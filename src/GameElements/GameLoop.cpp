@@ -2,27 +2,27 @@
 
 void RunGame()
 {
-	system("CLS");
 	Player player = GeneratePlayer();
 
-	Update(player);
-	DetectInput();
+	while (!WindowShouldClose())
+	{
+		Update(player);
+	}
 
-	BeginDrawing();
-	DrawRectangleRec(player.body, RAYWHITE);
-	EndDrawing();
+	//CloseWindow();
+
 }
 
 Player GeneratePlayer()
 {
-	return { {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f, 4, 10}, 3 };
+	return { {GetScreenWidth() / 5.0f, GetScreenHeight() / 5.0f, GetScreenWidth() / 5.0f+4, GetScreenHeight() / 5.0f + 10}, 0,3 };
 }
 
 void Update(Player& player)
 {
 	UpdatePlayer(player);
-	DetectInput();
-	Draw();
+	//DetectInput();
+	Draw(player);
 }
 
 void UpdatePlayer(Player& player)
@@ -64,9 +64,15 @@ void ActionInput()
 	}
 }
 
-void Draw()
+void Draw(Player player)
 {
 	BeginDrawing();
-	DrawPlayer();
+	ClearBackground(BLACK);
+	DrawPlayer(player);
 	EndDrawing();
+}
+
+void DrawPlayer(Player player)
+{
+	DrawRectanglePro(player.body, { player.body.width/2, player.body.height/2 }, player.angle, RAYWHITE);
 }

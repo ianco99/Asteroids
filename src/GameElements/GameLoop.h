@@ -10,6 +10,11 @@ struct Player
 };
 
 Player GeneratePlayer();
+void Update(Player& player);
+void UpdatePlayer(Player& player);
 void DetectInput();
 void ActionInput();
-void DrawPlayer();
+
+
+void Draw(Player player);
+void DrawPlayer(Player player);

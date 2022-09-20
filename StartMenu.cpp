@@ -1,9 +1,9 @@
-#include "System/StartMenu.h"
+#include "StartMenu.h"
 
 void RunGame();
 
 void RunProject()
 {
-	cout << "sas";
+	InitWindow(800, 600, "Asteroids");
 	RunGame();
 }
