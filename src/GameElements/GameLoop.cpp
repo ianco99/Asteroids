@@ -15,12 +15,12 @@ void RunGame()
 
 Player GeneratePlayer()
 {
-	return { {GetScreenWidth() / 5.0f, GetScreenHeight() / 5.0f, GetScreenWidth() / 5.0f+4, GetScreenHeight() / 5.0f + 10}, 0,3 };
+	return { {GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 100, 100}, 50,3 };
 }
 
 void Update(Player& player)
 {
-	UpdatePlayer(player);
+	//UpdatePlayer(player);
 	//DetectInput();
 	Draw(player);
 }
@@ -74,5 +74,5 @@ void Draw(Player player)
 
 void DrawPlayer(Player player)
 {
-	DrawRectanglePro(player.body, { player.body.width/2, player.body.height/2 }, player.angle, RAYWHITE);
+	DrawRectanglePro(player.body, { player.body.width/2	, player.body.height/2}, player.angle, RAYWHITE);
 }
