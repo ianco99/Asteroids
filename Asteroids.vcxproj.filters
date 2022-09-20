@@ -8,18 +8,27 @@
     <Filter Include="System">
       <UniqueIdentifier>{c20b7677-e43c-42d9-b332-4df814bfa825}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameElements">
+      <UniqueIdentifier>{bcc293e2-45a3-4046-a008-6013730ddd30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="StartMenu.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="StartMenu.cpp">
+    <ClCompile Include="src\GameElements\GameLoop.cpp">
+      <Filter>GameElements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\main.cpp">
       <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StartMenu.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameElements\GameLoop.h">
+      <Filter>GameElements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
