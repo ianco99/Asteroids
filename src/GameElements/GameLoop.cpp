@@ -62,7 +62,9 @@ void ActionInput()
 {
 	if (IsKeyDown(MOUSE_BUTTON_LEFT))
 	{
-
+		Vector2 normalizedDir = { GetMousePosition().x / Vector2Length(GetMousePosition()), GetMousePosition().y / Vector2Length(GetMousePosition()) };
+	
+		
 	}
 }
 
