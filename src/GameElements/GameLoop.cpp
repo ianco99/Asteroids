@@ -15,7 +15,10 @@ void RunGame()
 
 Player GeneratePlayer()
 {
-	return { {GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 100, 100}, 0,3};
+	return 
+	{
+		{GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10},{0,0},{.5,.5} ,0,3
+	};
 }
 
 void Update(Player& player)
@@ -26,6 +29,15 @@ void Update(Player& player)
 }
 
 void UpdatePlayer(Player& player)
+{
+	PointPlayer(player);
+
+	DetectInput(player);
+
+	MovePlayer(player);
+}
+
+void PointPlayer(Player& player)
 {
 	Vector2 pointTo = GetMousePosition();
 
@@ -53,19 +65,37 @@ void UpdatePlayer(Player& player)
 	player.angle = angle;
 }
 
-void DetectInput()
+void DetectInput(Player& player)
 {
-	ActionInput();
+	ActionInput(player);
 }
 
-void ActionInput()
+void ActionInput(Player& player)
 {
-	if (IsKeyDown(MOUSE_BUTTON_LEFT))
+
+	if (IsKeyDown(KEY_A))
 	{
-		Vector2 normalizedDir = { GetMousePosition().x / Vector2Length(GetMousePosition()), GetMousePosition().y / Vector2Length(GetMousePosition()) };
-	
+		Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
 		
+		//esto es malisimo
+		if (GetMouseX() < player.body.x)
+		{
+			normalizedDir.x *= -1;
+		}
+		if (GetMouseY() < player.body.y)
+		{
+			normalizedDir.y *= -1;
+		}
+
+		//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
+		player.acceleration = Vector2Add(player.acceleration, normalizedDir);
 	}
+}
+
+void MovePlayer(Player& player)
+{
+	player.body.x = player.body.x + player.acceleration.x * GetFrameTime();
+	player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
 }
 
 void Draw(Player player)
@@ -78,5 +108,5 @@ void Draw(Player player)
 
 void DrawPlayer(Player player)
 {
-	DrawRectanglePro(player.body, { player.body.width/2	, player.body.height/2}, player.angle, RAYWHITE);
+	DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
 }
