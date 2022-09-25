@@ -19,7 +19,7 @@ Player GeneratePlayer()
 
 	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10 };
 	player.acceleration = { 0,0 };
-	player.speedMultiplier = { .5,.5 };
+	player.speedMultiplier = { .1f, .1f };
 	player.angle = 0;
 	player.lifes = 3;
 
@@ -30,10 +30,12 @@ Player GeneratePlayer()
 
 void GenerateBullets(Bullet bullets[])
 {
-	for (int i = 0; i < sizeof(bullets) / sizeof(bullets[0]); i++)
+	for (int i = 0; i < 50; i++)
 	{
 		bullets[i].isActive = false;
-		bullets[i].velocity = { 1,1 };
+		bullets[i].acceleration = { 200,200 };
+		bullets[i].body.width = 3;
+		bullets[i].body.height = 3;
 	}
 }
 
@@ -51,7 +53,11 @@ void UpdatePlayer(Player& player)
 	DetectInput(player);
 
 	MovePlayer(player);
+
+	UpdateBullets(player.bullets);
 }
+
+
 
 void PointPlayer(Player& player)
 {
@@ -94,7 +100,7 @@ void ActionInput(Player& player)
 		OnMoveInput(player);
 	}
 
-	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
 		OnShootInput(player);
 	}
@@ -115,13 +121,14 @@ void OnMoveInput(Player& player)
 	}
 
 	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
-	player.acceleration = Vector2Add(player.acceleration, normalizedDir);
+	//player.acceleration += Vector2Add(player.acceleration, normalizedDir);
+	player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
 }
 
 void OnShootInput(Player& player)
 {
 
-	for (int i = 0; i < sizeof(player.bullets)/sizeof(player.bullets[0]); i++)
+	for (int i = 0; i < 50; i++)
 	{
 		if (!player.bullets[i].isActive)
 		{
@@ -134,8 +141,32 @@ void OnShootInput(Player& player)
 
 void GiveBulletOrientation(Player player, Bullet& bullet)
 {
+	//Give bullet player's angle
 	bullet.angle = player.angle;
-	bullet.pos = { player.body.x, player.body.y };
+	
+	//Give bullet player's position
+	bullet.body.x = player.body.x;
+	bullet.body.y = player.body.y;
+	
+	//Give bullet a direction
+
+	Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
+
+	//esto es malisimo
+	if (GetMouseX() < player.body.x)
+	{
+		normalizedDir.x *= -1;
+	}
+	if (GetMouseY() < player.body.y)
+	{
+		normalizedDir.y *= -1;
+	}
+
+	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
+	//player.acceleration += Vector2Add(player.acceleration, normalizedDir);
+	//player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
+	
+	bullet.velocity = Vector2Add(Vector2Multiply(bullet.acceleration, normalizedDir), bullet.velocity);
 }
 
 void MovePlayer(Player& player)
@@ -144,15 +175,40 @@ void MovePlayer(Player& player)
 	player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
 }
 
+void UpdateBullets(Bullet bullets[])
+{
+	for (int i = 0; i < 50; i++)
+	{
+		if (bullets[i].isActive)
+		{
+			bullets[i].body.x = bullets[i].body.x + bullets[i].velocity.x * GetFrameTime();
+			bullets[i].body.y = bullets[i].body.y + bullets[i].velocity.y * GetFrameTime();
+		}
+	}
+}
+
 void Draw(Player player)
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
 	DrawPlayer(player);
+	DrawBullets(player.bullets);
 	EndDrawing();
 }
 
 void DrawPlayer(Player player)
 {
 	DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
+}
+
+void DrawBullets(Bullet bullets[])
+{
+	for (int i = 0; i < 50; i++)
+	{
+		if (bullets[i].isActive)
+		{
+			DrawRectanglePro(bullets[i].body, { bullets[i].body.width / 2, bullets[i].body.height / 2 }, bullets[i].angle, RAYWHITE);
+		}
+	}
+	
 }

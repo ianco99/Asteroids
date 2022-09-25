@@ -5,7 +5,8 @@
 
 struct Bullet
 {
-	Vector2 pos;
+	Rectangle body;
+	Vector2 acceleration;
 	Vector2 velocity;
 	float angle;
 	bool isActive;
@@ -31,7 +32,7 @@ void Update(Player& player);
 Player GeneratePlayer();
 
 void UpdatePlayer(Player& player);
-
+void UpdateBullets(Bullet bullets[]);
 void PointPlayer(Player& player);
 
 void DetectInput(Player& player);
@@ -40,5 +41,5 @@ void OnMoveInput(Player& player);
 void OnShootInput(Player& player);
 void MovePlayer(Player& player);
 void DrawPlayer(Player player);
-
+void DrawBullets(Bullet bullets[]);
 void Draw(Player player);
