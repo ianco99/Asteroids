@@ -3,32 +3,42 @@
 #include "raylib.h"
 #include "raymath.h"
 
-struct Player
-{
-	Rectangle body;
-	Vector2 acceleration;
-	Vector2 speedMultiplier;
-	float angle;
-	int lifes;
-};
-
 struct Bullet
 {
 	Vector2 pos;
 	Vector2 velocity;
 	float angle;
+	bool isActive;
 };
 
-Player GeneratePlayer();
+struct Player
+{
+	Rectangle body;
+	Vector2 acceleration;
+	Vector2 speedMultiplier;
+	Bullet bullets[50]{};
+	float angle;
+	int lifes;
+};
+
+
+
+void GenerateBullets(Bullet bullets[]);
+void GiveBulletOrientation(Player player, Bullet& bullet);
+
 void Update(Player& player);
+
+Player GeneratePlayer();
+
 void UpdatePlayer(Player& player);
 
 void PointPlayer(Player& player);
 
 void DetectInput(Player& player);
 void ActionInput(Player& player);
-
+void OnMoveInput(Player& player);
+void OnShootInput(Player& player);
 void MovePlayer(Player& player);
+void DrawPlayer(Player player);
 
 void Draw(Player player);
-void DrawPlayer(Player player);

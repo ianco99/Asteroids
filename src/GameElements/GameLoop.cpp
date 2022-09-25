@@ -15,10 +15,26 @@ void RunGame()
 
 Player GeneratePlayer()
 {
-	return 
+	Player player;
+
+	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10 };
+	player.acceleration = { 0,0 };
+	player.speedMultiplier = { .5,.5 };
+	player.angle = 0;
+	player.lifes = 3;
+
+	GenerateBullets(player.bullets);
+
+	return player;
+}
+
+void GenerateBullets(Bullet bullets[])
+{
+	for (int i = 0; i < sizeof(bullets) / sizeof(bullets[0]); i++)
 	{
-		{GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10},{0,0},{.5,.5} ,0,3
-	};
+		bullets[i].isActive = false;
+		bullets[i].velocity = { 1,1 };
+	}
 }
 
 void Update(Player& player)
@@ -73,23 +89,53 @@ void DetectInput(Player& player)
 void ActionInput(Player& player)
 {
 
-	if (IsKeyDown(KEY_A))
+	if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 	{
-		Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
-		
-		//esto es malisimo
-		if (GetMouseX() < player.body.x)
-		{
-			normalizedDir.x *= -1;
-		}
-		if (GetMouseY() < player.body.y)
-		{
-			normalizedDir.y *= -1;
-		}
-
-		//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
-		player.acceleration = Vector2Add(player.acceleration, normalizedDir);
+		OnMoveInput(player);
 	}
+
+	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	{
+		OnShootInput(player);
+	}
+}
+
+void OnMoveInput(Player& player)
+{
+	Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
+
+	//esto es malisimo
+	if (GetMouseX() < player.body.x)
+	{
+		normalizedDir.x *= -1;
+	}
+	if (GetMouseY() < player.body.y)
+	{
+		normalizedDir.y *= -1;
+	}
+
+	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
+	player.acceleration = Vector2Add(player.acceleration, normalizedDir);
+}
+
+void OnShootInput(Player& player)
+{
+
+	for (int i = 0; i < sizeof(player.bullets)/sizeof(player.bullets[0]); i++)
+	{
+		if (!player.bullets[i].isActive)
+		{
+			player.bullets[i].isActive = true;
+			GiveBulletOrientation(player, player.bullets[i]);
+			break;
+		}
+	}
+}
+
+void GiveBulletOrientation(Player player, Bullet& bullet)
+{
+	bullet.angle = player.angle;
+	bullet.pos = { player.body.x, player.body.y };
 }
 
 void MovePlayer(Player& player)
