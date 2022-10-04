@@ -22,12 +22,24 @@
     <ClCompile Include="src\System\main.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameElements\Bullet.cpp">
+      <Filter>GameElements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameElements\Player.cpp">
+      <Filter>GameElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StartMenu.h">
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\GameElements\GameLoop.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameElements\Player.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameElements\Bullet.h">
       <Filter>GameElements</Filter>
     </ClInclude>
   </ItemGroup>
