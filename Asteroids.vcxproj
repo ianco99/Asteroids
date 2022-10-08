@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameElements\Asteroid.cpp" />
     <ClCompile Include="src\GameElements\Bullet.cpp" />
     <ClCompile Include="src\GameElements\GameLoop.cpp" />
     <ClCompile Include="src\GameElements\Player.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="StartMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameElements\Asteroid.h" />
     <ClInclude Include="src\GameElements\Bullet.h" />
     <ClInclude Include="src\GameElements\GameLoop.h" />
     <ClInclude Include="src\GameElements\Player.h" />

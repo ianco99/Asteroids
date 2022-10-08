@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "Player.h"
+#include "Asteroid.h"
 
 int offset = 5;
 
@@ -21,6 +22,8 @@ Player GeneratePlayer()
 
 void UpdatePlayer(Player& player)
 {
+	CheckOutOfScreen(player);
+
 	PointPlayer(player);
 
 	DetectInput(player);

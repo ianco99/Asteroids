@@ -28,6 +28,9 @@
     <ClCompile Include="src\GameElements\Player.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameElements\Asteroid.cpp">
+      <Filter>GameElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StartMenu.h">
@@ -40,6 +43,9 @@
       <Filter>GameElements</Filter>
     </ClInclude>
     <ClInclude Include="src\GameElements\Bullet.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameElements\Asteroid.h">
       <Filter>GameElements</Filter>
     </ClInclude>
   </ItemGroup>

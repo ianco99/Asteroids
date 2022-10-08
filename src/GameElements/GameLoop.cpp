@@ -2,14 +2,22 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "Bullet.h"
+#include "Asteroid.h"
 
 void RunGame()
 {
 	Player player = GeneratePlayer();
+	
+	Asteroid asteroids[200];
+
+	for (int i = 0; i < 5; i++)
+	{
+		asteroids[i] = CreateAsteroid(i,AsteroidSize::Big);
+	}
 
 	while (!WindowShouldClose())
 	{
-		Update(player);
+		Update(player, asteroids);
 	}
 
 	CloseWindow();
@@ -17,10 +25,10 @@ void RunGame()
 }
 
 
-void Update(Player& player)
+void Update(Player& player, Asteroid asteroids[])
 {
 	UpdatePlayer(player);
-	CheckOutOfScreen(player);
+	UpdateAsteroids(asteroids);
 	Draw(player);
 }
 

@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include "Player.h"
+#include "Asteroid.h"
 
-void Update(Player& player);
+using namespace kuznickiAsteroid;
+
+void Update(Player& player, Asteroid asteroids[]);
 void Draw(Player player);
