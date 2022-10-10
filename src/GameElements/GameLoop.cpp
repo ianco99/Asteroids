@@ -13,6 +13,8 @@ Asteroid asteroids[200];
 
 void RunGame()
 {
+	bool playing = true;
+
 	player = GeneratePlayer();
 
 	for (int i = 0; i < 5; i++)
@@ -20,28 +22,60 @@ void RunGame()
 		asteroids[i] = CreateAsteroid(i, AsteroidSize::Big);
 	}
 
-	while (!WindowShouldClose())
+	GameEndConditions condition = GameEndConditions::Game;
+
+	while (playing)
 	{
-		Update(player);
+		switch (condition)
+		{
+		case GameEndConditions::Game:
+			Update();
+			condition = CheckGameEndConditions();
+			break;
+
+		case GameEndConditions::Pause:
+
+			break;
+
+		case GameEndConditions::Win:
+
+			break;
+
+		case GameEndConditions::Lose:
+			playing = false;
+			break;
+
+		default:
+			break;
+		}
 	}
-
-	CloseWindow();
-
 }
 
 
-void Update(Player& player)
+void Update()
 {
-	UpdatePlayer(player);
+	UpdatePlayer();
 	UpdateAsteroids();
-	Draw(player);
+	Draw();
 }
 
-void Draw(Player player)
+GameEndConditions CheckGameEndConditions()
+{
+	if (player.lives <= 0)
+	{
+		return GameEndConditions::Lose;
+	}
+	else
+	{
+		return GameEndConditions::Game;
+	}
+}
+
+void Draw()
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
-	DrawPlayer(player);
+	DrawPlayer();
 	DrawBullets(player.bullets);
 	DrawAsteroid();
 	EndDrawing();

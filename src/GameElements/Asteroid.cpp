@@ -132,16 +132,6 @@ namespace kuznickiAsteroid
 
 	void MoveAsteroid(Asteroid& asteroid)
 	{
-		//player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
-		//asteroid.position = asteroid.position + asteroid.speed;
-
-
-		//player.body.x = player.body.x + player.acceleration.x * GetFrameTime();
-		//player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
-
-		std::cout << asteroid.position.x;
-		std::cout << asteroid.position.y;
-
 		asteroid.position = Vector2Add(asteroid.position, { asteroid.speed.x * GetFrameTime(), asteroid.speed.y * GetFrameTime() });
 	}
 

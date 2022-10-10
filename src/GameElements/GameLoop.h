@@ -5,5 +5,9 @@
 
 using namespace kuznickiAsteroid;
 
-void Update(Player& player);
-void Draw(Player player);
+enum class GameEndConditions{Game, Pause, Win, Lose};
+
+GameEndConditions CheckGameEndConditions();
+
+void Update();
+void Draw();

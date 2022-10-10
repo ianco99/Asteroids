@@ -13,127 +13,46 @@ extern int maxAsteroids;
 
 bool CheckCollisionPlayerAsteroid();
 
+void KillPlayer();
+
 Player GeneratePlayer()
 {
 	Player player;
 
 	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10 };
 	player.acceleration = { 0,0 };
-	player.speedMultiplier = { .5f, .5f };
+	player.speedMultiplier = { .1f, .1f };
 	player.angle = 0;
 	player.lives = 3;
+	player.isAlive = true;
 
 	GenerateBullets(player.bullets);
 
 	return player;
 }
 
-void UpdatePlayer(Player& player)
+void UpdatePlayer()
 {
-	CheckOutOfScreen(player);
+	CheckOutOfScreen();
 
-	CheckCollisionPlayerAsteroid();
+	if (CheckCollisionPlayerAsteroid())
+	{
+		KillPlayer();
+		return;
+	}
 
-	PointPlayer(player);
+	PointPlayer();
 
-	DetectInput(player);
+	DetectInput();
 
-	MovePlayer(player);
+	MovePlayer();
 
-	CheckOutOfScreen(player);
+	CheckOutOfScreen();
 
 	UpdateBullets(player.bullets);
 }
 
-
-void PointPlayer(Player& player)
-{
-	Vector2 pointTo = GetMousePosition();
-
-	Vector2 playerPos = { player.body.x , player.body.y };
-
-	Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
-
-	float angle = atan(distance.y / distance.x);
-
-	angle = angle * 180 / PI;
-
-	if (distance.x > 0 && distance.y < 0) //Quad 4
-	{
-		angle += 360;
-	}
-	else if (distance.x < 0 && distance.y < 0) //Quad 3
-	{
-		angle += 180;
-	}
-	else if (distance.x < 0 && distance.y > 0) //Quad 2
-	{
-		angle += 180;
-	}
-
-	player.angle = angle;
-}
-
-void DetectInput(Player& player)
-{
-	ActionInput(player);
-}
-
-void ActionInput(Player& player)
-{
-
-	if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
-	{
-		OnMoveInput(player);
-	}
-
-	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-	{
-		OnShootInput(player);
-	}
-}
-
-void OnMoveInput(Player& player)
-{
-	Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
-
-	//esto es malisimo
-	if (GetMouseX() < player.body.x)
-	{
-		normalizedDir.x *= -1;
-	}
-	if (GetMouseY() < player.body.y)
-	{
-		normalizedDir.y *= -1;
-	}
-
-	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
-	//player.acceleration += Vector2Add(player.acceleration, normalizedDir);
-	player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
-}
-
-void OnShootInput(Player& player)
-{
-
-	for (int i = 0; i < 50; i++)
-	{
-		if (!player.bullets[i].isActive)
-		{
-			player.bullets[i].isActive = true;
-			GiveBulletOrientation(player.bullets[i]);
-			break;
-		}
-	}
-}
-
-
-void MovePlayer(Player& player)
-{
-	player.body.x = player.body.x + player.acceleration.x * GetFrameTime();
-	player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
-}
-
-void CheckOutOfScreen(Player& player)
+void CheckOutOfScreen()
 {
 	if (player.body.x <= 0)
 	{
@@ -196,7 +115,105 @@ bool CheckCollisionPlayerAsteroid()
 
 }
 
-void DrawPlayer(Player player)
+void KillPlayer()
+{
+	player.lives--;
+	player.isAlive = false;
+
+	player.body.x = GetScreenWidth() / 2;
+	player.body.y = GetScreenHeight() / 2;
+
+	player.acceleration = {0,0};
+}
+
+void PointPlayer()
+{
+	Vector2 pointTo = GetMousePosition();
+
+	Vector2 playerPos = { player.body.x , player.body.y };
+
+	Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
+
+	float angle = atan(distance.y / distance.x);
+
+	angle = angle * 180 / PI;
+
+	if (distance.x > 0 && distance.y < 0) //Quad 4
+	{
+		angle += 360;
+	}
+	else if (distance.x < 0 && distance.y < 0) //Quad 3
+	{
+		angle += 180;
+	}
+	else if (distance.x < 0 && distance.y > 0) //Quad 2
+	{
+		angle += 180;
+	}
+
+	player.angle = angle;
+}
+
+void DetectInput()
+{
+	ActionInput();
+}
+
+void ActionInput()
+{
+
+	if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+	{
+		OnMoveInput();
+	}
+
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	{
+		OnShootInput();
+	}
+}
+
+void OnMoveInput()
+{
+	Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
+
+	//esto es malisimo
+	if (GetMouseX() < player.body.x)
+	{
+		normalizedDir.x *= -1;
+	}
+	if (GetMouseY() < player.body.y)
+	{
+		normalizedDir.y *= -1;
+	}
+
+	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
+	//player.acceleration += Vector2Add(player.acceleration, normalizedDir);
+	player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
+}
+
+void OnShootInput()
+{
+
+	for (int i = 0; i < 50; i++)
+	{
+		if (!player.bullets[i].isActive)
+		{
+			player.bullets[i].isActive = true;
+			GiveBulletOrientation(player.bullets[i]);
+			break;
+		}
+	}
+}
+
+
+void MovePlayer()
+{
+	player.body.x = player.body.x + player.acceleration.x * GetFrameTime();
+	player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
+}
+
+void DrawPlayer()
 {
 	DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
 }

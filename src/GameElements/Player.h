@@ -10,23 +10,24 @@ struct Player
 	Bullet bullets[50]{};
 	float angle;
 	int lives;
+	bool isAlive;
 };
 
 Player GeneratePlayer();
 
-void UpdatePlayer(Player& player);
+void UpdatePlayer();
 
-void PointPlayer(Player& player);
+void PointPlayer();
 
-void DetectInput(Player& player);
-void ActionInput(Player& player);
-void OnMoveInput(Player& player);
-void OnShootInput(Player& player);
+void DetectInput();
+void ActionInput();
+void OnMoveInput();
+void OnShootInput();
 
 void GiveBulletOrientation(Bullet& bullet);
 
-void MovePlayer(Player& player);
+void MovePlayer();
 
-void CheckOutOfScreen(Player& player);
+void CheckOutOfScreen();
 
-void DrawPlayer(Player player);
+void DrawPlayer();
