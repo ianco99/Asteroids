@@ -59,11 +59,6 @@ void UpdateBullets(Bullet bullets[])
 			{
 				bullets[i].isActive = false;
 			}
-			else if (CheckCollisionBulletShip(bullets[i]))
-			{
-				bullets[i].isActive = false;
-				player.lives--;
-			}
 			else
 			{
 				bullets[i].position.x = bullets[i].position.x + bullets[i].velocity.x * GetFrameTime();
@@ -92,11 +87,6 @@ bool CheckCollisionBulletAsteroid(Bullet& bullet)
 		}
 	}
 	return false;
-}
-
-bool CheckCollisionBulletShip(Bullet& bullet)
-{
-
 }
 
 void DrawBullets(Bullet bullets[])

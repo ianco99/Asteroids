@@ -3,9 +3,15 @@
 #include "Player.h"
 #include "Asteroid.h"
 
+using namespace kuznickiAsteroid;
+
 extern Player player;
+extern Asteroid asteroids[];
 
 extern int screenOffset;
+extern int maxAsteroids;
+
+bool CheckCollisionPlayerAsteroid();
 
 Player GeneratePlayer()
 {
@@ -26,6 +32,8 @@ void UpdatePlayer(Player& player)
 {
 	CheckOutOfScreen(player);
 
+	CheckCollisionPlayerAsteroid();
+
 	PointPlayer(player);
 
 	DetectInput(player);
@@ -36,6 +44,7 @@ void UpdatePlayer(Player& player)
 
 	UpdateBullets(player.bullets);
 }
+
 
 void PointPlayer(Player& player)
 {
@@ -143,6 +152,48 @@ void CheckOutOfScreen(Player& player)
 	{
 		player.body.y = 0 + screenOffset;
 	}
+}
+
+bool CheckCollisionPlayerAsteroid()
+{
+	for (int i = 0; i < maxAsteroids; i++)
+	{
+		//Collision circle-rectangle: http://www.jeffreythompson.org/collision-detection/circle-rect.php
+
+		float testX = asteroids[i].position.x;
+		float testY = asteroids[i].position.y;
+
+		if (asteroids[i].position.x < player.body.x)
+		{
+			testX = player.body.x;
+		}
+
+		else if (asteroids[i].position.x > player.body.x + player.body.width)
+		{
+			testX = player.body.x + player.body.width;
+		}
+
+		if (asteroids[i].position.y < player.body.y)
+		{
+			testY = player.body.y;
+		}
+
+		else if (asteroids[i].position.y > player.body.y + player.body.height)
+		{
+			testY = player.body.y + player.body.height;
+		}
+
+		float distX = asteroids[i].position.x - testX;
+		float distY = asteroids[i].position.y - testY;
+		float distance = sqrt((distX * distX) + (distY * distY));
+
+		if (distance <= static_cast<float>(asteroids[i].size))
+		{
+			return true;
+		}
+	}
+	return false;
+
 }
 
 void DrawPlayer(Player player)
