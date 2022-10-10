@@ -4,15 +4,18 @@
 #include "Bullet.h"
 #include "Asteroid.h"
 
+int maxAsteroids = 60;
+int screenOffset = 5;
+
 void RunGame()
 {
 	Player player = GeneratePlayer();
-	
+
 	Asteroid asteroids[200];
 
 	for (int i = 0; i < 5; i++)
 	{
-		asteroids[i] = CreateAsteroid(i,AsteroidSize::Big);
+		asteroids[i] = CreateAsteroid(i, AsteroidSize::Big);
 	}
 
 	while (!WindowShouldClose())
@@ -29,14 +32,15 @@ void Update(Player& player, Asteroid asteroids[])
 {
 	UpdatePlayer(player);
 	UpdateAsteroids(asteroids);
-	Draw(player);
+	Draw(player, asteroids);
 }
 
-void Draw(Player player)
+void Draw(Player player, Asteroid asteroids[])
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
 	DrawPlayer(player);
 	DrawBullets(player.bullets);
+	DrawAsteroid(asteroids);
 	EndDrawing();
 }

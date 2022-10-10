@@ -3,15 +3,13 @@
 #include "Player.h"
 #include "Asteroid.h"
 
-int offset = 5;
-
 Player GeneratePlayer()
 {
 	Player player;
 
 	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10 };
 	player.acceleration = { 0,0 };
-	player.speedMultiplier = { .1f, .1f };
+	player.speedMultiplier = { .5f, .5f };
 	player.angle = 0;
 	player.lifes = 3;
 
@@ -126,20 +124,20 @@ void CheckOutOfScreen(Player& player)
 {
 	if (player.body.x <= 0)
 	{
-		player.body.x = GetScreenWidth() - offset;
+		player.body.x = GetScreenWidth() - screenOffset;
 	}
 	else if (player.body.x >= GetScreenWidth())
 	{
-		player.body.x = 0 + offset;
+		player.body.x = 0 + screenOffset;
 	}
 
 	if (player.body.y <= 0)
 	{
-		player.body.y = GetScreenHeight() - offset;
+		player.body.y = GetScreenHeight() - screenOffset;
 	}
 	if (player.body.y >= GetScreenHeight())
 	{
-		player.body.y = 0 + offset;
+		player.body.y = 0 + screenOffset;
 	}
 }
 

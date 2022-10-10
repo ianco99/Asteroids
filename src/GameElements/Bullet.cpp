@@ -33,21 +33,6 @@ void GiveBulletOrientation(Player player, Bullet& bullet)
 
 	direction = Vector2Normalize(direction);
 
-	////esto es malisimo
-	//if (GetMouseX() < player.body.x)
-	//{
-	//    normalizedDir.x *= -1;
-	//}
-	//if (GetMouseY() < player.body.y)
-	//{
-	//    normalizedDir.y *= -1;
-	//}
-
-	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
-	//player.acceleration += Vector2Add(player.acceleration, normalizedDir);
-	//player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
-
-	//bullet.velocity = Vector2Add(Vector2Multiply(bullet.acceleration, normalizedDir), bullet.velocity);
 	bullet.velocity.x = direction.x * bullet.acceleration.x;
 	bullet.velocity.y = direction.y * bullet.acceleration.y;
 }

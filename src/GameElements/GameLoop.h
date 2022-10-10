@@ -6,4 +6,4 @@
 using namespace kuznickiAsteroid;
 
 void Update(Player& player, Asteroid asteroids[]);
-void Draw(Player player);
+void Draw(Player player, Asteroid asteroids[]);

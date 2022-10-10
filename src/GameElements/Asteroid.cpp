@@ -3,7 +3,8 @@
 #include "raymath.h"
 #include "Asteroid.h"
 
-extern int offset;
+extern int maxAsteroids;
+extern int screenOffset;
 
 namespace kuznickiAsteroid
 {
@@ -14,14 +15,16 @@ namespace kuznickiAsteroid
 	{
 		Asteroid createdAsteroid;
 
+		createdAsteroid.speed = { 0,0 };
 
 		createdAsteroid.arrayPosition = arrayPosition;
 
-		GiveAsteroidInitPosition(createdAsteroid);
+		if(static_cast<int>(AsteroidSize::Small) < static_cast<int>(size))
+			GiveAsteroidInitPosition(createdAsteroid);
 
 		GiveAsteroidInitDirection(createdAsteroid);
 
-		createdAsteroid.speedMultiplier = { 10.0f, 10.0f };
+		createdAsteroid.speedMultiplier = { 200.0f, 200.0f };
 
 		createdAsteroid.speed = Vector2Add(Vector2Multiply(createdAsteroid.speedMultiplier, createdAsteroid.direction), createdAsteroid.speed);
 
@@ -45,27 +48,27 @@ namespace kuznickiAsteroid
 		switch (sector)
 		{
 
-		case kuznickiAsteroid::SpawnSector::Top:
+		case SpawnSector::Top:
 
 			posX = rand() % GetScreenWidth();
-			posY = 0 - offset;
+			posY = 0 - screenOffset;
 			break;
 
-		case kuznickiAsteroid::SpawnSector::Right:
+		case SpawnSector::Right:
 
-			posX = GetScreenWidth() + offset;
+			posX = GetScreenWidth() + screenOffset;
 			posY = rand() % GetScreenHeight();
 			break;
 
-		case kuznickiAsteroid::SpawnSector::Down:
+		case SpawnSector::Down:
 
 			posX = rand() % GetScreenWidth();
-			posY = GetScreenHeight() + offset;
+			posY = GetScreenHeight() + screenOffset;
 			break;
 
-		case kuznickiAsteroid::SpawnSector::Left:
+		case SpawnSector::Left:
 
-			posX = 0 - offset;
+			posX = 0 - screenOffset;
 			posY = rand() % GetScreenHeight();
 			break;
 		}
@@ -88,38 +91,37 @@ namespace kuznickiAsteroid
 	{
 		AsteroidsOutOfScreen(asteroids);
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < maxAsteroids; i++)
 		{
 			if (asteroids[i].isAlive)
 			{
 				MoveAsteroid(asteroids[i]);
-				DrawAsteroid(asteroids[i]);
 			}
 		}
 	}
 
 	void AsteroidsOutOfScreen(Asteroid asteroids[])
 	{
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < maxAsteroids; i++)
 		{
 			if (asteroids[i].isAlive)
 			{
-				if (asteroids[i].position.x <= 0)
+				if (asteroids[i].position.x < 0)
 				{
-					asteroids[i].position.x = GetScreenWidth() - offset;
+					asteroids[i].position.x = GetScreenWidth() - screenOffset;
 				}
-				else if (asteroids[i].position.x >= GetScreenWidth())
+				else if (asteroids[i].position.x > GetScreenWidth())
 				{
-					asteroids[i].position.x = 0 + offset;
+					asteroids[i].position.x = 0 + screenOffset;
 				}
 
-				if (asteroids[i].position.y <= 0)
+				if (asteroids[i].position.y < 0)
 				{
-					asteroids[i].position.y = GetScreenHeight() - offset;
+					asteroids[i].position.y = GetScreenHeight() - screenOffset;
 				}
-				if (asteroids[i].position.y >= GetScreenHeight())
+				if (asteroids[i].position.y > GetScreenHeight())
 				{
-					asteroids[i].position.y = 0 + offset;
+					asteroids[i].position.y = 0 + screenOffset;
 				}
 			}
 		}
@@ -129,18 +131,48 @@ namespace kuznickiAsteroid
 	{
 		//player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
 		//asteroid.position = asteroid.position + asteroid.speed;
+
+			
+		//player.body.x = player.body.x + player.acceleration.x * GetFrameTime();
+		//player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
+
 		std::cout << asteroid.position.x;
 		std::cout << asteroid.position.y;
 
-		asteroid.position = Vector2Add(Vector2Multiply(asteroid.speed, { GetFrameTime(), GetFrameTime() }), asteroid.position);
+		asteroid.position = Vector2Add(asteroid.position, { asteroid.speed.x * GetFrameTime(), asteroid.speed.y * GetFrameTime() });
 	}
 
-	void DrawAsteroid(Asteroid& asteroid)
+	void DrawAsteroid(Asteroid asteroids[])
 	{
-		DrawCircleV(asteroid.position, static_cast<int>(asteroid.size), RAYWHITE);
+		for (int i = 0; i < maxAsteroids; i++)
+		{
+			if (asteroids[i].isAlive)
+				DrawCircleV(asteroids[i].position, static_cast<int>(asteroids[i].size), RAYWHITE);
+		}
+
+		
 	}
 
 	void DestroyAsteroid(Asteroid asteroids[], Asteroid& asteroid)
+	{
+		if (ChangeAsteroidSize(asteroid))	//Check if I need to generate another asteroid with lower size
+		{
+			for (int i = 0; i < maxAsteroids; i++)
+			{
+				if (!asteroids[i].isAlive)	//Find new position for lower size asteroid
+				{
+					asteroids[i] = CreateAsteroid(i, asteroid.size);
+					asteroids[i].position = Vector2Add(asteroid.position, {static_cast<float>(asteroid.size), static_cast<float>(asteroid.size)});
+				}
+			}
+		}
+		
+		asteroids[asteroid.arrayPosition] = asteroid;
+
+		
+	}
+
+	bool ChangeAsteroidSize(Asteroid& asteroid)
 	{
 		switch (asteroid.size)
 		{
@@ -157,6 +189,9 @@ namespace kuznickiAsteroid
 			break;
 		}
 
-		asteroids[asteroid.arrayPosition] = asteroid;
+		if (asteroid.isAlive)
+			return true;
+		else
+			return false;
 	}
 }

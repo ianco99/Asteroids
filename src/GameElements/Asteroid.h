@@ -29,8 +29,10 @@ namespace kuznickiAsteroid
 
 	void MoveAsteroid(Asteroid& asteroid);
 
-	void DrawAsteroid(Asteroid& asteroid);
+	void DrawAsteroid(Asteroid asteroids[]);
 
 	void DestroyAsteroid(Asteroid asteroids[], Asteroid& asteroid);
+
+	bool ChangeAsteroidSize(Asteroid& asteroid);
 }
 
