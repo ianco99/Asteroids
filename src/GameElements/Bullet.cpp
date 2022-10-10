@@ -1,8 +1,13 @@
 #include "raylib.h"
 #include "Player.h"
+#include "Asteroid.h"
 #include "Bullet.h"
 #include "raymath.h"
 
+extern Player player;
+
+using namespace kuznickiAsteroid;
+extern Asteroid asteroids[];
 
 void GenerateBullets(Bullet bullets[])
 {
@@ -15,7 +20,7 @@ void GenerateBullets(Bullet bullets[])
 	}
 }
 
-void GiveBulletOrientation(Player player, Bullet& bullet)
+void GiveBulletOrientation(Bullet& bullet)
 {
 	//Give bullet player's angle
 	bullet.angle = player.angle;
@@ -44,10 +49,25 @@ void UpdateBullets(Bullet bullets[])
 	{
 		if (bullets[i].isActive)
 		{
-			bullets[i].body.x = bullets[i].body.x + bullets[i].velocity.x * GetFrameTime();
-			bullets[i].body.y = bullets[i].body.y + bullets[i].velocity.y * GetFrameTime();
+			if (CheckCollisionBullet(bullets[i]))
+			{
+
+			}
+			else
+			{
+				bullets[i].body.x = bullets[i].body.x + bullets[i].velocity.x * GetFrameTime();
+				bullets[i].body.y = bullets[i].body.y + bullets[i].velocity.y * GetFrameTime();
+			}
 		}
 	}
+}
+
+bool CheckCollisionBullet(Bullet& bullet)
+{
+
+	//Collision circle-rectangle: http://www.jeffreythompson.org/collision-detection/circle-rect.php
+
+	float testX = 
 }
 
 void DrawBullets(Bullet bullets[])

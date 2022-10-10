@@ -3,6 +3,10 @@
 #include "Player.h"
 #include "Asteroid.h"
 
+extern Player player;
+
+extern int screenOffset;
+
 Player GeneratePlayer()
 {
 	Player player;

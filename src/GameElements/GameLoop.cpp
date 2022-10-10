@@ -7,11 +7,13 @@
 int maxAsteroids = 60;
 int screenOffset = 5;
 
+Player player;
+
+Asteroid asteroids[200];
+
 void RunGame()
 {
-	Player player = GeneratePlayer();
-
-	Asteroid asteroids[200];
+	player = GeneratePlayer();
 
 	for (int i = 0; i < 5; i++)
 	{
