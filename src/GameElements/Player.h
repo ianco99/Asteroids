@@ -29,5 +29,6 @@ void GiveBulletOrientation(Bullet& bullet);
 void MovePlayer();
 
 void CheckOutOfScreen();
+void CheckBulletsOutOfScreen();
 
 void DrawPlayer();

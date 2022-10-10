@@ -21,7 +21,7 @@ void GenerateBullets(Bullet bullets[])
 	for (int i = 0; i < 50; i++)
 	{
 		bullets[i].isActive = false;
-		bullets[i].acceleration = { 200,200 };
+		bullets[i].acceleration = { 400,400 };
 		bullets[i].size = 3;
 	}
 }
@@ -75,16 +75,20 @@ bool CheckCollisionBulletAsteroid(Bullet& bullet)
 
 	for (int i = 0; i < maxAsteroids; i++)
 	{
-		float distX = asteroids[i].position.x - bullet.position.x;
-		float distY = asteroids[i].position.y - bullet.position.y;
-
-		float distance = sqrt((distX * distX) + (distY * distY));
-
-		if (distance <= static_cast<double>(asteroids[i].size) + bullet.size)
+		if (asteroids[i].isAlive)
 		{
-			DestroyAsteroid(asteroids[i]);
-			return true;
+			float distX = asteroids[i].position.x - bullet.position.x;
+			float distY = asteroids[i].position.y - bullet.position.y;
+
+			float distance = sqrt((distX * distX) + (distY * distY));
+
+			if (distance <= static_cast<double>(asteroids[i].size) + bullet.size)
+			{
+				DestroyAsteroid(asteroids[i]);
+				return true;
+			}
 		}
+		
 	}
 	return false;
 }
