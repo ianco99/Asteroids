@@ -15,7 +15,7 @@ Player GeneratePlayer()
 	player.acceleration = { 0,0 };
 	player.speedMultiplier = { .5f, .5f };
 	player.angle = 0;
-	player.lifes = 3;
+	player.lives = 3;
 
 	GenerateBullets(player.bullets);
 
@@ -111,7 +111,7 @@ void OnShootInput(Player& player)
 		if (!player.bullets[i].isActive)
 		{
 			player.bullets[i].isActive = true;
-			GiveBulletOrientation(player, player.bullets[i]);
+			GiveBulletOrientation(player.bullets[i]);
 			break;
 		}
 	}

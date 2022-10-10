@@ -22,7 +22,7 @@ void RunGame()
 
 	while (!WindowShouldClose())
 	{
-		Update(player, asteroids);
+		Update(player);
 	}
 
 	CloseWindow();
@@ -30,19 +30,19 @@ void RunGame()
 }
 
 
-void Update(Player& player, Asteroid asteroids[])
+void Update(Player& player)
 {
 	UpdatePlayer(player);
-	UpdateAsteroids(asteroids);
-	Draw(player, asteroids);
+	UpdateAsteroids();
+	Draw(player);
 }
 
-void Draw(Player player, Asteroid asteroids[])
+void Draw(Player player)
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
 	DrawPlayer(player);
 	DrawBullets(player.bullets);
-	DrawAsteroid(asteroids);
+	DrawAsteroid();
 	EndDrawing();
 }

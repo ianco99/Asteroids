@@ -3,7 +3,8 @@
 
 struct Bullet
 {
-	Rectangle body;
+	Vector2 position;
+	int size;
 	Vector2 acceleration;
 	Vector2 velocity;
 	float angle;

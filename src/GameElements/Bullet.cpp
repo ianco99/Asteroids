@@ -4,10 +4,17 @@
 #include "Bullet.h"
 #include "raymath.h"
 
+using namespace kuznickiAsteroid;
+
 extern Player player;
 
-using namespace kuznickiAsteroid;
 extern Asteroid asteroids[];
+
+extern int maxAsteroids;
+
+
+bool CheckCollisionBulletAsteroid(Bullet& bullet);
+bool CheckCollisionBulletShip(Bullet& bullet);
 
 void GenerateBullets(Bullet bullets[])
 {
@@ -15,8 +22,7 @@ void GenerateBullets(Bullet bullets[])
 	{
 		bullets[i].isActive = false;
 		bullets[i].acceleration = { 200,200 };
-		bullets[i].body.width = 3;
-		bullets[i].body.height = 3;
+		bullets[i].size = 3;
 	}
 }
 
@@ -26,8 +32,8 @@ void GiveBulletOrientation(Bullet& bullet)
 	bullet.angle = player.angle;
 
 	//Give bullet player's position
-	bullet.body.x = player.body.x;
-	bullet.body.y = player.body.y;
+	bullet.position.x = player.body.x;
+	bullet.position.y = player.body.y;
 
 	//Give bullet a direction
 
@@ -49,25 +55,48 @@ void UpdateBullets(Bullet bullets[])
 	{
 		if (bullets[i].isActive)
 		{
-			if (CheckCollisionBullet(bullets[i]))
+			if (CheckCollisionBulletAsteroid(bullets[i]))
 			{
-
+				bullets[i].isActive = false;
+			}
+			else if (CheckCollisionBulletShip(bullets[i]))
+			{
+				bullets[i].isActive = false;
+				player.lives--;
 			}
 			else
 			{
-				bullets[i].body.x = bullets[i].body.x + bullets[i].velocity.x * GetFrameTime();
-				bullets[i].body.y = bullets[i].body.y + bullets[i].velocity.y * GetFrameTime();
+				bullets[i].position.x = bullets[i].position.x + bullets[i].velocity.x * GetFrameTime();
+				bullets[i].position.y = bullets[i].position.y + bullets[i].velocity.y * GetFrameTime();
 			}
 		}
 	}
 }
 
-bool CheckCollisionBullet(Bullet& bullet)
+bool CheckCollisionBulletAsteroid(Bullet& bullet)
 {
 
-	//Collision circle-rectangle: http://www.jeffreythompson.org/collision-detection/circle-rect.php
+	//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
 
-	float testX = 
+	for (int i = 0; i < maxAsteroids; i++)
+	{
+		float distX = asteroids[i].position.x - bullet.position.x;
+		float distY = asteroids[i].position.y - bullet.position.y;
+
+		float distance = sqrt((distX * distX) + (distY * distY));
+
+		if (distance <= static_cast<double>(asteroids[i].size) + bullet.size)
+		{
+			DestroyAsteroid(asteroids[i]);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CheckCollisionBulletShip(Bullet& bullet)
+{
+
 }
 
 void DrawBullets(Bullet bullets[])
@@ -76,7 +105,7 @@ void DrawBullets(Bullet bullets[])
 	{
 		if (bullets[i].isActive)
 		{
-			DrawRectanglePro(bullets[i].body, { bullets[i].body.width / 2, bullets[i].body.height / 2 }, bullets[i].angle, RAYWHITE);
+			DrawCircleV(bullets[i].position, bullets[i].size, RAYWHITE);
 		}
 	}
 

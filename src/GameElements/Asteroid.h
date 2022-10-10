@@ -23,15 +23,15 @@ namespace kuznickiAsteroid
 
 	Asteroid CreateAsteroid(int arrayPosition, AsteroidSize size);
 
-	void UpdateAsteroids(Asteroid asteroids[]);
+	void UpdateAsteroids();
 
-	void AsteroidsOutOfScreen(Asteroid asteroids[]);
+	void AsteroidsOutOfScreen();
 
 	void MoveAsteroid(Asteroid& asteroid);
 
-	void DrawAsteroid(Asteroid asteroids[]);
+	void DrawAsteroid();
 
-	void DestroyAsteroid(Asteroid asteroids[], Asteroid& asteroid);
+	void DestroyAsteroid(Asteroid& asteroid);
 
 	bool ChangeAsteroidSize(Asteroid& asteroid);
 }
