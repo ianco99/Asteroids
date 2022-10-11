@@ -6,10 +6,13 @@
 
 int maxAsteroids = 60;
 int screenOffset = 5;
+int initialAsteroids = 5;
 
 Player player;
 
-Asteroid asteroids[200];
+Asteroid asteroids[60];
+
+extern Texture2D backgroundSprite;
 
 void DrawUserInterface();
 
@@ -19,7 +22,15 @@ void RunGame()
 
 	player = GeneratePlayer();
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < maxAsteroids; i++)
+	{
+		asteroids[i].isAlive = false;
+		asteroids[i].direction = { 0,0 };
+		asteroids[i].size = AsteroidSize::Big;
+		asteroids[i].speed = { 0,0 };
+	}
+
+	for (int i = 0; i < initialAsteroids; i++)
 	{
 		asteroids[i] = CreateAsteroid(i, AsteroidSize::Big);
 	}
@@ -78,6 +89,7 @@ void Draw()
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
+	DrawTexturePro(backgroundSprite, { static_cast<float>(0),static_cast<float>(0),static_cast<float>(backgroundSprite.width), static_cast<float>(backgroundSprite.height) }, { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) }, { 0,0 }, 0, RAYWHITE);
 	DrawPlayer();
 	DrawBullets(player.bullets);
 	DrawAsteroid();
