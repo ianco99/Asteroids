@@ -101,9 +101,24 @@ namespace kuznickiAsteroid
 	void GiveAsteroidInitDirection(Asteroid& asteroid)
 	{
 		Vector2 newDirection;
+		bool isNegative;
 
 		newDirection.x = rand() % 20;
 		newDirection.y = rand() % 20;
+
+		int aux = rand() % 2 + 1;
+
+		if (aux == 2)
+		{
+			newDirection.x *= -1;
+		}
+
+		aux = rand() % 2 + 1;
+
+		if (aux == 1)
+		{
+			newDirection.y *= -1;
+		}
 
 		newDirection = Vector2Normalize(newDirection);
 
@@ -164,16 +179,22 @@ namespace kuznickiAsteroid
 				//Rectangle sourRect = { 0,0,static_cast<float>(asteroids[i].sprite.width),static_cast<float>(asteroids[i].sprite.height) };
 				//Rectangle destRect = { asteroids[i].position.x,asteroids[i].position.y,static_cast<float>(asteroids[i].sprite.width * static_cast<float>(asteroids[i].size)),static_cast<float>(asteroids[i].sprite.height * static_cast<float>(asteroids[i].size)) };
 				//Vector2 texturePiv = { static_cast<float>((asteroids[i].sprite.width * static_cast<float>(asteroids[i].size)) / 2),static_cast<float>((asteroids[i].sprite.height * static_cast<float>(asteroids[i].size)) / 2) };
-			
+
 				//DrawTexturePro(asteroids[i].sprite, sourRect, destRect, texturePiv, asteroids[i].rotation, WHITE);
+				//asteroids[i].sprite.width -= 100;
+				//asteroids[i].sprite.height -= 100;
 
+				Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) };
 
-				DrawCircleV(asteroids[i].position, static_cast<int>(asteroids[i].size), RAYWHITE);
+				//Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size), asteroids[i].position.y - static_cast<float>(asteroids[i].size), asteroids[i].position.x + static_cast<float>(asteroids[i].size), asteroids[i].position.y + static_cast<float>(asteroids[i].size) };
+				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size),asteroids[i].position.y - static_cast<float>(asteroids[i].size) ,static_cast<float>(asteroids[i].size)*2,static_cast<float>(asteroids[i].size)*2};
+
+				DrawTexturePro(asteroids[i].sprite, sourRect, destRect, { 0,0 }, 0, RAYWHITE);
+				//DrawCircleV(asteroids[i].position, static_cast<int>(asteroids[i].size), GREEN);
 			}
-				//DrawTexturePro(asteroids[i].sprite, { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) }, { asteroids[i].position.x - static_cast<int>(asteroids[i].size), asteroids[i].position.y - static_cast<int>(asteroids[i].size)}, { asteroids[i].position.x - static_cast<int>(asteroids[i].size) , asteroids[i].position.y - static_cast<int>(asteroids[i].size)  }, asteroids[i].rotation, RAYWHITE);
-				//DrawTextureEx(asteroids[i].sprite, asteroids[i].position, asteroids[i].rotation, 1 / static_cast<float>(asteroids[i].size), RAYWHITE);
+			//DrawTexturePro(asteroids[i].sprite, { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) }, { asteroids[i].position.x - static_cast<int>(asteroids[i].size), asteroids[i].position.y - static_cast<int>(asteroids[i].size)}, { asteroids[i].position.x - static_cast<int>(asteroids[i].size) , asteroids[i].position.y - static_cast<int>(asteroids[i].size)  }, asteroids[i].rotation, RAYWHITE);
+			//DrawTextureEx(asteroids[i].sprite, asteroids[i].position, asteroids[i].rotation, 1 / static_cast<float>(asteroids[i].size), RAYWHITE);
 		}
-
 
 	}
 
