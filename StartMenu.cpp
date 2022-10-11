@@ -4,7 +4,7 @@ void RunGame();
 
 void RunProject()
 {
-	InitWindow(800, 600, "Asteroids");
+	InitWindow(1024, 768, "Asteroids");
 
 	while (!WindowShouldClose())
 	{

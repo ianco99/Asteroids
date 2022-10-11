@@ -84,11 +84,26 @@ bool CheckCollisionBulletAsteroid(Bullet& bullet)
 
 			if (distance <= static_cast<double>(asteroids[i].size) + bullet.size)
 			{
+				switch (asteroids[i].size)
+				{
+				case AsteroidSize::Big:
+					player.score += 500;
+					break;
+				case AsteroidSize::Medium:
+					player.score += 250;
+					break;
+				case AsteroidSize::Small:
+					player.score += 100;
+					break;
+				default:
+					break;
+				}
+				
 				DestroyAsteroid(asteroids[i]);
 				return true;
 			}
 		}
-		
+
 	}
 	return false;
 }

@@ -8,13 +8,16 @@ namespace kuznickiAsteroid
 
 	struct Asteroid
 	{
+		Texture2D sprite;
+
 		Vector2 position;
 		Vector2 speed;
 		Vector2 speedMultiplier;
 		Vector2 direction;
 
 		float rotationSpeed;
-		
+		float rotation;
+
 		AsteroidSize size;	//
 		int arrayPosition;	//This way is easier to know where in the array this asteroid is, when needed to destroy it or change it in some way
 

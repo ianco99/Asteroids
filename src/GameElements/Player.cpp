@@ -19,11 +19,14 @@ Player GeneratePlayer()
 {
 	Player player;
 
-	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 10, 10 };
+	player.shipSprite = LoadTexture("textures/playerShip.png");
+
+	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 20, 20 };
 	player.acceleration = { 0,0 };
 	player.speedMultiplier = { .1f, .1f };
 	player.angle = 0;
 	player.lives = 3;
+	player.score = 0;
 	player.isAlive = true;
 
 	GenerateBullets(player.bullets);
@@ -246,5 +249,8 @@ void MovePlayer()
 
 void DrawPlayer()
 {
-	DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
+	//DrawTextureEx(player.shipSprite, { player.body.x+player.body.width/2 , player.body.y+player.body.height }, player.angle, 0.2f,RAYWHITE);
+	//DrawTextureRec(player.shipSprite, player.body, { player.body.x, player.body.y }, RAYWHITE);
+	//DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
+	DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, player.body, { player.body.width / 2, player.body.height / 2 }, player.angle, RAYWHITE);
 }
