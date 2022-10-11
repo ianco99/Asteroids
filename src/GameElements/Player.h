@@ -7,8 +7,8 @@ struct Player
 	Texture2D shipSprite;
 
 	Rectangle body;
+	Vector2 velocity;
 	Vector2 acceleration;
-	Vector2 speedMultiplier;
 	Bullet bullets[50]{};
 	float angle;
 	int lives;

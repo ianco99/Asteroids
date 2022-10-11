@@ -22,8 +22,8 @@ Player GeneratePlayer()
 	player.shipSprite = LoadTexture("textures/playerShip.png");
 
 	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 20, 20 };
-	player.acceleration = { 0,0 };
-	player.speedMultiplier = { .1f, .1f };
+	player.velocity = { 0,0 };
+	player.acceleration = { .1f, .1f };
 	player.angle = 0;
 	player.lives = 3;
 	player.score = 0;
@@ -157,7 +157,7 @@ void KillPlayer()
 	player.body.x = GetScreenWidth() / 2;
 	player.body.y = GetScreenHeight() / 2;
 
-	player.acceleration = {0,0};
+	player.velocity = {0,0};
 }
 
 void PointPlayer()
@@ -209,21 +209,10 @@ void ActionInput()
 
 void OnMoveInput()
 {
-	Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
+	Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.body.x, player.body.y });
+	Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
 
-	//esto es malisimo
-	if (GetMouseX() < player.body.x)
-	{
-		normalizedDir.x *= -1;
-	}
-	if (GetMouseY() < player.body.y)
-	{
-		normalizedDir.y *= -1;
-	}
-
-	//player.acceleration = Vector2Multiply(Vector2Add(player.acceleration, normalizedDir), player.speedMultiplier);
-	//player.acceleration += Vector2Add(player.acceleration, normalizedDir);
-	player.acceleration = Vector2Add(Vector2Multiply(player.speedMultiplier, normalizedDir), player.acceleration);
+	player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
 }
 
 void OnShootInput()
@@ -243,8 +232,8 @@ void OnShootInput()
 
 void MovePlayer()
 {
-	player.body.x = player.body.x + player.acceleration.x * GetFrameTime();
-	player.body.y = player.body.y + player.acceleration.y * GetFrameTime();
+	player.body.x = player.body.x + player.velocity.x * GetFrameTime();
+	player.body.y = player.body.y + player.velocity.y * GetFrameTime();
 }
 
 void DrawPlayer()
