@@ -12,6 +12,7 @@ Player player;
 
 Asteroid asteroids[60];
 
+Texture2D bulletSprite;
 extern Texture2D backgroundSprite;
 
 void DrawUserInterface();
@@ -21,6 +22,8 @@ void RunGame()
 	bool playing = true;
 
 	player = GeneratePlayer();
+
+	bulletSprite = LoadTexture("textures/bullets.png");
 
 	for (int i = 0; i < maxAsteroids; i++)
 	{

@@ -3,6 +3,8 @@
 
 struct Bullet
 {
+	Texture2D sprite;
+
 	Vector2 position;
 	int size;
 	Vector2 acceleration;
