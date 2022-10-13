@@ -50,7 +50,18 @@ void RunGame()
 			break;
 
 		case GameEndConditions::Pause:
+			BeginDrawing();
+			DrawText("You are in pause, press Y to quit to menu or N to resume playing.", GetScreenWidth()/2 - TextLength("You are in pause, press Y to quit to menu or N to resume playing."), GetScreenHeight()/2, 22, RAYWHITE);
+			EndDrawing();
 
+			if (IsKeyPressed(KEY_Y))
+			{
+				playing = false;
+			}
+			else if (IsKeyPressed(KEY_N))
+			{
+				condition = GameEndConditions::Game;
+			}
 			break;
 
 		case GameEndConditions::Win:
@@ -72,7 +83,6 @@ void Update()
 {
 	UpdatePlayer();
 	UpdateAsteroids();
-
 	Draw();
 }
 
@@ -81,6 +91,10 @@ GameEndConditions CheckGameEndConditions()
 	if (player.lives <= 0)
 	{
 		return GameEndConditions::Lose;
+	}
+	else if (IsKeyPressed(KEY_ESCAPE))
+	{
+		return GameEndConditions::Pause;
 	}
 	else
 	{
