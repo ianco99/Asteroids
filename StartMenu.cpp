@@ -32,12 +32,12 @@ void RunProject()
 
 		DrawTexturePro(backgroundSprite, { static_cast<float>(0),static_cast<float>(0),static_cast<float>(backgroundSprite.width), static_cast<float>(backgroundSprite.height) }, { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) }, { 0,0 }, 0, RAYWHITE);
 
-		
+		DrawText("ASTEROIDS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "ASTEROIDS", 60, 0).x / 2, GetScreenHeight()/10, 60, RAYWHITE);
 
 		//DrawTexturePro(buttonSprite, { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) }, startBtnBounds, { 0,0 }, 0, RAYWHITE);
 
 		DrawTextureRec(buttonSprite, { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) }, { startBtnBounds.x, startBtnBounds.y }, btnTint);
-		DrawText("START", startBtnBounds.x - 15 + startBtnBounds.width / 2 , startBtnBounds.y, 12, BLACK);
+		DrawText("START", startBtnBounds.x + startBtnBounds.width / 2 - MeasureTextEx(GetFontDefault(), "START", 12, 0).x, startBtnBounds.y + startBtnBounds.height / 2 - MeasureTextEx(GetFontDefault(), "START", 12, 0).y, 26, BLACK);
 
 		EndDrawing();
 
