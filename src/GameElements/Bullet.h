@@ -6,7 +6,7 @@ struct Bullet
 	Texture2D sprite;
 
 	Vector2 position;
-	int size;
+	int radiusSize;
 	Vector2 acceleration;
 	Vector2 velocity;
 	float angle;

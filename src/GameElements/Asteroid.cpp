@@ -19,7 +19,7 @@ namespace kuznickiAsteroid
 
 	void TrySpawningAnotherAsteroid();
 
-	Asteroid CreateAsteroid(int arrayPosition, AsteroidSize size)
+	Asteroid CreateAsteroid(int arrayPosition, AsteroidRadiusSize radiusSize)
 	{
 		Asteroid createdAsteroid;
 
@@ -27,20 +27,20 @@ namespace kuznickiAsteroid
 
 		createdAsteroid.arrayPosition = arrayPosition;
 
-		if (static_cast<int>(AsteroidSize::Small) < static_cast<int>(size))
+		if (static_cast<int>(AsteroidRadiusSize::Small) < static_cast<int>(radiusSize))
 			GiveAsteroidInitPosition(createdAsteroid);
 
 		GiveAsteroidInitDirection(createdAsteroid);
 
-		switch (size)
+		switch (radiusSize)
 		{
-		case kuznickiAsteroid::AsteroidSize::Big:
+		case kuznickiAsteroid::AsteroidRadiusSize::Big:
 			createdAsteroid.speedMultiplier = { 120.0f, 120.0f };
 			break;
-		case kuznickiAsteroid::AsteroidSize::Medium:
+		case kuznickiAsteroid::AsteroidRadiusSize::Medium:
 			createdAsteroid.speedMultiplier = { 160.0f, 160.0f };
 			break;
-		case kuznickiAsteroid::AsteroidSize::Small:
+		case kuznickiAsteroid::AsteroidRadiusSize::Small:
 			createdAsteroid.speedMultiplier = { 200.0f, 200.0f };
 			break;
 		default:
@@ -53,7 +53,7 @@ namespace kuznickiAsteroid
 
 		createdAsteroid.speed = Vector2Add(Vector2Multiply(createdAsteroid.speedMultiplier, createdAsteroid.direction), createdAsteroid.speed);
 
-		createdAsteroid.size = size;
+		createdAsteroid.radiusSize = radiusSize;
 
 		createdAsteroid.isAlive = true;
 
@@ -181,7 +181,7 @@ namespace kuznickiAsteroid
 
 				Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) };
 
-				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size),asteroids[i].position.y - static_cast<float>(asteroids[i].size) ,static_cast<float>(asteroids[i].size) * 2,static_cast<float>(asteroids[i].size) * 2 };
+				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].radiusSize),asteroids[i].position.y - static_cast<float>(asteroids[i].radiusSize) ,static_cast<float>(asteroids[i].radiusSize) * 2,static_cast<float>(asteroids[i].radiusSize) * 2 };
 
 				DrawTexturePro(asteroids[i].sprite, sourRect, destRect, { 0,0 }, 0, RAYWHITE);
 			}
@@ -191,14 +191,14 @@ namespace kuznickiAsteroid
 
 	void DestroyAsteroid(Asteroid& asteroid)
 	{
-		if (ChangeAsteroidSize(asteroid))	//Check if I need to generate another asteroid with lower size
+		if (ChangeAsteroidSize(asteroid))	//Check if I need to generate another asteroid with lower radiusSize
 		{
 			for (int i = 0; i < maxAsteroids; i++)
 			{
-				if (!asteroids[i].isAlive)	//Find new position for lower size asteroid
+				if (!asteroids[i].isAlive)	//Find new position for lower radiusSize asteroid
 				{
-					asteroids[i] = CreateAsteroid(i, asteroid.size);
-					asteroids[i].position = Vector2Add(asteroid.position, { static_cast<float>(asteroid.size), static_cast<float>(asteroid.size) });
+					asteroids[i] = CreateAsteroid(i, asteroid.radiusSize);
+					asteroids[i].position = Vector2Add(asteroid.position, { static_cast<float>(asteroid.radiusSize), static_cast<float>(asteroid.radiusSize) });
 					break;
 				}
 			}
@@ -216,15 +216,15 @@ namespace kuznickiAsteroid
 	bool ChangeAsteroidSize(Asteroid& asteroid)
 	{
 		PlaySoundMulti(asteroidDeathSound);
-		switch (asteroid.size)
+		switch (asteroid.radiusSize)
 		{
-		case AsteroidSize::Big:
-			asteroid.size = AsteroidSize::Medium;
+		case AsteroidRadiusSize::Big:
+			asteroid.radiusSize = AsteroidRadiusSize::Medium;
 			break;
-		case AsteroidSize::Medium:
-			asteroid.size = AsteroidSize::Small;
+		case AsteroidRadiusSize::Medium:
+			asteroid.radiusSize = AsteroidRadiusSize::Small;
 			break;
-		case AsteroidSize::Small:
+		case AsteroidRadiusSize::Small:
 			asteroid.isAlive = false;
 			break;
 		default:
@@ -246,7 +246,7 @@ namespace kuznickiAsteroid
 			{
 				if (!asteroids[i].isAlive)
 				{
-					asteroids[i] = CreateAsteroid(i, AsteroidSize::Big);
+					asteroids[i] = CreateAsteroid(i, AsteroidRadiusSize::Big);
 					break;
 				}
 			}

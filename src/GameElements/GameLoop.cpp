@@ -43,13 +43,13 @@ void RunGame()
 	{
 		asteroids[i].isAlive = false;
 		asteroids[i].direction = { 0,0 };
-		asteroids[i].size = AsteroidSize::Big;
+		asteroids[i].radiusSize = AsteroidRadiusSize::Big;
 		asteroids[i].speed = { 0,0 };
 	}
 
 	for (int i = 0; i < initialAsteroids; i++)
 	{
-		asteroids[i] = CreateAsteroid(i, AsteroidSize::Big);
+		asteroids[i] = CreateAsteroid(i, AsteroidRadiusSize::Big);
 	}
 
 	GameEndConditions condition = GameEndConditions::Game;

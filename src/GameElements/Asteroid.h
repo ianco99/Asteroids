@@ -4,7 +4,7 @@
 namespace kuznickiAsteroid
 {
 	enum class SpawnSector{Top, Right, Down, Left};
-	enum class AsteroidSize {Big = 20, Medium = 10, Small = 6};
+	enum class AsteroidRadiusSize {Big = 20, Medium = 10, Small = 6};
 
 	struct Asteroid
 	{
@@ -18,13 +18,13 @@ namespace kuznickiAsteroid
 		float rotationSpeed;
 		float rotation;
 
-		AsteroidSize size;	//
+		AsteroidRadiusSize radiusSize;
 		int arrayPosition;	//This way is easier to know where in the array this asteroid is, when needed to destroy it or change it in some way
 
 		bool isAlive;
 	};
 
-	Asteroid CreateAsteroid(int arrayPosition, AsteroidSize size);
+	Asteroid CreateAsteroid(int arrayPosition, AsteroidRadiusSize radiusSize);
 
 	void UpdateAsteroids();
 
