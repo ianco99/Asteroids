@@ -60,22 +60,22 @@ void UpdatePlayer()
 
 void CheckOutOfScreen()
 {
-	if (player.body.x <= 0)
+	if (player.position.x <= 0)
 	{
-		player.body.x = GetScreenWidth() - screenOffset;
+		player.position.x = GetScreenWidth() - screenOffset;
 	}
-	else if (player.body.x >= GetScreenWidth())
+	else if (player.position.x >= GetScreenWidth())
 	{
-		player.body.x = 0 + screenOffset;
+		player.position.x = 0 + screenOffset;
 	}
 
-	if (player.body.y <= 0)
+	if (player.position.y <= 0)
 	{
-		player.body.y = GetScreenHeight() - screenOffset;
+		player.position.y = GetScreenHeight() - screenOffset;
 	}
-	if (player.body.y >= GetScreenHeight())
+	if (player.position.y >= GetScreenHeight())
 	{
-		player.body.y = 0 + screenOffset;
+		player.position.y = 0 + screenOffset;
 	}
 
 
@@ -113,40 +113,19 @@ bool CheckCollisionPlayerAsteroid()
 	{
 		if (asteroids[i].isAlive)
 		{
-			//Collision circle-rectangle: http://www.jeffreythompson.org/collision-detection/circle-rect.php
-
-			float testX = asteroids[i].position.x;
-			float testY = asteroids[i].position.y;
-
-			if (asteroids[i].position.x < player.body.x)
-			{
-				testX = player.body.x;
-			}
-
-			else if (asteroids[i].position.x > player.body.x + player.body.width)
-			{
-				testX = player.body.x + player.body.width;
-			}
-
-			if (asteroids[i].position.y < player.body.y)
-			{
-				testY = player.body.y;
-			}
-
-			else if (asteroids[i].position.y > player.body.y + player.body.height)
-			{
-				testY = player.body.y + player.body.height;
-			}
-
-			float distX = asteroids[i].position.x - testX;
-			float distY = asteroids[i].position.y - testY;
+			float distX = player.position.x - asteroids[i].position.x;
+			float distY = player.position.y - asteroids[i].position.y;
 			float distance = sqrt((distX * distX) + (distY * distY));
 
-			if (distance <= static_cast<float>(asteroids[i].size))
+			//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
+
+			if (distance <= player.radius + static_cast<float>(asteroids[i].size))
 			{
 				return true;
 			}
+
 		}
+
 	}
 	return false;
 
@@ -157,8 +136,8 @@ void KillPlayer()
 	player.lives--;
 	player.isAlive = false;
 
-	player.body.x = GetScreenWidth() / 2;
-	player.body.y = GetScreenHeight() / 2;
+	player.position.x = GetScreenWidth() / 2;
+	player.position.y = GetScreenHeight() / 2;
 
 	PlaySoundMulti(playerDeathSound);
 
@@ -169,7 +148,7 @@ void PointPlayer()
 {
 	Vector2 pointTo = GetMousePosition();
 
-	Vector2 playerPos = { player.body.x , player.body.y };
+	Vector2 playerPos = { player.position.x , player.position.y };
 
 	Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
 
@@ -214,7 +193,7 @@ void ActionInput()
 
 void OnMoveInput()
 {
-	Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.body.x, player.body.y });
+	Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
 	Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
 
 	player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
