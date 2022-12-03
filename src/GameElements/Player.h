@@ -6,11 +6,12 @@ struct Player
 {
 	Texture2D shipSprite;
 
-	Rectangle body;
+	Vector2 position;
 	Vector2 velocity;
 	Vector2 acceleration;
 	Bullet bullets[50]{};
 	float angle;
+	float radius;
 	int lives;
 	int score;
 	bool isAlive;

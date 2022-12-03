@@ -14,11 +14,16 @@ extern int maxAsteroids;
 
 extern Texture2D bulletSprite;
 
+Sound bulletShootSound;
 
 bool CheckCollisionBulletAsteroid(Bullet& bullet);
 
 void GenerateBullets(Bullet bullets[])
 {
+	bulletShootSound = LoadSound("audio/asteroidExplosion.ogg");
+
+	SetSoundVolume(bulletShootSound, .04f);
+
 	for (int i = 0; i < 50; i++)
 	{
 		bullets[i].isActive = false;
@@ -29,6 +34,7 @@ void GenerateBullets(Bullet bullets[])
 
 void GiveBulletOrientation(Bullet& bullet)
 {
+	PlaySoundMulti(bulletShootSound);
 	//Give bullet player's angle
 	bullet.angle = player.angle;
 
@@ -115,18 +121,11 @@ void DrawBullets(Bullet bullets[])
 	{
 		if (bullets[i].isActive)
 		{
-			//bullets[i].sprite 
-
 			Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(bulletSprite.width), static_cast<float>(bulletSprite.height) };
 
-			//Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size), asteroids[i].position.y - static_cast<float>(asteroids[i].size), asteroids[i].position.x + static_cast<float>(asteroids[i].size), asteroids[i].position.y + static_cast<float>(asteroids[i].size) };
 			Rectangle destRect = { bullets[i].position.x - static_cast<float>(bullets[i].size),bullets[i].position.y - static_cast<float>(bullets[i].size) ,static_cast<float>(bullets[i].size) * 2,static_cast<float>(bullets[i].size) * 2 };
 
 			DrawTexturePro(bulletSprite, sourRect, destRect, { 0,0 }, bullets[i].angle, RAYWHITE);
-
-			//DrawTexturePro(bulletSprite, { 0.0f,0.0f, static_cast<float>(bulletSprite.width), static_cast<float>(bulletSprite.height) }, bullets[i].body, { player.body.width / 2, player.body.height / 2 }, player.angle, RAYWHITE);
-
-			//DrawCircleV(bullets[i].position, bullets[i].size, RAYWHITE);
 		}
 	}
 

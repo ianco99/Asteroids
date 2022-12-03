@@ -13,6 +13,12 @@ Player player;
 Asteroid asteroids[60];
 
 Texture2D bulletSprite;
+
+Sound playerDeathSound;
+Sound asteroidDeathSound;
+
+extern Music backgroundSong;
+
 extern Texture2D backgroundSprite;
 
 void DrawUserInterface();
@@ -22,6 +28,14 @@ void RunGame()
 	bool playing = true;
 
 	player = GeneratePlayer();
+
+	playerDeathSound = LoadSound("audio/shipDeath.ogg");
+	asteroidDeathSound = LoadSound("audio/bulletShoot.ogg");
+
+
+	
+	SetSoundVolume(playerDeathSound, .03f);
+	SetSoundVolume(asteroidDeathSound, .04f);
 
 	bulletSprite = LoadTexture("textures/bullets.png");
 
@@ -42,6 +56,7 @@ void RunGame()
 
 	while (playing)
 	{
+		UpdateMusicStream(backgroundSong);
 		switch (condition)
 		{
 		case GameEndConditions::Game:
@@ -76,6 +91,9 @@ void RunGame()
 			break;
 		}
 	}
+
+	//UnloadSound(playerDeathSound);
+	//UnloadSound(asteroidDeathSound);
 }
 
 

@@ -8,6 +8,8 @@ using namespace kuznickiAsteroid;
 extern Player player;
 extern Asteroid asteroids[];
 
+extern Sound playerDeathSound;
+
 extern int screenOffset;
 extern int maxAsteroids;
 
@@ -21,9 +23,10 @@ Player GeneratePlayer()
 
 	player.shipSprite = LoadTexture("textures/playerShip.png");
 
-	player.body = { GetScreenWidth() / 2.0f - 5, GetScreenHeight() / 2.0f - 5, 20, 20 };
+	player.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+	player.radius = 20.0f;
 	player.velocity = { 0,0 };
-	player.acceleration = { .1f, .1f };
+	player.acceleration = { 2.5f, 2.5f };
 	player.angle = 0;
 	player.lives = 3;
 	player.score = 0;
@@ -157,6 +160,8 @@ void KillPlayer()
 	player.body.x = GetScreenWidth() / 2;
 	player.body.y = GetScreenHeight() / 2;
 
+	PlaySoundMulti(playerDeathSound);
+
 	player.velocity = {0,0};
 }
 
@@ -241,5 +246,6 @@ void DrawPlayer()
 	//DrawTextureEx(player.shipSprite, { player.body.x+player.body.width/2 , player.body.y+player.body.height }, player.angle, 0.2f,RAYWHITE);
 	//DrawTextureRec(player.shipSprite, player.body, { player.body.x, player.body.y }, RAYWHITE);
 	//DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
+	DrawCircleLines(player.body.x, player.body.y, player.body.width, GREEN);
 	DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, player.body, { player.body.width / 2, player.body.height / 2 }, player.angle, RAYWHITE);
 }

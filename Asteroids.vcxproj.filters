@@ -19,9 +19,6 @@
     <ClCompile Include="src\GameElements\GameLoop.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\main.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameElements\Bullet.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
@@ -31,6 +28,7 @@
     <ClCompile Include="src\GameElements\Asteroid.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
+    <ClCompile Include="src\System\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StartMenu.h">

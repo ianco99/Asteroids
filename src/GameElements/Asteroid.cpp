@@ -9,9 +9,11 @@ extern int screenOffset;
 int smallAsteroidCounter = 0;
 
 extern kuznickiAsteroid::Asteroid asteroids[];
+extern Sound asteroidDeathSound;
 
 namespace kuznickiAsteroid
 {
+
 	void GiveAsteroidInitPosition(Asteroid& asteroid);
 	void GiveAsteroidInitDirection(Asteroid& asteroid);
 
@@ -176,24 +178,13 @@ namespace kuznickiAsteroid
 		{
 			if (asteroids[i].isAlive)
 			{
-				//Rectangle sourRect = { 0,0,static_cast<float>(asteroids[i].sprite.width),static_cast<float>(asteroids[i].sprite.height) };
-				//Rectangle destRect = { asteroids[i].position.x,asteroids[i].position.y,static_cast<float>(asteroids[i].sprite.width * static_cast<float>(asteroids[i].size)),static_cast<float>(asteroids[i].sprite.height * static_cast<float>(asteroids[i].size)) };
-				//Vector2 texturePiv = { static_cast<float>((asteroids[i].sprite.width * static_cast<float>(asteroids[i].size)) / 2),static_cast<float>((asteroids[i].sprite.height * static_cast<float>(asteroids[i].size)) / 2) };
-
-				//DrawTexturePro(asteroids[i].sprite, sourRect, destRect, texturePiv, asteroids[i].rotation, WHITE);
-				//asteroids[i].sprite.width -= 100;
-				//asteroids[i].sprite.height -= 100;
 
 				Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) };
 
-				//Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size), asteroids[i].position.y - static_cast<float>(asteroids[i].size), asteroids[i].position.x + static_cast<float>(asteroids[i].size), asteroids[i].position.y + static_cast<float>(asteroids[i].size) };
-				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size),asteroids[i].position.y - static_cast<float>(asteroids[i].size) ,static_cast<float>(asteroids[i].size)*2,static_cast<float>(asteroids[i].size)*2};
+				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].size),asteroids[i].position.y - static_cast<float>(asteroids[i].size) ,static_cast<float>(asteroids[i].size) * 2,static_cast<float>(asteroids[i].size) * 2 };
 
 				DrawTexturePro(asteroids[i].sprite, sourRect, destRect, { 0,0 }, 0, RAYWHITE);
-				//DrawCircleV(asteroids[i].position, static_cast<int>(asteroids[i].size), GREEN);
 			}
-			//DrawTexturePro(asteroids[i].sprite, { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) }, { asteroids[i].position.x - static_cast<int>(asteroids[i].size), asteroids[i].position.y - static_cast<int>(asteroids[i].size)}, { asteroids[i].position.x - static_cast<int>(asteroids[i].size) , asteroids[i].position.y - static_cast<int>(asteroids[i].size)  }, asteroids[i].rotation, RAYWHITE);
-			//DrawTextureEx(asteroids[i].sprite, asteroids[i].position, asteroids[i].rotation, 1 / static_cast<float>(asteroids[i].size), RAYWHITE);
 		}
 
 	}
@@ -224,6 +215,7 @@ namespace kuznickiAsteroid
 
 	bool ChangeAsteroidSize(Asteroid& asteroid)
 	{
+		PlaySoundMulti(asteroidDeathSound);
 		switch (asteroid.size)
 		{
 		case AsteroidSize::Big:
