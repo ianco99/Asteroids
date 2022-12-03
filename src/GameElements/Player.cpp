@@ -237,8 +237,8 @@ void OnShootInput()
 
 void MovePlayer()
 {
-	player.body.x = player.body.x + player.velocity.x * GetFrameTime();
-	player.body.y = player.body.y + player.velocity.y * GetFrameTime();
+	player.position.x = player.position.x + player.velocity.x * GetFrameTime();
+	player.position.y = player.position.y + player.velocity.y * GetFrameTime();
 }
 
 void DrawPlayer()
@@ -246,6 +246,6 @@ void DrawPlayer()
 	//DrawTextureEx(player.shipSprite, { player.body.x+player.body.width/2 , player.body.y+player.body.height }, player.angle, 0.2f,RAYWHITE);
 	//DrawTextureRec(player.shipSprite, player.body, { player.body.x, player.body.y }, RAYWHITE);
 	//DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
-	DrawCircleLines(player.body.x, player.body.y, player.body.width, GREEN);
-	DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, player.body, { player.body.width / 2, player.body.height / 2 }, player.angle, RAYWHITE);
+	DrawCircleLines(player.position.x, player.position.y, player.radius, GREEN);
+	DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, { player.position.x, player.position.y , player.position.x + player.radius * 2, player.position.y + player.radius * 2 }, { player.position.x + player.radius, player.position.y + player.radius / 2 }, player.angle, RAYWHITE);
 }
