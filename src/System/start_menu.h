@@ -3,5 +3,7 @@
 
 namespace kuznickiAsteroid
 {
+	enum class ProgramScreen{StartMenu, GameLoop, CreditsScreen, Quit};
+
 	void RunProject();
 }
