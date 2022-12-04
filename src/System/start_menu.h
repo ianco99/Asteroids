@@ -1,4 +1,7 @@
 #pragma once
 #include "raylib.h"
 
-//void Print();
+namespace kuznickiAsteroid
+{
+	void RunProject();
+}

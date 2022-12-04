@@ -3,16 +3,16 @@
 #include "raymath.h"
 #include "Asteroid.h"
 
-extern int maxAsteroids;
-extern int screenOffset;
-
-int smallAsteroidCounter = 0;
-
-extern kuznickiAsteroid::Asteroid asteroids[];
-extern Sound asteroidDeathSound;
-
 namespace kuznickiAsteroid
 {
+	extern int maxAsteroids;
+	extern int screenOffset;
+
+	int smallAsteroidCounter = 0;
+
+	extern kuznickiAsteroid::Asteroid asteroids[];
+	extern Sound asteroidDeathSound;
+
 
 	void GiveAsteroidInitPosition(Asteroid& asteroid);
 	void GiveAsteroidInitDirection(Asteroid& asteroid);

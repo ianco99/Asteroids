@@ -1,8 +1,8 @@
-void RunProject();
+#include "start_menu.h"
 
 int main()
 {
-	RunProject();
+	kuznickiAsteroid::RunProject();
 
 	return 0;
 }

@@ -3,239 +3,240 @@
 #include "Player.h"
 #include "Asteroid.h"
 
-using namespace kuznickiAsteroid;
-
-extern Player player;
-extern Asteroid asteroids[];
-
-extern Sound playerDeathSound;
-
-extern int screenOffset;
-extern int maxAsteroids;
-
-bool CheckCollisionPlayerAsteroid();
-
-void KillPlayer();
-
-Player GeneratePlayer()
+namespace kuznickiAsteroid
 {
-	Player player;
+	extern Player player;
+	extern Asteroid asteroids[];
 
-	player.shipSprite = LoadTexture("textures/playerShip.png");
+	extern Sound playerDeathSound;
 
-	player.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
-	player.radius = 20.0f;
-	player.velocity = { 0,0 };
-	player.acceleration = { 2.5f, 2.5f };
-	player.angle = 0;
-	player.lives = 3;
-	player.score = 0;
-	player.isAlive = true;
+	extern int screenOffset;
+	extern int maxAsteroids;
 
-	GenerateBullets(player.bullets);
+	bool CheckCollisionPlayerAsteroid();
 
-	return player;
-}
+	void KillPlayer();
 
-void UpdatePlayer()
-{
-	CheckOutOfScreen();
-
-	if (CheckCollisionPlayerAsteroid())
+	Player GeneratePlayer()
 	{
-		KillPlayer();
-		return;
+		Player player;
+
+		player.shipSprite = LoadTexture("textures/playerShip.png");
+
+		player.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+		player.radius = 20.0f;
+		player.velocity = { 0,0 };
+		player.acceleration = { 2.5f, 2.5f };
+		player.angle = 0;
+		player.lives = 3;
+		player.score = 0;
+		player.isAlive = true;
+
+		GenerateBullets(player.bullets);
+
+		return player;
 	}
 
-	PointPlayer();
-
-	DetectInput();
-
-	MovePlayer();
-
-	CheckOutOfScreen();
-
-	UpdateBullets(player.bullets);
-}
-
-void CheckOutOfScreen()
-{
-	if (player.position.x <= 0)
+	void UpdatePlayer()
 	{
-		player.position.x = GetScreenWidth() - screenOffset;
-	}
-	else if (player.position.x >= GetScreenWidth())
-	{
-		player.position.x = 0 + screenOffset;
-	}
+		CheckOutOfScreen();
 
-	if (player.position.y <= 0)
-	{
-		player.position.y = GetScreenHeight() - screenOffset;
-	}
-	if (player.position.y >= GetScreenHeight())
-	{
-		player.position.y = 0 + screenOffset;
-	}
-
-
-	CheckBulletsOutOfScreen();
-}
-
-void CheckBulletsOutOfScreen()
-{
-	for (int i = 0; i < 50; i++)
-	{
-		if (player.bullets[i].position.x <= 0)
+		if (CheckCollisionPlayerAsteroid())
 		{
-			player.bullets[i].isActive = false;
-		}
-		else if (player.bullets[i].position.x >= GetScreenWidth())
-		{
-			player.bullets[i].isActive = false;
+			KillPlayer();
+			return;
 		}
 
-		if (player.bullets[i].position.y <= 0)
-		{
-			player.bullets[i].isActive = false;
-		}
-		if (player.bullets[i].position.y >= GetScreenHeight())
-		{
-			player.bullets[i].isActive = false;
-		}
+		PointPlayer();
+
+		DetectInput();
+
+		MovePlayer();
+
+		CheckOutOfScreen();
+
+		UpdateBullets(player.bullets);
 	}
-}
 
-
-bool CheckCollisionPlayerAsteroid()
-{
-	for (int i = 0; i < maxAsteroids; i++)
+	void CheckOutOfScreen()
 	{
-		if (asteroids[i].isAlive)
+		if (player.position.x <= 0)
 		{
-			float distX = player.position.x - asteroids[i].position.x;
-			float distY = player.position.y - asteroids[i].position.y;
-			float distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
+			player.position.x = GetScreenWidth() - screenOffset;
+		}
+		else if (player.position.x >= GetScreenWidth())
+		{
+			player.position.x = 0 + screenOffset;
+		}
 
-			//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
+		if (player.position.y <= 0)
+		{
+			player.position.y = GetScreenHeight() - screenOffset;
+		}
+		if (player.position.y >= GetScreenHeight())
+		{
+			player.position.y = 0 + screenOffset;
+		}
 
-			if (distance <= player.radius + static_cast<float>(asteroids[i].radiusSize))
+
+		CheckBulletsOutOfScreen();
+	}
+
+	void CheckBulletsOutOfScreen()
+	{
+		for (int i = 0; i < 50; i++)
+		{
+			if (player.bullets[i].position.x <= 0)
 			{
-				return true;
+				player.bullets[i].isActive = false;
+			}
+			else if (player.bullets[i].position.x >= GetScreenWidth())
+			{
+				player.bullets[i].isActive = false;
+			}
+
+			if (player.bullets[i].position.y <= 0)
+			{
+				player.bullets[i].isActive = false;
+			}
+			if (player.bullets[i].position.y >= GetScreenHeight())
+			{
+				player.bullets[i].isActive = false;
+			}
+		}
+	}
+
+
+	bool CheckCollisionPlayerAsteroid()
+	{
+		for (int i = 0; i < maxAsteroids; i++)
+		{
+			if (asteroids[i].isAlive)
+			{
+				float distX = player.position.x - asteroids[i].position.x;
+				float distY = player.position.y - asteroids[i].position.y;
+				float distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
+
+				//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
+
+				if (distance <= player.radius + static_cast<float>(asteroids[i].radiusSize))
+				{
+					return true;
+				}
+
 			}
 
 		}
+		return false;
 
 	}
-	return false;
 
-}
-
-void KillPlayer()
-{
-	player.lives--;
-	player.isAlive = false;
-
-	player.position.x = GetScreenWidth() / 2;
-	player.position.y = GetScreenHeight() / 2;
-
-	PlaySoundMulti(playerDeathSound);
-
-	player.velocity = {0,0};
-}
-
-void PointPlayer()
-{
-	Vector2 pointTo = GetMousePosition();
-
-	Vector2 playerPos = { player.position.x , player.position.y };
-
-	Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
-
-	float angle = atan(distance.y / distance.x);
-
-	angle = angle * 180 / PI;
-
-	if (distance.x > 0 && distance.y < 0) //Quad 4
+	void KillPlayer()
 	{
-		angle += 360;
-	}
-	else if (distance.x < 0 && distance.y < 0) //Quad 3
-	{
-		angle += 180;
-	}
-	else if (distance.x < 0 && distance.y > 0) //Quad 2
-	{
-		angle += 180;
+		player.lives--;
+		player.isAlive = false;
+
+		player.position.x = GetScreenWidth() / 2;
+		player.position.y = GetScreenHeight() / 2;
+
+		PlaySoundMulti(playerDeathSound);
+
+		player.velocity = { 0,0 };
 	}
 
-	player.angle = angle;
-}
-
-void DetectInput()
-{
-	ActionInput();
-}
-
-void ActionInput()
-{
-
-	if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+	void PointPlayer()
 	{
-		OnMoveInput();
-	}
+		Vector2 pointTo = GetMousePosition();
 
-	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-	{
-		OnShootInput();
-	}
-}
+		Vector2 playerPos = { player.position.x , player.position.y };
 
-void OnMoveInput()
-{
-	Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
-	Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
+		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
 
-	player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
+		float angle = atan(distance.y / distance.x);
 
-	if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
-		player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+		angle = angle * 180 / PI;
 
-	if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
-		player.velocity.y = player.defaultPlayerValues.maxVelocityY;
-}
-
-void OnShootInput()
-{
-
-	for (int i = 0; i < 50; i++)
-	{
-		if (!player.bullets[i].isActive)
+		if (distance.x > 0 && distance.y < 0) //Quad 4
 		{
-			player.bullets[i].isActive = true;
-			GiveBulletOrientation(player.bullets[i]);
-			break;
+			angle += 360;
+		}
+		else if (distance.x < 0 && distance.y < 0) //Quad 3
+		{
+			angle += 180;
+		}
+		else if (distance.x < 0 && distance.y > 0) //Quad 2
+		{
+			angle += 180;
+		}
+
+		player.angle = angle;
+	}
+
+	void DetectInput()
+	{
+		ActionInput();
+	}
+
+	void ActionInput()
+	{
+
+		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+		{
+			OnMoveInput();
+		}
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			OnShootInput();
 		}
 	}
-}
+
+	void OnMoveInput()
+	{
+		Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
+		Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
+
+		player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
+
+		if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
+			player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+
+		if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
+			player.velocity.y = player.defaultPlayerValues.maxVelocityY;
+	}
+
+	void OnShootInput()
+	{
+
+		for (int i = 0; i < 50; i++)
+		{
+			if (!player.bullets[i].isActive)
+			{
+				player.bullets[i].isActive = true;
+				GiveBulletOrientation(player.bullets[i]);
+				break;
+			}
+		}
+	}
 
 
-void MovePlayer()
-{
-	player.position.x = player.position.x + player.velocity.x * GetFrameTime();
-	player.position.y = player.position.y + player.velocity.y * GetFrameTime();
-}
+	void MovePlayer()
+	{
+		player.position.x = player.position.x + player.velocity.x * GetFrameTime();
+		player.position.y = player.position.y + player.velocity.y * GetFrameTime();
+	}
 
-void DrawPlayer()
-{
-	Rectangle spriteSource = { 0,0, player.shipSprite.width, player.shipSprite.height };
-	Rectangle spriteDestination = { player.position.x, player.position.y, player.radius*2, player.radius*2};
-	Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f};
-	//Rectangle spriteDestination = { player.position.x - player.radius, player.position.y - player.radius, player.radius*2, player.radius*2 };
-	//DrawTextureEx(player.shipSprite, { player.body.x+player.body.width/2 , player.body.y+player.body.height }, player.angle, 0.2f,RAYWHITE);
-	//DrawTextureRec(player.shipSprite, player.body, { player.body.x, player.body.y }, RAYWHITE);
-	//DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
-	DrawCircleLines(player.position.x, player.position.y, player.radius, GREEN);
-	DrawTexturePro(player.shipSprite, spriteSource, spriteDestination, spriteOrigin, player.angle, WHITE);
-	//DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, { player.position.x, player.position.y , player.position.x + player.radius * 2, player.position.y + player.radius * 2 }, { player.position.x + player.radius, player.position.y + player.radius / 2 }, player.angle, RAYWHITE);
+	void DrawPlayer()
+	{
+		Rectangle spriteSource = { 0,0, player.shipSprite.width, player.shipSprite.height };
+		Rectangle spriteDestination = { player.position.x, player.position.y, player.radius * 2, player.radius * 2 };
+		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
+		//Rectangle spriteDestination = { player.position.x - player.radius, player.position.y - player.radius, player.radius*2, player.radius*2 };
+		//DrawTextureEx(player.shipSprite, { player.body.x+player.body.width/2 , player.body.y+player.body.height }, player.angle, 0.2f,RAYWHITE);
+		//DrawTextureRec(player.shipSprite, player.body, { player.body.x, player.body.y }, RAYWHITE);
+		//DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
+		DrawCircleLines(player.position.x, player.position.y, player.radius, GREEN);
+		DrawTexturePro(player.shipSprite, spriteSource, spriteDestination, spriteOrigin, player.angle, WHITE);
+		//DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, { player.position.x, player.position.y , player.position.x + player.radius * 2, player.position.y + player.radius * 2 }, { player.position.x + player.radius, player.position.y + player.radius / 2 }, player.angle, RAYWHITE);
+	}
 }

@@ -1,20 +1,23 @@
 #pragma once
 #include <raylib.h>
 
-struct Bullet
+namespace kuznickiAsteroid
 {
-	Texture2D sprite;
+	struct Bullet
+	{
+		Texture2D sprite;
 
-	Vector2 position;
-	int radiusSize;
-	Vector2 acceleration;
-	Vector2 velocity;
-	float angle;
-	bool isActive;
-};
+		Vector2 position;
+		int radiusSize;
+		Vector2 acceleration;
+		Vector2 velocity;
+		float angle;
+		bool isActive;
+	};
 
-void GenerateBullets(Bullet bullets[]);
+	void GenerateBullets(Bullet bullets[]);
 
-void UpdateBullets(Bullet bullets[]);
+	void UpdateBullets(Bullet bullets[]);
 
-void DrawBullets(Bullet bullets[]);
+	void DrawBullets(Bullet bullets[]);
+}

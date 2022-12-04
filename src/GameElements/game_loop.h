@@ -3,11 +3,13 @@
 #include "Player.h"
 #include "Asteroid.h"
 
-using namespace kuznickiAsteroid;
+namespace kuznickiAsteroid
+{
 
-enum class GameEndConditions{Game, Pause, Win, Lose};
+	enum class GameEndConditions { Game, Pause, Win, Lose };
 
-GameEndConditions CheckGameEndConditions();
+	GameEndConditions CheckGameEndConditions();
 
-void Update();
-void Draw();
+	void Update();
+	void Draw();
+}
