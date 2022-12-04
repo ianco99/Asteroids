@@ -3,8 +3,8 @@
 
 namespace kuznickiAsteroid
 {
-	enum class SpawnSector{Top, Right, Down, Left};
-	enum class AsteroidRadiusSize {Big = 20, Medium = 10, Small = 6};
+	enum class SpawnSector { Top, Right, Down, Left };
+	enum class AsteroidRadiusSize { Big = 20, Medium = 10, Small = 6 };
 
 	struct Asteroid
 	{
@@ -32,7 +32,7 @@ namespace kuznickiAsteroid
 
 	void MoveAsteroid(Asteroid& asteroid);
 
-	void DrawAsteroid();
+	void DrawAsteroid(Texture2D asteroidSprite);
 
 	void DestroyAsteroid(Asteroid& asteroid);
 

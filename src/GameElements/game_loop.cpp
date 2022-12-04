@@ -14,6 +14,7 @@ namespace kuznickiAsteroid
 
 	Asteroid asteroids[60];
 
+	Texture2D asteroidSprite;
 	Texture2D bulletSprite;
 
 	Sound playerDeathSound;
@@ -23,24 +24,22 @@ namespace kuznickiAsteroid
 
 	extern Texture2D backgroundSprite;
 
+	void InitSounds();
+	void InitGame();
 	void DrawUserInterface();
 
-	void RunGame()
+	void InitSounds()
 	{
-		bool playing = true;
-
-		player = GeneratePlayer();
-
 		playerDeathSound = LoadSound("audio/shipDeath.ogg");
 		asteroidDeathSound = LoadSound("audio/bulletShoot.ogg");
 
-
-
 		SetSoundVolume(playerDeathSound, .03f);
 		SetSoundVolume(asteroidDeathSound, .04f);
+	}
 
-		bulletSprite = LoadTexture("textures/bullets.png");
-
+	void InitGame()
+	{
+		player = GeneratePlayer();
 		for (int i = 0; i < maxAsteroids; i++)
 		{
 			asteroids[i].isAlive = false;
@@ -54,7 +53,18 @@ namespace kuznickiAsteroid
 			asteroids[i] = CreateAsteroid(i, AsteroidRadiusSize::Big);
 		}
 
+		asteroidSprite = LoadTexture("textures/asteroid.png");
+	}
+
+	void RunGame()
+	{
+		bool playing = true;
+
+		bulletSprite = LoadTexture("textures/bullets.png");
+
 		GameEndConditions condition = GameEndConditions::Game;
+
+		
 
 		while (playing)
 		{
@@ -129,7 +139,7 @@ namespace kuznickiAsteroid
 		DrawTexturePro(backgroundSprite, { static_cast<float>(0),static_cast<float>(0),static_cast<float>(backgroundSprite.width), static_cast<float>(backgroundSprite.height) }, { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) }, { 0,0 }, 0, RAYWHITE);
 		DrawPlayer();
 		DrawBullets(player.bullets);
-		DrawAsteroid();
+		DrawAsteroid(asteroidSprite);
 		DrawUserInterface();
 		EndDrawing();
 	}

@@ -49,8 +49,6 @@ namespace kuznickiAsteroid
 
 		createdAsteroid.rotation = 0.0f;
 
-		createdAsteroid.sprite = LoadTexture("textures/asteroid.png");
-
 		createdAsteroid.speed = Vector2Add(Vector2Multiply(createdAsteroid.speedMultiplier, createdAsteroid.direction), createdAsteroid.speed);
 
 		createdAsteroid.radiusSize = radiusSize;
@@ -172,7 +170,7 @@ namespace kuznickiAsteroid
 		asteroid.position = Vector2Add(asteroid.position, { asteroid.speed.x * GetFrameTime(), asteroid.speed.y * GetFrameTime() });
 	}
 
-	void DrawAsteroid()
+	void DrawAsteroid(Texture2D asteroidSprite)
 	{
 		for (int i = 0; i < maxAsteroids; i++)
 		{
@@ -183,7 +181,7 @@ namespace kuznickiAsteroid
 
 				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].radiusSize),asteroids[i].position.y - static_cast<float>(asteroids[i].radiusSize) ,static_cast<float>(asteroids[i].radiusSize) * 2,static_cast<float>(asteroids[i].radiusSize) * 2 };
 
-				DrawTexturePro(asteroids[i].sprite, sourRect, destRect, { 0,0 }, 0, RAYWHITE);
+				DrawTexturePro(asteroidSprite, sourRect, destRect, { 0,0 }, 0, RAYWHITE);
 			}
 		}
 
