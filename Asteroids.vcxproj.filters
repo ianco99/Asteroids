@@ -13,9 +13,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="StartMenu.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameElements\GameLoop.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
@@ -29,11 +26,11 @@
       <Filter>GameElements</Filter>
     </ClCompile>
     <ClCompile Include="src\System\main.cpp" />
+    <ClCompile Include="src\System\StartMenu.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StartMenu.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameElements\GameLoop.h">
       <Filter>GameElements</Filter>
     </ClInclude>
@@ -45,6 +42,9 @@
     </ClInclude>
     <ClInclude Include="src\GameElements\Asteroid.h">
       <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\StartMenu.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

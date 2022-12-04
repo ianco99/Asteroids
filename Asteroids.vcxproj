@@ -78,6 +78,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\win32</OutDir>
+    <IntDir>$(SolutionDir)obj</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -157,14 +158,14 @@
     <ClCompile Include="src\GameElements\GameLoop.cpp" />
     <ClCompile Include="src\GameElements\Player.cpp" />
     <ClCompile Include="src\System\main.cpp" />
-    <ClCompile Include="StartMenu.cpp" />
+    <ClCompile Include="src\System\StartMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameElements\Asteroid.h" />
     <ClInclude Include="src\GameElements\Bullet.h" />
     <ClInclude Include="src\GameElements\GameLoop.h" />
     <ClInclude Include="src\GameElements\Player.h" />
-    <ClInclude Include="StartMenu.h" />
+    <ClInclude Include="src\System\StartMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
