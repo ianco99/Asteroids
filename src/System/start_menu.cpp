@@ -2,16 +2,18 @@
 
 namespace kuznickiAsteroid
 {
+	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, Color color);
 	void RunGame();
 	void MouseCollisions(Color& btnTint, Rectangle startBtnBounds, Rectangle buttonArtTextLinkBounds, Rectangle buttonBackgroundTextLinkBounds, Rectangle buttonShipTextLinkBounds, Rectangle buttonSfxTextLinkBounds, Rectangle buttonMusicTextLinkBounds);
 
 	Texture2D backgroundSprite;
-	Texture2D buttonSprite;
+
 
 	Music backgroundSong;
 
 	void RunProject()
 	{
+		Texture2D buttonSprite;
 
 		InitWindow(1024, 768, "Asteroids");
 
@@ -31,9 +33,9 @@ namespace kuznickiAsteroid
 
 		int offsetBtwnCredits = 40;
 
-		Color btnTint = RAYWHITE;
+		Color btnTint = WHITE;
 
-		Rectangle startBtnBounds = { GetScreenWidth() / 2 - buttonSprite.width / 2, GetScreenHeight() / 3 - buttonSprite.height / 2 + 20, buttonSprite.width, buttonSprite.height };
+		Rectangle startBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
 		//Rectangle startBtndest = { GetScreenWidth()/2 - buttonSprite.width, GetScreenHeight() / 4 - buttonSprite.height, buttonSprite.width, buttonSprite.height };
 
 		PlayMusicStream(backgroundSong);
@@ -56,8 +58,7 @@ namespace kuznickiAsteroid
 
 			//DrawTexturePro(buttonSprite, { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) }, startBtnBounds, { 0,0 }, 0, RAYWHITE);
 
-			DrawTextureRec(buttonSprite, { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) }, { startBtnBounds.x, startBtnBounds.y }, btnTint);
-			DrawText("START", startBtnBounds.x + startBtnBounds.width / 2 - MeasureTextEx(GetFontDefault(), "START", 12, 0).x, startBtnBounds.y + startBtnBounds.height / 2 - MeasureTextEx(GetFontDefault(), "START", 12, 0).y, 26, BLACK);
+			DrawTextAndButton("START", 26, startBtnBounds, buttonSprite, WHITE);
 
 			DrawText("CREDITS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "CREDITS", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 6, 26, RAYWHITE);
 			DrawText("Button art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Button art by Kenney", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 4 + offsetBtwnCredits * 2, 26, RAYWHITE);
@@ -73,6 +74,7 @@ namespace kuznickiAsteroid
 
 			DrawText("Music by yd", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Music by yd", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 4 + offsetBtwnCredits * 10 - 20, 26, RAYWHITE);
 			DrawText("https://opengameart.org/content/space-music-out-there", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 4 + offsetBtwnCredits * 11 - 6, 26, SKYBLUE);
+
 
 			EndDrawing();
 
@@ -93,5 +95,19 @@ namespace kuznickiAsteroid
 
 		CloseAudioDevice();
 		CloseWindow();
+	}
+
+	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, Color color)
+	{
+		Rectangle spriteSource = { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) };
+		Rectangle spriteDestination = { button.x, button.y, button.width, button.height };
+		Vector2 spriteOrigin = { buttonSprite.width / 2.0f, buttonSprite.height / 2.0f };
+
+		DrawTexturePro(buttonSprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
+		DrawText(text, button.x  - MeasureTextEx(GetFontDefault(), text, fontSize, 0).x / 2.0f, button.y - MeasureTextEx(GetFontDefault(), text, fontSize, 0).y / 2.0f, fontSize, BLACK);
+		
+		
+		//DrawText(TextFormat(Button[i].text), static_cast<int>(Button[i].body.x + Button[i].body.width / 2 - MeasureTextEx(GetFontDefault(), Button[i].text, 42, 0).x / 2), static_cast<int>(Button[i].body.y + MeasureTextEx(GetFontDefault(), Button[i].text, 42, 0).y / 2), 42, WHITE);
+
 	}
 };

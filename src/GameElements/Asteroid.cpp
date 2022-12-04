@@ -34,13 +34,13 @@ namespace kuznickiAsteroid
 
 		switch (radiusSize)
 		{
-		case kuznickiAsteroid::AsteroidRadiusSize::Big:
+		case AsteroidRadiusSize::Big:
 			createdAsteroid.speedMultiplier = { 120.0f, 120.0f };
 			break;
-		case kuznickiAsteroid::AsteroidRadiusSize::Medium:
+		case AsteroidRadiusSize::Medium:
 			createdAsteroid.speedMultiplier = { 160.0f, 160.0f };
 			break;
-		case kuznickiAsteroid::AsteroidRadiusSize::Small:
+		case AsteroidRadiusSize::Small:
 			createdAsteroid.speedMultiplier = { 200.0f, 200.0f };
 			break;
 		default:
