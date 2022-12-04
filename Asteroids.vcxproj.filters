@@ -13,37 +13,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameElements\GameLoop.cpp">
+    <ClCompile Include="src\GameElements\game_loop.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameElements\Bullet.cpp">
+    <ClCompile Include="src\GameElements\bullet.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameElements\Player.cpp">
+    <ClCompile Include="src\GameElements\player.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameElements\Asteroid.cpp">
+    <ClCompile Include="src\GameElements\asteroid.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
     <ClCompile Include="src\System\main.cpp" />
-    <ClCompile Include="src\System\StartMenu.cpp">
+    <ClCompile Include="src\System\start_menu.cpp">
       <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameElements\GameLoop.h">
+    <ClInclude Include="src\GameElements\game_loop.h">
       <Filter>GameElements</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameElements\Player.h">
+    <ClInclude Include="src\GameElements\player.h">
       <Filter>GameElements</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameElements\Bullet.h">
+    <ClInclude Include="src\GameElements\bullet.h">
       <Filter>GameElements</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameElements\Asteroid.h">
+    <ClInclude Include="src\GameElements\asteroid.h">
       <Filter>GameElements</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\StartMenu.h">
+    <ClInclude Include="src\System\start_menu.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>

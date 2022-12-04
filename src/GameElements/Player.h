@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "Bullet.h"
+#include "bullet.h"
 
 struct DefaultPlayerValues
 {
