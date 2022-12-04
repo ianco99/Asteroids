@@ -177,7 +177,7 @@ namespace kuznickiAsteroid
 			if (asteroids[i].isAlive)
 			{
 
-				Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(asteroids[i].sprite.width), static_cast<float>(asteroids[i].sprite.height) };
+				Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(asteroidSprite.width), static_cast<float>(asteroidSprite.height) };
 
 				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].radiusSize),asteroids[i].position.y - static_cast<float>(asteroids[i].radiusSize) ,static_cast<float>(asteroids[i].radiusSize) * 2,static_cast<float>(asteroids[i].radiusSize) * 2 };
 

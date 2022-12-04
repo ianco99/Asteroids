@@ -8,8 +8,6 @@ namespace kuznickiAsteroid
 
 	struct Asteroid
 	{
-		Texture2D sprite;
-
 		Vector2 position;
 		Vector2 speed;
 		Vector2 speedMultiplier;

@@ -62,8 +62,10 @@ namespace kuznickiAsteroid
 
 		bulletSprite = LoadTexture("textures/bullets.png");
 
-		GameEndConditions condition = GameEndConditions::Game;
+		InitSounds();
+		InitGame();
 
+		GameEndConditions condition = GameEndConditions::Game;
 		
 
 		while (playing)
