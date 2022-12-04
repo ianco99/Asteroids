@@ -197,6 +197,12 @@ void OnMoveInput()
 	Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
 
 	player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
+
+	if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
+		player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+
+	if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
+		player.velocity.y = player.defaultPlayerValues.maxVelocityY;
 }
 
 void OnShootInput()

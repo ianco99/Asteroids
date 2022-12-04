@@ -2,8 +2,16 @@
 #include "raylib.h"
 #include "Bullet.h"
 
+struct DefaultPlayerValues
+{
+	float maxVelocityX = 350;
+	float maxVelocityY = 350;
+};
+
 struct Player
 {
+	DefaultPlayerValues defaultPlayerValues;
+
 	Texture2D shipSprite;
 
 	Vector2 position;
