@@ -2,7 +2,7 @@
 
 namespace kuznickiAsteroid
 {
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, Color color);
+	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, bool shouldDrawTexture,Color color);
 	void RunGame();
 	void MouseCollisions(Color& btnTint, Rectangle startBtnBounds, Rectangle buttonArtTextLinkBounds, Rectangle buttonBackgroundTextLinkBounds, Rectangle buttonShipTextLinkBounds, Rectangle buttonSfxTextLinkBounds, Rectangle buttonMusicTextLinkBounds);
 
@@ -58,7 +58,7 @@ namespace kuznickiAsteroid
 
 			//DrawTexturePro(buttonSprite, { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) }, startBtnBounds, { 0,0 }, 0, RAYWHITE);
 
-			DrawTextAndButton("START", 26, startBtnBounds, buttonSprite, WHITE);
+			DrawTextAndButton("START", 26, startBtnBounds, buttonSprite, true, WHITE);
 
 			DrawText("CREDITS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "CREDITS", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 6, 26, RAYWHITE);
 			DrawText("Button art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Button art by Kenney", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 4 + offsetBtwnCredits * 2, 26, RAYWHITE);
@@ -97,7 +97,7 @@ namespace kuznickiAsteroid
 		CloseWindow();
 	}
 
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, Color color)
+	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, bool shouldDrawTexture, Color color)
 	{
 		Rectangle spriteSource = { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) };
 		Rectangle spriteDestination = { button.x, button.y, button.width, button.height };
