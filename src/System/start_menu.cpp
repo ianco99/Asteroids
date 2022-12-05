@@ -20,11 +20,20 @@ namespace kuznickiAsteroid
 	void RunProject()
 	{
 		Texture2D buttonSprite;
+		Color btnTint = WHITE;
+
+		Rectangle startBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
+
+		currentScreen = ProgramScreen::StartMenu;
+		ProgramScreen selectedScreen;
 
 		bool shouldQuit = false;
 
 		InitWindow(1024, 768, "Asteroids");
+		SetExitKey(KEY_F4);
 		InitAudioDevice();
+		PlayMusicStream(backgroundSong);
+		SetMusicVolume(backgroundSong, .2f);
 
 
 		buttonSprite = LoadTexture("textures/button.png");
@@ -35,21 +44,11 @@ namespace kuznickiAsteroid
 
 
 
-		Color btnTint = WHITE;
-
-		Rectangle startBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
-
-		PlayMusicStream(backgroundSong);
-
-		SetExitKey(KEY_F4);
-
-		currentScreen = ProgramScreen::StartMenu;
 
 		while (!WindowShouldClose() && !shouldQuit)
 		{
 			UpdateMusicStream(backgroundSong);
 
-			SetMusicVolume(backgroundSong, .2f);
 
 			switch (currentScreen)
 			{
@@ -88,7 +87,7 @@ namespace kuznickiAsteroid
 
 			switch (currentScreen)
 			{
-				
+
 			case kuznickiAsteroid::ProgramScreen::StartMenu:
 
 
@@ -99,7 +98,7 @@ namespace kuznickiAsteroid
 
 				DrawTextAndButton("START", 26, startBtnBounds, buttonSprite, true, WHITE);
 
-				
+
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::GameLoop:
@@ -117,7 +116,7 @@ namespace kuznickiAsteroid
 			default:
 
 				break;
-			}		
+			}
 
 			EndDrawing();
 		}
@@ -129,6 +128,11 @@ namespace kuznickiAsteroid
 
 		CloseAudioDevice();
 		CloseWindow();
+	}
+
+	bool CollisionPointRec()
+	{
+
 	}
 
 	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, bool shouldDrawTexture, Color color)
