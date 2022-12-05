@@ -2,13 +2,20 @@
 
 #include "credits_menu.h"
 
+#include <iostream>
+
 namespace kuznickiAsteroid
 {
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, bool shouldDrawTexture, Color color);
+	void InitWindowAndAudio();
+	void InitButtons(Button buttons[]);
+	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[]);
+	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, bool shouldDrawTexture, Color color);
 	void RunGame();
+	bool CollisionPointRec(Vector2 point, Rectangle rec);
 	void MouseCollisions(Color& btnTint, Rectangle startBtnBounds, Rectangle buttonArtTextLinkBounds, Rectangle buttonBackgroundTextLinkBounds, Rectangle buttonShipTextLinkBounds, Rectangle buttonSfxTextLinkBounds, Rectangle buttonMusicTextLinkBounds);
 
 	Texture2D backgroundSprite;
+	Texture2D buttonSprite;
 
 	ProgramScreen currentScreen;
 
@@ -19,31 +26,26 @@ namespace kuznickiAsteroid
 
 	void RunProject()
 	{
-		Texture2D buttonSprite;
+		
+		backgroundSong.looping = true;
+
 		Color btnTint = WHITE;
 
-		Rectangle startBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
+		InitWindowAndAudio();
+
+		buttonSprite = LoadTexture("textures/button.png");
+		backgroundSprite = LoadTexture("textures/back.png");
+		backgroundSong = LoadMusicStream("audio/backgroundSong.ogg");
+
+		Button buttons[4];
+		InitButtons(buttons);
+		Rectangle mouseCollisions[4];
+		InitMouseCollisions(buttons, mouseCollisions);
 
 		currentScreen = ProgramScreen::StartMenu;
 		ProgramScreen selectedScreen;
 
 		bool shouldQuit = false;
-
-		InitWindow(1024, 768, "Asteroids");
-		SetExitKey(KEY_F4);
-		InitAudioDevice();
-		PlayMusicStream(backgroundSong);
-		SetMusicVolume(backgroundSong, .2f);
-
-
-		buttonSprite = LoadTexture("textures/button.png");
-		backgroundSprite = LoadTexture("textures/back.png");
-
-		backgroundSong = LoadMusicStream("audio/backgroundSong.ogg");
-		backgroundSong.looping = true;
-
-
-
 
 		while (!WindowShouldClose() && !shouldQuit)
 		{
@@ -57,6 +59,17 @@ namespace kuznickiAsteroid
 				{
 					shouldQuit = true;
 				}
+
+				if (CollisionPointRec(GetMousePosition(), mouseCollisions[0]))
+				{
+					selectedScreen = buttons[0].buttonScreen;
+
+					if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+					{
+						currentScreen = selectedScreen;
+					}
+				}
+
 				else if (IsKeyPressed(KEY_SPACE))
 				{
 					currentScreen = ProgramScreen::GameLoop;
@@ -96,7 +109,9 @@ namespace kuznickiAsteroid
 
 				//DrawTexturePro(buttonSprite, { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) }, startBtnBounds, { 0,0 }, 0, RAYWHITE);
 
-				DrawTextAndButton("START", 26, startBtnBounds, buttonSprite, true, WHITE);
+				DrawRectangleLines( mouseCollisions[0].x, mouseCollisions[0].y, mouseCollisions[0].width, mouseCollisions[0].height,  GREEN);
+
+				DrawTextAndButton(buttons[0].text, 26, buttons[0].body, true, WHITE);
 
 
 				break;
@@ -130,12 +145,46 @@ namespace kuznickiAsteroid
 		CloseWindow();
 	}
 
-	bool CollisionPointRec()
+	void InitWindowAndAudio()
 	{
-
+		InitWindow(1024, 768, "Asteroids");
+		SetExitKey(KEY_F4);
+		InitAudioDevice();
+		PlayMusicStream(backgroundSong);
+		SetMusicVolume(backgroundSong, .2f);
 	}
 
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, bool shouldDrawTexture, Color color)
+	void InitButtons(Button buttons[])
+	{
+		Rectangle startBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
+		buttons[0].body = startBtnBounds;
+		buttons[0].buttonScreen = ProgramScreen::GameLoop;
+		buttons[0].text = "START";
+		buttons[0].link = " ";
+	}
+
+	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[])
+	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			mouseCollisions[i] = { buttons[i].body.x - buttons[i].body.width / 2, buttons[i].body.y - buttons[i].body.height / 2 ,buttons[i].body.width, buttons[i].body.height };
+		}
+	}
+
+	bool CollisionPointRec(Vector2 point, Rectangle rec)
+	{
+		if (point.x >= rec.x &&
+			point.x <= rec.x + rec.width &&
+			point.y >= rec.y &&
+			point.y <= rec.y + rec.height)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, bool shouldDrawTexture, Color color)
 	{
 		Rectangle spriteSource = { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) };
 		Rectangle spriteDestination = { button.x, button.y, button.width, button.height };
@@ -145,6 +194,8 @@ namespace kuznickiAsteroid
 			DrawTexturePro(buttonSprite, spriteSource, spriteDestination, spriteOrigin, 0.0f, WHITE);
 
 		DrawText(text, button.x - MeasureTextEx(GetFontDefault(), text, fontSize, 0).x / 2.0f, button.y - MeasureTextEx(GetFontDefault(), text, fontSize, 0).y / 2.0f, fontSize, BLACK);
+		
+		std::cout << button.x;
 
 		//DrawText("https://www.kenney.nl/assets/ui-pack", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", 26, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 4 + offsetBtwnCredits * 3, 26, SKYBLUE);
 
