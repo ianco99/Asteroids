@@ -14,4 +14,5 @@ namespace kuznickiAsteroid
 	};
 
 	void RunProject();
+	bool CollisionPointRec(Vector2 point, Rectangle rec);
 }
