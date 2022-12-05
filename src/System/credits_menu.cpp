@@ -11,29 +11,19 @@ const int maxCreditsButtons = 5;
 
 namespace kuznickiAsteroid
 {
+	extern ProgramScreen currentScreen;
+	extern Texture2D buttonSprite;
 
 	Button creditButtons[maxCreditsButtons];
 
 	Button backButton;
 
-	void ButtonCredits()
-	{
-		for (int i = 0; i < maxCreditsButtons; i++)
-		{
-			if (CollisionPointRec(GetMousePosition(), creditButtons[i].body))
-			{
-				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-				{
-					OpenURL(creditButtons[i].link);
-				}
-			}
-		}
+	Rectangle backButtonCollision;
 
-		if(CollisionPointRec(GetMousePosition(), backButton.body))
-	}
-
-	void DrawCredits()
+	void InitButtonCredits()
 	{
+		backButton = { GetScreenWidth() / 2.0f, GetScreenHeight() - GetScreenHeight() / 8.0f, static_cast<float>(buttonSprite.width), static_cast<float>(buttonSprite.height) };
+
 		creditButtons[0].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 3, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 2).y };
 		creditButtons[0].link = "https://www.kenney.nl/assets/ui-pack";
 
@@ -48,6 +38,34 @@ namespace kuznickiAsteroid
 
 		creditButtons[4].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 11, MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", creditsFontSize, 2).y };
 		creditButtons[4].link = "https://opengameart.org/content/space-music-out-there";
+
+		backButtonCollision = { backButton.body.x - backButton.body.width / 2, backButton.body.y - backButton.body.height / 2 , backButton.body.width, backButton.body.height };
+	}
+
+	void ButtonCredits()
+	{
+		for (int i = 0; i < maxCreditsButtons; i++)
+		{
+			if (CollisionPointRec(GetMousePosition(), creditButtons[i].body))
+			{
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					OpenURL(creditButtons[i].link);
+				}
+			}
+		}
+
+		if (CollisionPointRec(GetMousePosition(), backButtonCollision))
+		{
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			{
+				currentScreen = ProgramScreen::StartMenu;
+			}
+		}
+	}
+
+	void DrawCredits()
+	{
 
 		DrawText("CREDITS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "CREDITS", 26, 0).x / 2, GetScreenHeight() / 10, 26, RAYWHITE);
 
@@ -76,6 +94,8 @@ namespace kuznickiAsteroid
 
 		DrawRectangleLinesEx(creditButtons[4].body, 1, GREEN);
 		DrawText("https://opengameart.org/content/space-music-out-there", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 11, 26, SKYBLUE);
+
+		DrawTextAndButton("BACK", 26, backButton.body, true, WHITE);
 
 	}
 }

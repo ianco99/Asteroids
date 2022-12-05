@@ -8,9 +8,7 @@ namespace kuznickiAsteroid
 	void InitWindowAndAudio();
 	void InitButtons(Button buttons[]);
 	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[]);
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, bool shouldDrawTexture, Color color);
 	void RunGame();
-	void MouseCollisions(Color& btnTint, Rectangle startBtnBounds, Rectangle buttonArtTextLinkBounds, Rectangle buttonBackgroundTextLinkBounds, Rectangle buttonShipTextLinkBounds, Rectangle buttonSfxTextLinkBounds, Rectangle buttonMusicTextLinkBounds);
 
 	Texture2D backgroundSprite;
 	Texture2D buttonSprite;
@@ -37,6 +35,9 @@ namespace kuznickiAsteroid
 
 		Button buttons[4];
 		InitButtons(buttons);
+
+		InitButtonCredits();
+
 		Rectangle mouseCollisions[4];
 		InitMouseCollisions(buttons, mouseCollisions);
 
