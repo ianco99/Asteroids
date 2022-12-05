@@ -2,6 +2,9 @@
 
 #include "raylib.h"
 
+extern int creditsFontSize = 26;
+extern int offsetBtwnCredits = 40;
+
 void DrawCredits()
 {
 	Rectangle buttonCreditsTextBounds = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 0).x / 2, GetScreenHeight() - GetScreenHeight() / 3 - GetScreenHeight() / 4 + offsetBtwnCredits * 3, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 2).y };

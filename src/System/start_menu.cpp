@@ -12,12 +12,13 @@ namespace kuznickiAsteroid
 
 	Music backgroundSong;
 
+	int creditsFontSize = 26;
+	int offsetBtwnCredits = 40;
+
 	void RunProject()
 	{
 		Texture2D buttonSprite;
 
-		int offsetBtwnCredits = 40;
-		int creditsFontSize = 26;
 		bool shouldQuit = false;
 
 		InitWindow(1024, 768, "Asteroids");
@@ -50,6 +51,33 @@ namespace kuznickiAsteroid
 
 			switch (currentScreen)
 			{
+			case kuznickiAsteroid::ProgramScreen::StartMenu:
+				if (IsKeyPressed(KEY_ESCAPE))
+				{
+					shouldQuit = true;
+				}
+				else if (IsKeyPressed(KEY_SPACE))
+				{
+					currentScreen = ProgramScreen::GameLoop;
+				}
+				break;
+			case kuznickiAsteroid::ProgramScreen::GameLoop:
+				RunGame();
+				currentScreen = ProgramScreen::StartMenu;
+				break;
+			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
+				break;
+			case kuznickiAsteroid::ProgramScreen::Quit:
+				break;
+			default:
+				break;
+			}
+
+
+			switch (currentScreen)
+			{
+				
+			case kuznickiAsteroid::ProgramScreen::StartMenu:
 				BeginDrawing();
 
 				ClearBackground(BLACK);
@@ -65,38 +93,22 @@ namespace kuznickiAsteroid
 				EndDrawing();
 				break;
 
-			case kuznickiAsteroid::ProgramScreen::StartMenu:
-				
-				break;
-
 			case kuznickiAsteroid::ProgramScreen::GameLoop:
-				
+
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
-				
+
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::Quit:
-				
+
 				break;
 
 			default:
-				
+
 				break;
-			}
-
-
-
-
-			if (IsKeyPressed(KEY_ESCAPE))
-			{
-				shouldQuit = true;
-			}
-			else if (IsKeyPressed(KEY_SPACE))
-			{
-				RunGame();
-			}
+			}		
 		}
 
 		UnloadMusicStream(backgroundSong);
