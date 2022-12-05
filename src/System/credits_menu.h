@@ -1,2 +1,7 @@
 #pragma once
-void DrawCredits();
+
+namespace kuznickiAsteroid
+{
+	void ButtonCredits();
+	void DrawCredits();
+}

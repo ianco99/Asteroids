@@ -2,7 +2,6 @@
 
 #include "credits_menu.h"
 
-#include <iostream>
 
 namespace kuznickiAsteroid
 {
@@ -92,7 +91,7 @@ namespace kuznickiAsteroid
 				currentScreen = ProgramScreen::StartMenu;
 				break;
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
-
+				ButtonCredits();
 				break;
 			case kuznickiAsteroid::ProgramScreen::Quit:
 				break;
