@@ -1,5 +1,7 @@
 #include "start_menu.h"
 
+#include "credits_menu.h"
+
 namespace kuznickiAsteroid
 {
 	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, Texture2D buttonSprite, bool shouldDrawTexture, Color color);
@@ -60,12 +62,17 @@ namespace kuznickiAsteroid
 				{
 					currentScreen = ProgramScreen::GameLoop;
 				}
+				else if (IsKeyPressed(KEY_F))
+				{
+					currentScreen = ProgramScreen::CreditsScreen;
+				}
 				break;
 			case kuznickiAsteroid::ProgramScreen::GameLoop:
 				RunGame();
 				currentScreen = ProgramScreen::StartMenu;
 				break;
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
+
 				break;
 			case kuznickiAsteroid::ProgramScreen::Quit:
 				break;
@@ -73,16 +80,18 @@ namespace kuznickiAsteroid
 				break;
 			}
 
+			BeginDrawing();
+
+			ClearBackground(BLACK);
+
+			DrawTexturePro(backgroundSprite, { static_cast<float>(0),static_cast<float>(0),static_cast<float>(backgroundSprite.width), static_cast<float>(backgroundSprite.height) }, { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) }, { 0,0 }, 0, RAYWHITE);
 
 			switch (currentScreen)
 			{
 				
 			case kuznickiAsteroid::ProgramScreen::StartMenu:
-				BeginDrawing();
 
-				ClearBackground(BLACK);
 
-				DrawTexturePro(backgroundSprite, { static_cast<float>(0),static_cast<float>(0),static_cast<float>(backgroundSprite.width), static_cast<float>(backgroundSprite.height) }, { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) }, { 0,0 }, 0, RAYWHITE);
 
 				DrawText("ASTEROIDS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "ASTEROIDS", 60, 0).x / 2, GetScreenHeight() / 10, 60, RAYWHITE);
 
@@ -90,7 +99,7 @@ namespace kuznickiAsteroid
 
 				DrawTextAndButton("START", 26, startBtnBounds, buttonSprite, true, WHITE);
 
-				EndDrawing();
+				
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::GameLoop:
@@ -98,7 +107,7 @@ namespace kuznickiAsteroid
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
-
+				DrawCredits();
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::Quit:
@@ -109,6 +118,8 @@ namespace kuznickiAsteroid
 
 				break;
 			}		
+
+			EndDrawing();
 		}
 
 		UnloadMusicStream(backgroundSong);
