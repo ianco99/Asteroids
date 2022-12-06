@@ -18,6 +18,7 @@ namespace kuznickiAsteroid
 
 	extern Button pauseButton;
 
+	extern bool isRespawning;
 	extern int screenOffset;
 	extern int maxAsteroids;
 	extern const int maxBullets;
@@ -48,6 +49,7 @@ namespace kuznickiAsteroid
 		createdPlayer.lives = 3;
 		createdPlayer.score = 0;
 		createdPlayer.isAlive = true;
+		createdPlayer.color = WHITE;
 
 		GenerateBullets(createdPlayer.bullets);
 
@@ -160,7 +162,8 @@ namespace kuznickiAsteroid
 	{
 		player.lives--;
 		player.isAlive = false;
-
+		isRespawning = true;
+		player.color = GRAY;
 		player.position.x = GetScreenWidth() / 2.0f;
 		player.position.y = GetScreenHeight() / 2.0f;
 
@@ -182,7 +185,7 @@ namespace kuznickiAsteroid
 
 				//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
 
-				if (distance <= static_cast<double>(player.radius) + static_cast<float>(asteroids[i].radiusSize))
+				if (distance <= static_cast<double>(player.radius) + static_cast<float>(asteroids[i].radiusSize) && player.isAlive)
 				{
 					return true;
 				}
@@ -248,6 +251,6 @@ namespace kuznickiAsteroid
 		Rectangle spriteDestination = { player.position.x, player.position.y, player.radius * 2, player.radius * 2 };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		DrawTexturePro(player.shipSprite, spriteSource, spriteDestination, spriteOrigin, player.angle, WHITE);
+		DrawTexturePro(player.shipSprite, spriteSource, spriteDestination, spriteOrigin, player.angle, player.color);
 	}
 }

@@ -15,6 +15,7 @@ namespace kuznickiAsteroid
 		DefaultPlayerValues defaultPlayerValues;
 
 		Texture2D shipSprite;
+		Color color;
 
 		Vector2 position;
 		Vector2 velocity;

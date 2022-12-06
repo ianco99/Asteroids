@@ -36,6 +36,11 @@ namespace kuznickiAsteroid
 	int screenOffset = 5;
 	int initialAsteroids = 5;
 	const int maxBullets = 50;
+	const float respawnTime = 5.0f;
+	float currentRespawnTime = 0.0f;
+
+	bool isRespawning = false;
+
 
 	void InitSounds();
 	void InitGame();
@@ -93,6 +98,17 @@ namespace kuznickiAsteroid
 			case GameEndConditions::Game:
 				Update();
 				condition = CheckGameEndConditions();
+
+				if (isRespawning)
+					currentRespawnTime += GetFrameTime();
+
+				if (currentRespawnTime >= respawnTime)
+				{
+					player.color = WHITE;
+					player.isAlive = true;
+					isRespawning = false;
+					currentRespawnTime = 0.0f;
+				}
 				break;
 
 			case GameEndConditions::Pause:
