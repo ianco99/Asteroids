@@ -27,7 +27,7 @@ namespace kuznickiAsteroid
 	{
 		Player player;
 
-		player.shipSprite = LoadTexture("textures/playerShip.png");
+		player.shipSprite = LoadTexture("resources/textures/playerShip.png");
 
 		player.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
 		player.radius = 20.0f;

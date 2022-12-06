@@ -4,7 +4,6 @@
 
 #include "start_menu.h"
 
-//const int maxCreditsButtons = 5;
 
 namespace kuznickiAsteroid
 {

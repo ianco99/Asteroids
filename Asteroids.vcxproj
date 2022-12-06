@@ -124,6 +124,13 @@
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>start call "$(SolutionDir)batch.bat" "$(SolutionDir)resources" "$(TargetDir)resources" exit</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>mkdir "$(TargetDir)resources"
+</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

@@ -20,7 +20,7 @@ namespace kuznickiAsteroid
 
 	void GenerateBullets(Bullet bullets[])
 	{
-		bulletShootSound = LoadSound("audio/asteroidExplosion.ogg");
+		bulletShootSound = LoadSound("resources/audio/asteroidExplosion.ogg");
 
 		SetSoundVolume(bulletShootSound, .04f);
 

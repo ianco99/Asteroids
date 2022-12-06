@@ -36,8 +36,8 @@ namespace kuznickiAsteroid
 
 	void InitSounds()
 	{
-		playerDeathSound = LoadSound("audio/shipDeath.ogg");
-		asteroidDeathSound = LoadSound("audio/bulletShoot.ogg");
+		playerDeathSound = LoadSound("resources/audio/shipDeath.ogg");
+		asteroidDeathSound = LoadSound("resources/audio/bulletShoot.ogg");
 
 		SetSoundVolume(playerDeathSound, .03f);
 		SetSoundVolume(asteroidDeathSound, .04f);
@@ -59,7 +59,7 @@ namespace kuznickiAsteroid
 			asteroids[i] = CreateAsteroid(i, AsteroidRadiusSize::Big);
 		}
 
-		asteroidSprite = LoadTexture("textures/asteroid.png");
+		asteroidSprite = LoadTexture("resources/textures/asteroid.png");
 
 		pauseButton.body = { GetScreenWidth() / 2.0f, 30.0f, static_cast<float>(buttonSprite.width), static_cast<float>(buttonSprite.height) };
 		pauseButton.text = "| |";
@@ -70,7 +70,7 @@ namespace kuznickiAsteroid
 	{
 		bool playing = true;
 
-		bulletSprite = LoadTexture("textures/bullets.png");
+		bulletSprite = LoadTexture("resources/textures/bullets.png");
 
 		InitSounds();
 		InitGame();

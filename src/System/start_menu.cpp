@@ -33,9 +33,9 @@ namespace kuznickiAsteroid
 
 		InitWindowAndAudio();
 
-		buttonSprite = LoadTexture("textures/button.png");
-		backgroundSprite = LoadTexture("textures/back.png");
-		backgroundSong = LoadMusicStream("audio/backgroundSong.ogg");
+		buttonSprite = LoadTexture("resources/textures/button.png");
+		backgroundSprite = LoadTexture("resources/textures/back.png");
+		backgroundSong = LoadMusicStream("resources/audio/backgroundSong.ogg");
 
 		Button buttons[4];
 		InitButtons(buttons);
