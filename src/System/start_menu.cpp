@@ -24,7 +24,7 @@ namespace kuznickiAsteroid
 
 	const int startMenuButtons = 4;
 
-	int creditsFontSize = 26;
+	const int textFontSize = 26;
 	int offsetBtwnCredits = 40;
 
 	void RunProject()
@@ -122,7 +122,7 @@ namespace kuznickiAsteroid
 
 				for (int i = 0; i < startMenuButtons; i++)
 				{
-					DrawTextAndButton(buttons[i].text, 26, buttons[i].body, true);
+					DrawTextAndButton(buttons[i].text, textFontSize, buttons[i].body, true);
 				}
 
 				break;

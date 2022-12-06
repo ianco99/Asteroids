@@ -18,6 +18,8 @@ namespace kuznickiAsteroid
 
 	extern Sound bulletShootSound;
 
+	extern int textFontSize = 26;
+
 	Player player;
 
 	Asteroid asteroids[60];
@@ -44,8 +46,8 @@ namespace kuznickiAsteroid
 		playerDeathSound = LoadSound("resources/audio/shipDeath.ogg");
 		asteroidDeathSound = LoadSound("resources/audio/bulletShoot.ogg");
 
-		SetSoundVolume(playerDeathSound, .03f);
-		SetSoundVolume(asteroidDeathSound, .04f);
+		SetSoundVolume(playerDeathSound, 0.03f);
+		SetSoundVolume(asteroidDeathSound, 0.04f);
 	}
 
 	void InitGame()
@@ -95,7 +97,7 @@ namespace kuznickiAsteroid
 
 			case GameEndConditions::Pause:
 				BeginDrawing();
-				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "You are in pause, press Y to quit to menu or N to resume playing.", 26, 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4.0f), 22, RAYWHITE);
+				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "You are in pause, press Y to quit to menu or N to resume playing.", static_cast<float>(textFontSize), 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4.0f), textFontSize, WHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_Y))
@@ -111,8 +113,8 @@ namespace kuznickiAsteroid
 			case GameEndConditions::Lose:
 
 				BeginDrawing();
-				DrawText(TextFormat("You lost! Your final score was %2i", player.score), static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), TextFormat("You lost! Your final score was %2i", player.score), 26, 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4), 22, RAYWHITE);
-				DrawText("Press space to go back to main menu", static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", 26, 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4.0f + 40.0f), 22, WHITE);
+				DrawText(TextFormat("You lost! Your final score was %2i", player.score), static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), TextFormat("You lost! Your final score was %2i", player.score), static_cast<float>(textFontSize), 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4), textFontSize, RAYWHITE);
+				DrawText("Press space to go back to main menu", static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", 26, 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4.0f + 40.0f), textFontSize, WHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_SPACE))
