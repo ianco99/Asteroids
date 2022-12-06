@@ -12,6 +12,10 @@ namespace kuznickiAsteroid
 
 	int smallAsteroidCounter = 0;
 
+	const float bigSpeed = 120.0f;
+	const float mediumSpeed = 160.0f;
+	const float smallSpeed = 200.0f;
+
 	extern kuznickiAsteroid::Asteroid asteroids[];
 	extern Sound asteroidDeathSound;
 
@@ -36,13 +40,13 @@ namespace kuznickiAsteroid
 		switch (radiusSize)
 		{
 		case AsteroidRadiusSize::Big:
-			createdAsteroid.speedMultiplier = { 120.0f, 120.0f };
+			createdAsteroid.speedMultiplier = { bigSpeed, bigSpeed };
 			break;
 		case AsteroidRadiusSize::Medium:
-			createdAsteroid.speedMultiplier = { 160.0f, 160.0f };
+			createdAsteroid.speedMultiplier = { mediumSpeed, mediumSpeed};
 			break;
 		case AsteroidRadiusSize::Small:
-			createdAsteroid.speedMultiplier = { 200.0f, 200.0f };
+			createdAsteroid.speedMultiplier = { smallSpeed, smallSpeed };
 			break;
 		default:
 			break;
@@ -61,7 +65,6 @@ namespace kuznickiAsteroid
 
 	void GiveAsteroidInitPosition(Asteroid& asteroid)
 	{
-
 		int posX = 0;
 		int posY = 0;
 
@@ -176,7 +179,6 @@ namespace kuznickiAsteroid
 		{
 			if (asteroids[i].isAlive)
 			{
-
 				Rectangle sourRect = { 0.0f,0.0f, static_cast<float>(asteroidSprite.width), static_cast<float>(asteroidSprite.height) };
 
 				Rectangle destRect = { asteroids[i].position.x - static_cast<float>(asteroids[i].radiusSize),asteroids[i].position.y - static_cast<float>(asteroids[i].radiusSize) ,static_cast<float>(asteroids[i].radiusSize) * 2,static_cast<float>(asteroids[i].radiusSize) * 2 };
@@ -189,11 +191,11 @@ namespace kuznickiAsteroid
 
 	void DestroyAsteroid(Asteroid& asteroid)
 	{
-		if (ChangeAsteroidSize(asteroid))	//Check if I need to generate another asteroid with lower radiusSize
+		if (ChangeAsteroidSize(asteroid))
 		{
 			for (int i = 0; i < maxAsteroids; i++)
 			{
-				if (!asteroids[i].isAlive)	//Find new position for lower radiusSize asteroid
+				if (!asteroids[i].isAlive)
 				{
 					asteroids[i] = CreateAsteroid(i, asteroid.radiusSize);
 					asteroids[i].position = Vector2Add(asteroid.position, { static_cast<float>(asteroid.radiusSize), static_cast<float>(asteroid.radiusSize) });
