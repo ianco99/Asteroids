@@ -32,15 +32,14 @@ namespace kuznickiAsteroid
 
 	static Button pauseButton;
 
-	int maxAsteroids = 60;
 	int screenOffset = 5;
-	static int initialAsteroids = 5;
+	static const int initialAsteroids = 5;
+	int maxAsteroids = 60;
 	const int maxBullets = 50;
 	static const float respawnTime = 5.0f;
 	static float currentRespawnTime = 0.0f;
 
 	bool isRespawning = false;
-
 
 	static void InitSounds();
 	static void InitGame();
@@ -148,6 +147,7 @@ namespace kuznickiAsteroid
 		UnloadTexture(player.shipSprite);
 		UnloadTexture(player.bullets->sprite);
 		UnloadTexture(asteroidSprite);
+
 	}
 
 
