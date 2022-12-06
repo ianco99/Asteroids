@@ -72,13 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\win32</OutDir>
-    <IntDir>$(SolutionDir)obj</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\win32</OutDir>
-    <IntDir>$(SolutionDir)obj</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -101,8 +101,7 @@
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>start call "$(SolutionDir)batch.bat" "$(SolutionDir)resources" "$(TargetDir)resources" exit</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +127,7 @@
       <Command>start call "$(SolutionDir)batch.bat" "$(SolutionDir)resources" "$(TargetDir)resources" exit</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>mkdir "$(TargetDir)resources"
+      <Command>
 </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>

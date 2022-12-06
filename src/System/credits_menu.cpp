@@ -66,30 +66,31 @@ namespace kuznickiAsteroid
 
 	void DrawCredits()
 	{
+		int textFont = 26;
 
-		DrawText("CREDITS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "CREDITS", 26, 0).x / 2, GetScreenHeight() / 10, 26, RAYWHITE);
+		DrawText("CREDITS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "CREDITS", textFont, 0).x / 2, GetScreenHeight() / 10, textFont, RAYWHITE);
 
-		DrawText("Button art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Button art by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 2, 26, RAYWHITE);
+		DrawText("Button art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Button art by Kenney", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 2, textFont, RAYWHITE);
 
-		DrawText("https://www.kenney.nl/assets/ui-pack", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 3, 26, SKYBLUE);
+		DrawText("https://www.kenney.nl/assets/ui-pack", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 3, textFont, SKYBLUE);
 
-		DrawText("Background art by Westbeam", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Background art by Westbeam", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 4, 26, RAYWHITE);
+		DrawText("Background art by Westbeam", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Background art by Westbeam", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 4, textFont, RAYWHITE);
 
-		DrawText("https://opengameart.org/content/space-background-1", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-background-1", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 5, 26, SKYBLUE);
+		DrawText("https://opengameart.org/content/space-background-1", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-background-1", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 5, textFont, SKYBLUE);
 
-		DrawText("Ship, asteroids and bullets art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Ship, asteroids and bullets art by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 6, 26, RAYWHITE);
+		DrawText("Ship, asteroids and bullets art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Ship, asteroids and bullets art by Kenney", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 6, textFont, RAYWHITE);
 
-		DrawText("https://www.kenney.nl/assets/space-shooter-extension", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 7, 26, SKYBLUE);
+		DrawText("https://www.kenney.nl/assets/space-shooter-extension", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 7, textFont, SKYBLUE);
 
-		DrawText("SFX by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "SFX by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 8, 26, RAYWHITE);
+		DrawText("SFX by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "SFX by Kenney", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 8, textFont, RAYWHITE);
 
-		DrawText("https://www.kenney.nl/assets/sci-fi-sounds", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 9, 26, SKYBLUE);
+		DrawText("https://www.kenney.nl/assets/sci-fi-sounds", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 9, textFont, SKYBLUE);
 
-		DrawText("Music by yd", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Music by yd", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 10, 26, RAYWHITE);
+		DrawText("Music by yd", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Music by yd", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 10, textFont, RAYWHITE);
 
-		DrawText("https://opengameart.org/content/space-music-out-there", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 11, 26, SKYBLUE);
+		DrawText("https://opengameart.org/content/space-music-out-there", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", textFont, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 11, textFont, SKYBLUE);
 
-		DrawTextAndButton("BACK", 26, backButton.body, true, WHITE);
+		DrawTextAndButton("BACK", textFont, backButton.body, true, WHITE);
 
 	}
 }
