@@ -6,7 +6,7 @@
 namespace kuznickiAsteroid
 {
 
-	enum class GameEndConditions { Game, Pause, Win, Lose };
+	enum class GameEndConditions { Game, Pause, Lose };
 
 	GameEndConditions CheckGameEndConditions();
 

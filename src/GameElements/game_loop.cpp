@@ -89,7 +89,7 @@ namespace kuznickiAsteroid
 
 			case GameEndConditions::Pause:
 				BeginDrawing();
-				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", GetScreenWidth() / 2 - TextLength("You are in pause, press Y to quit to menu or N to resume playing."), GetScreenHeight() / 2, 22, RAYWHITE);
+				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(),"You are in pause, press Y to quit to menu or N to resume playing.",26, 2).x / 2.0f, GetScreenHeight() / 4, 22, RAYWHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_Y))
@@ -100,10 +100,6 @@ namespace kuznickiAsteroid
 				{
 					condition = GameEndConditions::Game;
 				}
-				break;
-
-			case GameEndConditions::Win:
-
 				break;
 
 			case GameEndConditions::Lose:
