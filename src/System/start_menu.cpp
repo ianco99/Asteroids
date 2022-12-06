@@ -6,139 +6,22 @@
 
 namespace kuznickiAsteroid
 {
-	void InitWindowAndAudio();
-	void InitButtons(Button buttons[]);
-	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[]);
+	void InitMouseCollisions();
 	void RunGame();
 
-	extern Sound bulletShootSound;
-	extern Sound playerDeathSound;
-	extern Sound asteroidDeathSound;
-
-	Texture2D backgroundSprite;
-	Texture2D buttonSprite;
-
-	ProgramScreen currentScreen;
-
-	Music backgroundSong;
+	extern ProgramScreen selectedScreen;
+	extern ProgramScreen currentScreen;
 
 	const int startMenuButtons = 4;
 
+	extern Texture2D buttonSprite;
+	Rectangle mouseCollisions[startMenuButtons];
+
+
+	Button buttons[startMenuButtons];
+
+
 	const int textFontSize = 26;
-	int offsetBtwnCredits = 40;
-
-	void RunProject()
-	{
-		backgroundSong.looping = true;
-
-		Color btnTint = WHITE;
-
-		InitWindowAndAudio();
-
-		buttonSprite = LoadTexture("resources/textures/button.png");
-		backgroundSprite = LoadTexture("resources/textures/back.png");
-		backgroundSong = LoadMusicStream("resources/audio/backgroundSong.ogg");
-
-		Button buttons[startMenuButtons];
-		InitButtons(buttons);
-
-		InitButtonCredits();
-		InitButtonRules();
-
-		Rectangle mouseCollisions[startMenuButtons];
-		InitMouseCollisions(buttons, mouseCollisions);
-
-
-		currentScreen = ProgramScreen::StartMenu;
-		ProgramScreen selectedScreen;
-
-		bool shouldQuit = false;
-
-		while (!shouldQuit)
-		{
-			UpdateMusicStream(backgroundSong);
-
-			switch (currentScreen)
-			{
-			case kuznickiAsteroid::ProgramScreen::StartMenu:
-				if (IsKeyPressed(KEY_ESCAPE))
-				{
-					shouldQuit = true;
-				}
-
-				
-
-				if (IsKeyPressed(KEY_SPACE))
-				{
-					currentScreen = ProgramScreen::GameLoop;
-				}
-				else if (IsKeyPressed(KEY_F))
-				{
-					currentScreen = ProgramScreen::CreditsScreen;
-				}
-				break;
-			case kuznickiAsteroid::ProgramScreen::GameLoop:
-				RunGame();
-				currentScreen = ProgramScreen::StartMenu;
-				break;
-			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
-				ButtonCredits();
-				break;
-			case kuznickiAsteroid::ProgramScreen::RulesScreen:
-				ButtonRules();
-				break;
-			case kuznickiAsteroid::ProgramScreen::Quit:
-				shouldQuit = true;
-				break;
-			default:
-				break;
-			}
-
-			BeginDrawing();
-
-			ClearBackground(BLACK);
-
-			DrawTexturePro(backgroundSprite, { static_cast<float>(0),static_cast<float>(0),static_cast<float>(backgroundSprite.width), static_cast<float>(backgroundSprite.height) }, { 0,0,static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) }, { 0,0 }, 0, RAYWHITE);
-
-			switch (currentScreen)
-			{
-
-			case kuznickiAsteroid::ProgramScreen::StartMenu:
-
-				DrawText("ASTEROIDS", static_cast<int>(GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "ASTEROIDS", 60, 0).x / 2), static_cast<int>(GetScreenHeight() / 10), 60, RAYWHITE);
-
-				for (int i = 0; i < startMenuButtons; i++)
-				{
-					DrawTextAndButton(buttons[i].text, textFontSize, buttons[i].body, true);
-				}
-
-				break;
-
-			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
-				DrawCredits();
-				break;
-			case kuznickiAsteroid::ProgramScreen::RulesScreen:
-				DrawRules();
-				break;
-			default:
-
-				break;
-			}
-
-			EndDrawing();
-		}
-
-		UnloadSound(playerDeathSound);
-		UnloadSound(asteroidDeathSound);
-		UnloadSound(bulletShootSound);
-		UnloadMusicStream(backgroundSong);
-
-		UnloadTexture(backgroundSprite);
-		UnloadTexture(buttonSprite);
-
-		CloseAudioDevice();
-		CloseWindow();
-	}
 
 	void StartButtons()
 	{
@@ -156,16 +39,7 @@ namespace kuznickiAsteroid
 		}
 	}
 
-	void InitWindowAndAudio()
-	{
-		InitWindow(1024, 768, "Asteroids");
-		SetExitKey(KEY_F4);
-		InitAudioDevice();
-		PlayMusicStream(backgroundSong);
-		SetMusicVolume(backgroundSong, .2f);
-	}
-
-	void InitButtons(Button buttons[])
+	void InitButtonsStart()
 	{
 		Rectangle startBtnBounds = { static_cast<float>(GetScreenWidth()) / 2.0f , static_cast<float>(GetScreenHeight()) / 3.0f, static_cast<float>(buttonSprite.width), static_cast<float>(buttonSprite.height) };
 		buttons[0].body = startBtnBounds;
@@ -190,9 +64,11 @@ namespace kuznickiAsteroid
 		buttons[3].buttonScreen = ProgramScreen::Quit;
 		buttons[3].text = "QUIT";
 		buttons[3].link = " ";
+
+		InitMouseCollisions();
 	}
 
-	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[])
+	void InitMouseCollisions()
 	{
 		for (size_t i = 0; i < startMenuButtons; i++)
 		{
@@ -211,6 +87,16 @@ namespace kuznickiAsteroid
 		}
 
 		return false;
+	}
+
+	void DrawStart()
+	{
+		DrawText("ASTEROIDS", static_cast<int>(GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "ASTEROIDS", 60, 0).x / 2), static_cast<int>(GetScreenHeight() / 10), 60, RAYWHITE);
+
+		for (int i = 0; i < startMenuButtons; i++)
+		{
+			DrawTextAndButton(buttons[i].text, textFontSize, buttons[i].body, true);
+		}
 	}
 
 	void DrawTextAndButton(const char* text, int fontSize, Rectangle button, bool shouldDrawTexture)
