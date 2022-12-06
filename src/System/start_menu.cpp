@@ -46,12 +46,13 @@ namespace kuznickiAsteroid
 		Rectangle mouseCollisions[4];
 		InitMouseCollisions(buttons, mouseCollisions);
 
+
 		currentScreen = ProgramScreen::StartMenu;
 		ProgramScreen selectedScreen;
 
 		bool shouldQuit = false;
 
-		while (!WindowShouldClose() && !shouldQuit)
+		while (!shouldQuit)
 		{
 			UpdateMusicStream(backgroundSong);
 
