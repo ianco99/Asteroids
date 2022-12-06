@@ -15,5 +15,5 @@ namespace kuznickiAsteroid
 
 	void RunProject();
 	bool CollisionPointRec(Vector2 point, Rectangle rec);
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, bool shouldDrawTexture, Color color);
+	void DrawTextAndButton(const char* text, int fontSize, Rectangle button, bool shouldDrawTexture, Color color);
 }

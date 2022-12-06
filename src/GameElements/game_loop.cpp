@@ -94,7 +94,7 @@ namespace kuznickiAsteroid
 
 			case GameEndConditions::Pause:
 				BeginDrawing();
-				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "You are in pause, press Y to quit to menu or N to resume playing.", 26, 2).x / 2.0f, GetScreenHeight() / 4, 22, RAYWHITE);
+				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", static_cast<float>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "You are in pause, press Y to quit to menu or N to resume playing.", 26, 2).x / 2.0f), static_cast<float>(GetScreenHeight() / 4.0f), 22, RAYWHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_Y))
@@ -111,7 +111,7 @@ namespace kuznickiAsteroid
 
 				BeginDrawing();
 				DrawText(TextFormat("You lost! Your final score was %2i", player.score), GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), TextFormat("You lost! Your final score was %2i", player.score), 26, 2).x / 2.0f, GetScreenHeight() / 4, 22, RAYWHITE);
-				DrawText("Press space to go back to main menu", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", 26, 2).x / 2.0f, GetScreenHeight() / 4 + 40, 22, WHITE);
+				DrawText("Press space to go back to main menu", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", 26, 2).x / 2.0f, GetScreenHeight() / 4.0f + 40.0f, 22, WHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_SPACE))

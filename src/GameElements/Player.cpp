@@ -143,8 +143,8 @@ namespace kuznickiAsteroid
 		player.lives--;
 		player.isAlive = false;
 
-		player.position.x = GetScreenWidth() / 2;
-		player.position.y = GetScreenHeight() / 2;
+		player.position.x = GetScreenWidth() / 2.0f;
+		player.position.y = GetScreenHeight() / 2.0f;
 
 		PlaySoundMulti(playerDeathSound);
 

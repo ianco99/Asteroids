@@ -164,25 +164,25 @@ namespace kuznickiAsteroid
 
 	void InitButtons(Button buttons[])
 	{
-		Rectangle startBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
+		Rectangle startBtnBounds = { GetScreenWidth() / 2.0f , GetScreenHeight() / 3.0f, buttonSprite.width, buttonSprite.height };
 		buttons[0].body = startBtnBounds;
 		buttons[0].buttonScreen = ProgramScreen::GameLoop;
 		buttons[0].text = "START";
 		buttons[0].link = " ";
 
-		Rectangle creditsBtnBounds = { GetScreenWidth() / 2 , GetScreenHeight() / 2, buttonSprite.width, buttonSprite.height };
+		Rectangle creditsBtnBounds = { GetScreenWidth() / 2.0f , GetScreenHeight() / 2.0f, buttonSprite.width, buttonSprite.height };
 		buttons[1].body = creditsBtnBounds;
 		buttons[1].buttonScreen = ProgramScreen::CreditsScreen;
 		buttons[1].text = "CREDITS";
 		buttons[1].link = " ";
 
-		Rectangle rulesBtnBounds = { GetScreenWidth() / 2, GetScreenHeight() - GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
+		Rectangle rulesBtnBounds = { GetScreenWidth() / 2.0f, GetScreenHeight() - GetScreenHeight() / 3.0f, buttonSprite.width, buttonSprite.height };
 		buttons[2].body = rulesBtnBounds;
 		buttons[2].buttonScreen = ProgramScreen::RulesScreen;
 		buttons[2].text = "RULES";
 		buttons[2].link = " ";
 
-		Rectangle quitBtnBounds = { GetScreenWidth() / 2, GetScreenHeight() - GetScreenHeight() / 8, buttonSprite.width, buttonSprite.height };
+		Rectangle quitBtnBounds = { GetScreenWidth() / 2.0f, GetScreenHeight() - GetScreenHeight() / 8.0f, buttonSprite.width, buttonSprite.height };
 		buttons[3].body = quitBtnBounds;
 		buttons[3].buttonScreen = ProgramScreen::Quit;
 		buttons[3].text = "QUIT";
@@ -210,7 +210,7 @@ namespace kuznickiAsteroid
 		return false;
 	}
 
-	void DrawTextAndButton(const char* text, float fontSize, Rectangle button, bool shouldDrawTexture, Color color)
+	void DrawTextAndButton(const char* text, int fontSize, Rectangle button, bool shouldDrawTexture, Color color)
 	{
 		Rectangle spriteSource = { 0,0, static_cast<float>(buttonSprite.width),  static_cast<float>(buttonSprite.height) };
 		Rectangle spriteDestination = { button.x, button.y, button.width, button.height };

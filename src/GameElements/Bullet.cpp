@@ -88,10 +88,10 @@ namespace kuznickiAsteroid
 		{
 			if (asteroids[i].isAlive)
 			{
-				float distX = asteroids[i].position.x - bullet.position.x;
-				float distY = asteroids[i].position.y - bullet.position.y;
+				double distX = asteroids[i].position.x - bullet.position.x;
+				double distY = asteroids[i].position.y - bullet.position.y;
 
-				float distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
+				double distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
 
 				if (distance <= static_cast<double>(asteroids[i].radiusSize) + bullet.radiusSize)
 				{

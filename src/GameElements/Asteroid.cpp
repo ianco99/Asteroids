@@ -152,16 +152,16 @@ namespace kuznickiAsteroid
 				}
 				else if (asteroids[i].position.x > GetScreenWidth())
 				{
-					asteroids[i].position.x = 0 + screenOffset;
+					asteroids[i].position.x = 0.0f + screenOffset;
 				}
 
 				if (asteroids[i].position.y < 0)
 				{
-					asteroids[i].position.y = GetScreenHeight() - screenOffset;
+					asteroids[i].position.y = static_cast<float>(GetScreenHeight() - screenOffset);
 				}
 				if (asteroids[i].position.y > GetScreenHeight())
 				{
-					asteroids[i].position.y = 0 + screenOffset;
+					asteroids[i].position.y = 0.0f + screenOffset;
 				}
 			}
 		}
