@@ -10,19 +10,19 @@ namespace kuznickiAsteroid
 	extern int maxAsteroids;
 	extern int screenOffset;
 
-	int smallAsteroidCounter = 0;
+	static int smallAsteroidCounter = 0;
 
-	const float bigSpeed = 120.0f;
-	const float mediumSpeed = 160.0f;
-	const float smallSpeed = 200.0f;
+	static const float bigSpeed = 120.0f;
+	static const float mediumSpeed = 160.0f;
+	static const float smallSpeed = 200.0f;
 
 	extern kuznickiAsteroid::Asteroid asteroids[];
 	extern Sound asteroidDeathSound;
 
-	void GiveAsteroidInitPosition(Asteroid& asteroid);
-	void GiveAsteroidInitDirection(Asteroid& asteroid);
-	bool ChangeAsteroidSize(Asteroid& asteroid);
-	void TrySpawningAnotherAsteroid();
+	static void GiveAsteroidInitPosition(Asteroid& asteroid);
+	static void GiveAsteroidInitDirection(Asteroid& asteroid);
+	static bool ChangeAsteroidSize(Asteroid& asteroid);
+	static void TrySpawningAnotherAsteroid();
 
 	Asteroid CreateAsteroid(int arrayPosition, AsteroidRadiusSize radiusSize)
 	{

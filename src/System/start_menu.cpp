@@ -6,8 +6,7 @@
 
 namespace kuznickiAsteroid
 {
-	void InitMouseCollisions();
-	void RunGame();
+	static void InitMouseCollisions();
 
 	extern ProgramScreen selectedScreen;
 	extern ProgramScreen currentScreen;

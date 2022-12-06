@@ -7,6 +7,7 @@ namespace kuznickiAsteroid
 
 	GameEndConditions CheckGameEndConditions();
 
+	void RunGame();
 	void Update();
 	void Draw();
 }

@@ -20,11 +20,11 @@ namespace kuznickiAsteroid
 
 	extern const int maxBullets = 50;
 
-	const int bigAsteroidPoints = 500;
-	const int mediumAsteroidPoints = 250;
-	const int smallAsteroidPoints = 100;
+	static const int bigAsteroidPoints = 500;
+	static const int mediumAsteroidPoints = 250;
+	static const int smallAsteroidPoints = 100;
 
-	bool CheckCollisionBulletAsteroid(Bullet& bullet);
+	static bool CheckCollisionBulletAsteroid(Bullet& bullet);
 
 	void GenerateBullets(Bullet bullets[])
 	{

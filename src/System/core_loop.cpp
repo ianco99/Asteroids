@@ -2,12 +2,11 @@
 
 #include "credits_menu.h"
 #include "rules_menu.h"
-
+#include "GameElements/game_loop.h"
 
 namespace kuznickiAsteroid
 {
-	void InitWindowAndAudio();
-	void RunGame();
+	static void InitWindowAndAudio();
 
 	extern Sound bulletShootSound;
 	extern Sound playerDeathSound;
