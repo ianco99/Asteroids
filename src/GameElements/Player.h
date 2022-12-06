@@ -31,19 +31,7 @@ namespace kuznickiAsteroid
 
 	void UpdatePlayer();
 
-	void PointPlayer();
-
-	void DetectInput();
-	void ActionInput();
-	void OnMoveInput();
-	void OnShootInput();
-
 	void GiveBulletOrientation(Bullet& bullet);
-
-	void MovePlayer();
-
-	void CheckOutOfScreen();
-	void CheckBulletsOutOfScreen();
 
 	void DrawPlayer();
 };

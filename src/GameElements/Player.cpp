@@ -23,7 +23,16 @@ namespace kuznickiAsteroid
 	extern const int maxBullets;
 
 	bool CheckCollisionPlayerAsteroid();
+	void DetectInput();
+	void ActionInput();
+	void OnMoveInput();
+	void PointPlayer();
+	void OnShootInput();
+	void MovePlayer();
 	void KillPlayer();
+
+	void CheckOutOfScreen();
+	void CheckBulletsOutOfScreen();
 
 	Player GeneratePlayer()
 	{
@@ -64,6 +73,125 @@ namespace kuznickiAsteroid
 		CheckOutOfScreen();
 
 		UpdateBullets(player.bullets);
+	}
+
+	void DetectInput()
+	{
+		ActionInput();
+	}
+
+	void ActionInput()
+	{
+
+		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+		{
+			OnMoveInput();
+		}
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			OnShootInput();
+		}
+	}
+
+	void OnMoveInput()
+	{
+		Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
+		Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
+
+		player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
+
+		if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
+			player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+
+		if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
+			player.velocity.y = player.defaultPlayerValues.maxVelocityY;
+	}
+
+	void PointPlayer()
+	{
+		Vector2 pointTo = GetMousePosition();
+
+		Vector2 playerPos = { player.position.x , player.position.y };
+
+		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
+
+		double angle = atan(distance.y / distance.x);
+
+		angle = angle * 180 / PI;
+
+		if (distance.x > 0 && distance.y < 0) //Quad 4
+		{
+			angle += 360;
+		}
+		else if (distance.x < 0 && distance.y < 0) //Quad 3
+		{
+			angle += 180;
+		}
+		else if (distance.x < 0 && distance.y > 0) //Quad 2
+		{
+			angle += 180;
+		}
+
+		player.angle = static_cast<float>(angle);
+	}
+
+	void OnShootInput()
+	{
+
+		for (int i = 0; i < maxBullets; i++)
+		{
+			if (!player.bullets[i].isActive)
+			{
+				player.bullets[i].isActive = true;
+				GiveBulletOrientation(player.bullets[i]);
+				break;
+			}
+		}
+	}
+
+	void MovePlayer()
+	{
+		player.position.x = player.position.x + player.velocity.x * GetFrameTime();
+		player.position.y = player.position.y + player.velocity.y * GetFrameTime();
+	}
+
+	void KillPlayer()
+	{
+		player.lives--;
+		player.isAlive = false;
+
+		player.position.x = GetScreenWidth() / 2.0f;
+		player.position.y = GetScreenHeight() / 2.0f;
+
+		PlaySoundMulti(playerDeathSound);
+
+		player.velocity = { 0,0 };
+	}
+
+
+	bool CheckCollisionPlayerAsteroid()
+	{
+		for (int i = 0; i < maxAsteroids; i++)
+		{
+			if (asteroids[i].isAlive)
+			{
+				double distX = static_cast<double>(player.position.x) - static_cast<double>(asteroids[i].position.x);
+				double distY = static_cast<double>(player.position.y) - static_cast<double>(asteroids[i].position.y);
+				double distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
+
+				//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
+
+				if (distance <= static_cast<double>(player.radius) + static_cast<float>(asteroids[i].radiusSize))
+				{
+					return true;
+				}
+
+			}
+
+		}
+		return false;
+
 	}
 
 	void CheckOutOfScreen()
@@ -112,126 +240,6 @@ namespace kuznickiAsteroid
 				player.bullets[i].isActive = false;
 			}
 		}
-	}
-
-
-	bool CheckCollisionPlayerAsteroid()
-	{
-		for (int i = 0; i < maxAsteroids; i++)
-		{
-			if (asteroids[i].isAlive)
-			{
-				double distX = static_cast<double>(player.position.x) - static_cast<double>(asteroids[i].position.x);
-				double distY = static_cast<double>(player.position.y) - static_cast<double>(asteroids[i].position.y);
-				double distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
-
-				//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
-
-				if (distance <= static_cast<double>(player.radius) + static_cast<float>(asteroids[i].radiusSize))
-				{
-					return true;
-				}
-
-			}
-
-		}
-		return false;
-
-	}
-
-	void KillPlayer()
-	{
-		player.lives--;
-		player.isAlive = false;
-
-		player.position.x = GetScreenWidth() / 2.0f;
-		player.position.y = GetScreenHeight() / 2.0f;
-
-		PlaySoundMulti(playerDeathSound);
-
-		player.velocity = { 0,0 };
-	}
-
-	void PointPlayer()
-	{
-		Vector2 pointTo = GetMousePosition();
-
-		Vector2 playerPos = { player.position.x , player.position.y };
-
-		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
-
-		double angle = atan(distance.y / distance.x);
-
-		angle = angle * 180 / PI;
-
-		if (distance.x > 0 && distance.y < 0) //Quad 4
-		{
-			angle += 360;
-		}
-		else if (distance.x < 0 && distance.y < 0) //Quad 3
-		{
-			angle += 180;
-		}
-		else if (distance.x < 0 && distance.y > 0) //Quad 2
-		{
-			angle += 180;
-		}
-
-		player.angle = static_cast<float>(angle);
-	}
-
-	void DetectInput()
-	{
-		ActionInput();
-	}
-
-	void ActionInput()
-	{
-
-		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
-		{
-			OnMoveInput();
-		}
-
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-		{
-			OnShootInput();
-		}
-	}
-
-	void OnMoveInput()
-	{
-		Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
-		Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
-
-		player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
-
-		if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
-			player.velocity.x = player.defaultPlayerValues.maxVelocityX;
-
-		if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
-			player.velocity.y = player.defaultPlayerValues.maxVelocityY;
-	}
-
-	void OnShootInput()
-	{
-
-		for (int i = 0; i < maxBullets; i++)
-		{
-			if (!player.bullets[i].isActive)
-			{
-				player.bullets[i].isActive = true;
-				GiveBulletOrientation(player.bullets[i]);
-				break;
-			}
-		}
-	}
-
-
-	void MovePlayer()
-	{
-		player.position.x = player.position.x + player.velocity.x * GetFrameTime();
-		player.position.y = player.position.y + player.velocity.y * GetFrameTime();
 	}
 
 	void DrawPlayer()
