@@ -18,7 +18,6 @@ namespace kuznickiAsteroid
 
 	extern Sound bulletShootSound;
 	
-	
 	Player player;
 
 	Asteroid asteroids[60];

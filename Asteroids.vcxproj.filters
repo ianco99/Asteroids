@@ -28,6 +28,9 @@
     <ClCompile Include="src\System\credits_menu.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\System\rules_menu.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameElements\game_loop.h">
@@ -46,6 +49,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\System\credits_menu.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\rules_menu.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
