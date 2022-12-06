@@ -52,7 +52,7 @@ namespace kuznickiAsteroid
 
 		bool shouldQuit = false;
 
-		while (!shouldQuit)
+		while (!WindowShouldClose() && !shouldQuit)
 		{
 			UpdateMusicStream(backgroundSong);
 
@@ -64,7 +64,7 @@ namespace kuznickiAsteroid
 					shouldQuit = true;
 				}
 
-				for (int i = 0; i < 3; i++)
+				for (int i = 0; i < 4; i++)
 				{
 					if (CollisionPointRec(GetMousePosition(), mouseCollisions[i]))
 					{
@@ -97,6 +97,7 @@ namespace kuznickiAsteroid
 				ButtonRules();
 				break;
 			case kuznickiAsteroid::ProgramScreen::Quit:
+				shouldQuit = true;
 				break;
 			default:
 				break;
@@ -121,6 +122,8 @@ namespace kuznickiAsteroid
 
 				DrawTextAndButton(buttons[2].text, 26, buttons[2].body, true, WHITE);
 
+				DrawTextAndButton(buttons[3].text, 26, buttons[3].body, true, WHITE);
+
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
@@ -129,10 +132,6 @@ namespace kuznickiAsteroid
 			case kuznickiAsteroid::ProgramScreen::RulesScreen:
 				DrawRules();
 				break;
-			case kuznickiAsteroid::ProgramScreen::Quit:
-
-				break;
-
 			default:
 
 				break;
@@ -181,6 +180,12 @@ namespace kuznickiAsteroid
 		buttons[2].buttonScreen = ProgramScreen::RulesScreen;
 		buttons[2].text = "RULES";
 		buttons[2].link = " ";
+
+		Rectangle quitBtnBounds = { GetScreenWidth() / 2, GetScreenHeight() - GetScreenHeight() / 8, buttonSprite.width, buttonSprite.height };
+		buttons[3].body = quitBtnBounds;
+		buttons[3].buttonScreen = ProgramScreen::Quit;
+		buttons[3].text = "QUIT";
+		buttons[3].link = " ";
 	}
 
 	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[])
