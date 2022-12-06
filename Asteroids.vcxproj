@@ -164,10 +164,10 @@
   <ItemGroup>
     <ClCompile Include="src\GameElements\asteroid.cpp" />
     <ClCompile Include="src\GameElements\bullet.cpp" />
-    <ClCompile Include="src\GameElements\game_loop.cpp" />
     <ClCompile Include="src\GameElements\player.cpp" />
     <ClCompile Include="src\System\core_loop.cpp" />
     <ClCompile Include="src\System\credits_menu.cpp" />
+    <ClCompile Include="src\System\game_loop.cpp" />
     <ClCompile Include="src\System\main.cpp" />
     <ClCompile Include="src\System\rules_menu.cpp" />
     <ClCompile Include="src\System\start_menu.cpp" />
@@ -175,10 +175,10 @@
   <ItemGroup>
     <ClInclude Include="src\GameElements\asteroid.h" />
     <ClInclude Include="src\GameElements\bullet.h" />
-    <ClInclude Include="src\GameElements\game_loop.h" />
     <ClInclude Include="src\GameElements\player.h" />
     <ClInclude Include="src\System\core_loop.h" />
     <ClInclude Include="src\System\credits_menu.h" />
+    <ClInclude Include="src\System\game_loop.h" />
     <ClInclude Include="src\System\rules_menu.h" />
     <ClInclude Include="src\System\start_menu.h" />
   </ItemGroup>

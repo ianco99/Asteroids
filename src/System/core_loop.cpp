@@ -2,7 +2,7 @@
 
 #include "credits_menu.h"
 #include "rules_menu.h"
-#include "GameElements/game_loop.h"
+#include "game_loop.h"
 
 namespace kuznickiAsteroid
 {

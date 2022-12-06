@@ -5,8 +5,8 @@
 #include "raylib.h"
 #include "raymath.h"
 
-#include "Player.h"
-#include "Asteroid.h"
+#include "GameElements/player.h"
+#include "GameElements/asteroid.h"
 #include "start_menu.h"
 
 namespace kuznickiAsteroid
