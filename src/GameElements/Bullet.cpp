@@ -76,7 +76,7 @@ namespace kuznickiAsteroid
 		}
 	}
 
-	bool CheckCollisionBulletAsteroid(Bullet& bullet)
+	static bool CheckCollisionBulletAsteroid(Bullet& bullet)
 	{
 
 		//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php

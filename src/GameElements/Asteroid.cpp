@@ -67,7 +67,7 @@ namespace kuznickiAsteroid
 		return createdAsteroid;
 	}
 
-	void GiveAsteroidInitPosition(Asteroid& asteroid)
+	static void GiveAsteroidInitPosition(Asteroid& asteroid)
 	{
 		int posX = 0;
 		int posY = 0;
@@ -106,7 +106,7 @@ namespace kuznickiAsteroid
 		asteroid.position = { static_cast<float>(posX), static_cast<float>(posY) };
 	}
 
-	void GiveAsteroidInitDirection(Asteroid& asteroid)
+	static void GiveAsteroidInitDirection(Asteroid& asteroid)
 	{
 		Vector2 newDirection;
 
@@ -145,7 +145,7 @@ namespace kuznickiAsteroid
 		}
 	}
 
-	void AsteroidsOutOfScreen()
+	static void AsteroidsOutOfScreen()
 	{
 		for (int i = 0; i < maxAsteroids; i++)
 		{
@@ -172,7 +172,7 @@ namespace kuznickiAsteroid
 		}
 	}
 
-	void MoveAsteroid(Asteroid& asteroid)
+	static void MoveAsteroid(Asteroid& asteroid)
 	{
 		asteroid.position = Vector2Add(asteroid.position, { asteroid.speed.x * GetFrameTime(), asteroid.speed.y * GetFrameTime() });
 	}
@@ -217,7 +217,7 @@ namespace kuznickiAsteroid
 
 	}
 
-	bool ChangeAsteroidSize(Asteroid& asteroid)
+	static bool ChangeAsteroidSize(Asteroid& asteroid)
 	{
 		PlaySoundMulti(asteroidDeathSound);
 		switch (asteroid.radiusSize)
@@ -241,7 +241,7 @@ namespace kuznickiAsteroid
 			return false;
 	}
 
-	void TrySpawningAnotherAsteroid()
+	static void TrySpawningAnotherAsteroid()
 	{
 		if (smallAsteroidCounter >= 4)
 		{

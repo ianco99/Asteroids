@@ -46,7 +46,7 @@ namespace kuznickiAsteroid
 	static void InitGame();
 	static void DrawUserInterface();
 
-	void InitSounds()
+	static void InitSounds()
 	{
 		playerDeathSound = LoadSound("resources/audio/shipDeath.ogg");
 		asteroidDeathSound = LoadSound("resources/audio/bulletShoot.ogg");
@@ -55,7 +55,7 @@ namespace kuznickiAsteroid
 		SetSoundVolume(asteroidDeathSound, 0.04f);
 	}
 
-	void InitGame()
+	static void InitGame()
 	{
 		player = GeneratePlayer();
 		for (int i = 0; i < maxAsteroids; i++)
@@ -193,7 +193,7 @@ namespace kuznickiAsteroid
 		EndDrawing();
 	}
 
-	void DrawUserInterface()
+	static void DrawUserInterface()
 	{
 		int scoreFontSize = 40;
 

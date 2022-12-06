@@ -33,8 +33,6 @@ namespace kuznickiAsteroid
 	static void CheckOutOfScreen();
 	static void CheckBulletsOutOfScreen();
 
-	float velocityAdder = 2500;
-
 	Player GeneratePlayer()
 	{
 		Player createdPlayer;
@@ -78,12 +76,12 @@ namespace kuznickiAsteroid
 		UpdateBullets(player.bullets);
 	}
 
-	void DetectInput()
+	static void DetectInput()
 	{
 		ActionInput();
 	}
 
-	void ActionInput()
+	static void ActionInput()
 	{
 
 		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
@@ -97,7 +95,7 @@ namespace kuznickiAsteroid
 		}
 	}
 
-	void OnMoveInput()
+	static void OnMoveInput()
 	{
 		Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
 		Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
@@ -139,7 +137,7 @@ namespace kuznickiAsteroid
 
 	}
 
-	void PointPlayer()
+	static void PointPlayer()
 	{
 		Vector2 pointTo = GetMousePosition();
 
@@ -167,7 +165,7 @@ namespace kuznickiAsteroid
 		player.angle = static_cast<float>(angle);
 	}
 
-	void OnShootInput()
+	static void OnShootInput()
 	{
 
 		for (int i = 0; i < maxBullets; i++)
@@ -181,13 +179,13 @@ namespace kuznickiAsteroid
 		}
 	}
 
-	void MovePlayer()
+	static void MovePlayer()
 	{
 		player.position.x = player.position.x + player.velocity.x * GetFrameTime();
 		player.position.y = player.position.y + player.velocity.y * GetFrameTime();
 	}
 
-	void KillPlayer()
+	static void KillPlayer()
 	{
 		player.lives--;
 		player.isAlive = false;
@@ -202,7 +200,7 @@ namespace kuznickiAsteroid
 	}
 
 
-	bool CheckCollisionPlayerAsteroid()
+	static bool CheckCollisionPlayerAsteroid()
 	{
 		for (int i = 0; i < maxAsteroids; i++)
 		{
@@ -226,7 +224,7 @@ namespace kuznickiAsteroid
 
 	}
 
-	void CheckOutOfScreen()
+	static void CheckOutOfScreen()
 	{
 		if (player.position.x <= 0)
 		{
@@ -250,7 +248,7 @@ namespace kuznickiAsteroid
 		CheckBulletsOutOfScreen();
 	}
 
-	void CheckBulletsOutOfScreen()
+	static void CheckBulletsOutOfScreen()
 	{
 		for (int i = 0; i < maxBullets; i++)
 		{

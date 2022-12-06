@@ -117,7 +117,7 @@ namespace kuznickiAsteroid
 		CloseWindow();
 	}
 
-	void InitWindowAndAudio()
+	static void InitWindowAndAudio()
 	{
 		InitWindow(1024, 768, "Asteroids");
 		SetExitKey(KEY_F4);
