@@ -1,10 +1,10 @@
 #pragma once
 #include "raylib.h"
 
+#include "core_loop.h"
+
 namespace kuznickiAsteroid
 {
-	enum class ProgramScreen{StartMenu, GameLoop, CreditsScreen, RulesScreen,Quit};
-
 	struct Button
 	{
 		Rectangle body;
@@ -13,7 +13,6 @@ namespace kuznickiAsteroid
 		const char* link;
 	};
 
-	void RunProject();
 	void StartButtons();
 	void InitButtonsStart();
 	bool CollisionPointRec(Vector2 point, Rectangle rec);

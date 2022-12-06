@@ -10,7 +10,7 @@ namespace kuznickiAsteroid
 
 	extern ProgramScreen currentScreen;
 
-	const int startMenuButtons = 4;
+	static const int startMenuButtons = 4;
 
 	extern Texture2D buttonSprite;
 
@@ -67,7 +67,7 @@ namespace kuznickiAsteroid
 		InitMouseCollisions();
 	}
 
-	void InitMouseCollisions()
+	static void InitMouseCollisions()
 	{
 		for (size_t i = 0; i < startMenuButtons; i++)
 		{
