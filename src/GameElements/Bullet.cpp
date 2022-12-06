@@ -1,8 +1,10 @@
+#include "bullet.h"
+
 #include "raylib.h"
-#include "Player.h"
-#include "Asteroid.h"
-#include "Bullet.h"
 #include "raymath.h"
+
+#include "player.h"
+#include "asteroid.h"
 
 namespace kuznickiAsteroid
 {

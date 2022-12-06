@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-#include "Player.h"
-#include "Asteroid.h"
 
 namespace kuznickiAsteroid
 {

@@ -1,7 +1,9 @@
+#include "asteroid.h"
+
 #include <iostream>
+
 #include "raylib.h"
 #include "raymath.h"
-#include "Asteroid.h"
 
 namespace kuznickiAsteroid
 {

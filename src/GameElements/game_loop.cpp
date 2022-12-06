@@ -1,8 +1,12 @@
 ﻿#include "game_loop.h"
+
+#include <iostream>
+
 #include "raylib.h"
 #include "raymath.h"
-#include "bullet.h"
-#include "asteroid.h"
+
+#include "Player.h"
+#include "Asteroid.h"
 #include "System/start_menu.h"
 
 namespace kuznickiAsteroid
