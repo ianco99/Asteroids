@@ -6,8 +6,8 @@ namespace kuznickiAsteroid
 {
 	struct DefaultPlayerValues
 	{
-		float maxVelocityX = 350;
-		float maxVelocityY = 350;
+		float maxVelocityX = 1;
+		float maxVelocityY = 1;
 	};
 
 	struct Player

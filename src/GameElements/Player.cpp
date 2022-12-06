@@ -44,7 +44,7 @@ namespace kuznickiAsteroid
 		createdPlayer.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
 		createdPlayer.radius = 20.0f;
 		createdPlayer.velocity = { 0,0 };
-		createdPlayer.acceleration = { 2.5f, 2.5f };
+		createdPlayer.acceleration = { 0.1f, 0.1f };
 		createdPlayer.angle = 0;
 		createdPlayer.lives = 3;
 		createdPlayer.score = 0;
@@ -103,11 +103,11 @@ namespace kuznickiAsteroid
 
 		player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
 
-		if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
-			player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+		//if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
+		//	player.velocity.x = player.defaultPlayerValues.maxVelocityX;
 
-		if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
-			player.velocity.y = player.defaultPlayerValues.maxVelocityY;
+		//if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
+		//	player.velocity.y = player.defaultPlayerValues.maxVelocityY;
 	}
 
 	void PointPlayer()
