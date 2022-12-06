@@ -16,6 +16,8 @@ namespace kuznickiAsteroid
 
 	Sound bulletShootSound;
 
+	const int maxBullets = 50;
+
 	bool CheckCollisionBulletAsteroid(Bullet& bullet);
 
 	void GenerateBullets(Bullet bullets[])
@@ -24,7 +26,7 @@ namespace kuznickiAsteroid
 
 		SetSoundVolume(bulletShootSound, .04f);
 
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < maxBullets; i++)
 		{
 			bullets[i].isActive = false;
 			bullets[i].acceleration = { 400,400 };
@@ -58,7 +60,7 @@ namespace kuznickiAsteroid
 
 	void UpdateBullets(Bullet bullets[])
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < maxBullets; i++)
 		{
 			if (bullets[i].isActive)
 			{
@@ -117,7 +119,7 @@ namespace kuznickiAsteroid
 
 	void DrawBullets(Bullet bullets[])
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < maxBullets; i++)
 		{
 			if (bullets[i].isActive)
 			{

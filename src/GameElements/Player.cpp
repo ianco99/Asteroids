@@ -19,6 +19,7 @@ namespace kuznickiAsteroid
 
 	extern int screenOffset;
 	extern int maxAsteroids;
+	extern int maxBullets;
 
 	bool CheckCollisionPlayerAsteroid();
 	void KillPlayer();
@@ -90,7 +91,7 @@ namespace kuznickiAsteroid
 
 	void CheckBulletsOutOfScreen()
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < maxBullets; i++)
 		{
 			if (player.bullets[i].position.x <= 0)
 			{
@@ -214,7 +215,7 @@ namespace kuznickiAsteroid
 	void OnShootInput()
 	{
 
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < maxBullets; i++)
 		{
 			if (!player.bullets[i].isActive)
 			{
