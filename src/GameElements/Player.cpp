@@ -26,22 +26,22 @@ namespace kuznickiAsteroid
 
 	Player GeneratePlayer()
 	{
-		Player player;
+		Player createdPlayer;
 
-		player.shipSprite = LoadTexture("resources/textures/playerShip.png");
+		createdPlayer.shipSprite = LoadTexture("resources/textures/playerShip.png");
 
-		player.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
-		player.radius = 20.0f;
-		player.velocity = { 0,0 };
-		player.acceleration = { 2.5f, 2.5f };
-		player.angle = 0;
-		player.lives = 3;
-		player.score = 0;
-		player.isAlive = true;
+		createdPlayer.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+		createdPlayer.radius = 20.0f;
+		createdPlayer.velocity = { 0,0 };
+		createdPlayer.acceleration = { 2.5f, 2.5f };
+		createdPlayer.angle = 0;
+		createdPlayer.lives = 3;
+		createdPlayer.score = 0;
+		createdPlayer.isAlive = true;
 
-		GenerateBullets(player.bullets);
+		GenerateBullets(createdPlayer.bullets);
 
-		return player;
+		return createdPlayer;
 	}
 
 	void UpdatePlayer()

@@ -103,10 +103,9 @@ namespace kuznickiAsteroid
 	void GiveAsteroidInitDirection(Asteroid& asteroid)
 	{
 		Vector2 newDirection;
-		bool isNegative;
 
-		newDirection.x = rand() % 20;
-		newDirection.y = rand() % 20;
+		newDirection.x = static_cast<float>(rand() % 20);
+		newDirection.y = static_cast<float>(rand() % 20);
 
 		int aux = rand() % 2 + 1;
 
@@ -148,7 +147,7 @@ namespace kuznickiAsteroid
 			{
 				if (asteroids[i].position.x < 0)
 				{
-					asteroids[i].position.x = GetScreenWidth() - screenOffset;
+					asteroids[i].position.x = static_cast<float>(GetScreenWidth() - screenOffset);
 				}
 				else if (asteroids[i].position.x > GetScreenWidth())
 				{
