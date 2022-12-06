@@ -14,6 +14,7 @@ namespace kuznickiAsteroid
 	int maxAsteroids = 60;
 	int screenOffset = 5;
 	int initialAsteroids = 5;
+	const int maxBullets = 50;
 
 	extern Music backgroundSong;
 
@@ -158,6 +159,7 @@ namespace kuznickiAsteroid
 		{
 			return GameEndConditions::Game;
 		}
+		return GameEndConditions::Game;
 	}
 
 	void Draw()
@@ -169,7 +171,7 @@ namespace kuznickiAsteroid
 		DrawBullets(player.bullets);
 		DrawAsteroid(asteroidSprite);
 		DrawUserInterface();
-		DrawTextAndButton(pauseButton.text, 26, pauseButton.body, true, WHITE);
+		DrawTextAndButton(pauseButton.text, 26, pauseButton.body, true);
 		EndDrawing();
 	}
 

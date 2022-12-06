@@ -96,7 +96,7 @@ namespace kuznickiAsteroid
 
 		DrawText("https://opengameart.org/content/space-music-out-there", static_cast<int>(scrnWidth / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", static_cast<float>(textFont), 0).x / 2), static_cast<int>(scrnHeight / 8 + offsetBtwnCredits * 11), textFont, SKYBLUE);
 
-		DrawTextAndButton("BACK", textFont, backButton.body, true, WHITE);
+		DrawTextAndButton("BACK", textFont, backButton.body, true);
 
 	}
 }

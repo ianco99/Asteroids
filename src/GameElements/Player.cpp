@@ -6,6 +6,7 @@
 #include "System/start_menu.h"
 #include "asteroid.h"
 
+
 namespace kuznickiAsteroid
 {
 	extern Player player;
@@ -19,7 +20,7 @@ namespace kuznickiAsteroid
 
 	extern int screenOffset;
 	extern int maxAsteroids;
-	extern int maxBullets;
+	extern const int maxBullets;
 
 	bool CheckCollisionPlayerAsteroid();
 	void KillPlayer();
@@ -69,20 +70,20 @@ namespace kuznickiAsteroid
 	{
 		if (player.position.x <= 0)
 		{
-			player.position.x = GetScreenWidth() - screenOffset;
+			player.position.x = static_cast<float>(GetScreenWidth() - screenOffset);
 		}
 		else if (player.position.x >= GetScreenWidth())
 		{
-			player.position.x = 0 + screenOffset;
+			player.position.x = static_cast<float>(0 + screenOffset);
 		}
 
 		if (player.position.y <= 0)
 		{
-			player.position.y = GetScreenHeight() - screenOffset;
+			player.position.y = static_cast<float>(GetScreenHeight() - screenOffset);
 		}
 		if (player.position.y >= GetScreenHeight())
 		{
-			player.position.y = 0 + screenOffset;
+			player.position.y = static_cast<float>(0 + screenOffset);
 		}
 
 
@@ -120,13 +121,13 @@ namespace kuznickiAsteroid
 		{
 			if (asteroids[i].isAlive)
 			{
-				float distX = player.position.x - asteroids[i].position.x;
-				float distY = player.position.y - asteroids[i].position.y;
-				float distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
+				double distX = static_cast<double>(player.position.x) - static_cast<double>(asteroids[i].position.x);
+				double distY = static_cast<double>(player.position.y) - static_cast<double>(asteroids[i].position.y);
+				double distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
 
 				//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
 
-				if (distance <= player.radius + static_cast<float>(asteroids[i].radiusSize))
+				if (distance <= static_cast<double>(player.radius) + static_cast<float>(asteroids[i].radiusSize))
 				{
 					return true;
 				}
@@ -159,7 +160,7 @@ namespace kuznickiAsteroid
 
 		Vector2 distance = { pointTo.x - playerPos.x, pointTo.y - playerPos.y };
 
-		float angle = atan(distance.y / distance.x);
+		double angle = atan(distance.y / distance.x);
 
 		angle = angle * 180 / PI;
 
@@ -176,7 +177,7 @@ namespace kuznickiAsteroid
 			angle += 180;
 		}
 
-		player.angle = angle;
+		player.angle = static_cast<float>(angle);
 	}
 
 	void DetectInput()
@@ -235,7 +236,7 @@ namespace kuznickiAsteroid
 
 	void DrawPlayer()
 	{
-		Rectangle spriteSource = { 0,0, player.shipSprite.width, player.shipSprite.height };
+		Rectangle spriteSource = { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) };
 		Rectangle spriteDestination = { player.position.x, player.position.y, player.radius * 2, player.radius * 2 };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 

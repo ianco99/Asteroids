@@ -18,7 +18,7 @@ namespace kuznickiAsteroid
 
 	Sound bulletShootSound;
 
-	const int maxBullets = 50;
+	extern const int maxBullets = 50;
 
 	bool CheckCollisionBulletAsteroid(Bullet& bullet);
 
@@ -88,8 +88,8 @@ namespace kuznickiAsteroid
 		{
 			if (asteroids[i].isAlive)
 			{
-				double distX = asteroids[i].position.x - bullet.position.x;
-				double distY = asteroids[i].position.y - bullet.position.y;
+				double distX = static_cast<double>(asteroids[i].position.x) - bullet.position.x;
+				double distY = static_cast<double>(asteroids[i].position.y) - bullet.position.y;
 
 				double distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
 
