@@ -12,11 +12,11 @@ namespace kuznickiAsteroid
 
 	extern int textFontSize;
 
-	Button backButtonRules;
+	static Button backButtonRules;
 
-	Rectangle backButtonRulessCollision;
+	static Rectangle backButtonRulessCollision;
 
-	int offsetBtwnText = 60;
+	static int offsetBtwnText = 60;
 
 	void InitButtonRules()
 	{

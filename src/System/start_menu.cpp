@@ -14,13 +14,13 @@ namespace kuznickiAsteroid
 	const int startMenuButtons = 4;
 
 	extern Texture2D buttonSprite;
-	Rectangle mouseCollisions[startMenuButtons];
+
+	static Rectangle mouseCollisions[startMenuButtons];
+
+	static Button buttons[startMenuButtons];
 
 
-	Button buttons[startMenuButtons];
-
-
-	const int textFontSize = 26;
+	static const int textFontSize = 26;
 
 	void StartButtons()
 	{
