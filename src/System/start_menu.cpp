@@ -29,8 +29,6 @@ namespace kuznickiAsteroid
 
 	void RunProject()
 	{
-
-
 		backgroundSong.looping = true;
 
 		Color btnTint = WHITE;
