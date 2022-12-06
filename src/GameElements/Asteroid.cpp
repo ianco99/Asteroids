@@ -15,10 +15,9 @@ namespace kuznickiAsteroid
 	extern kuznickiAsteroid::Asteroid asteroids[];
 	extern Sound asteroidDeathSound;
 
-
 	void GiveAsteroidInitPosition(Asteroid& asteroid);
 	void GiveAsteroidInitDirection(Asteroid& asteroid);
-
+	bool ChangeAsteroidSize(Asteroid& asteroid);
 	void TrySpawningAnotherAsteroid();
 
 	Asteroid CreateAsteroid(int arrayPosition, AsteroidRadiusSize radiusSize)

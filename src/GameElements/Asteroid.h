@@ -33,7 +33,5 @@ namespace kuznickiAsteroid
 	void DrawAsteroid(Texture2D asteroidSprite);
 
 	void DestroyAsteroid(Asteroid& asteroid);
-
-	bool ChangeAsteroidSize(Asteroid& asteroid);
 }
 
