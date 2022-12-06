@@ -14,6 +14,7 @@ namespace kuznickiAsteroid
 	};
 
 	void RunProject();
+	void StartButtons();
 	bool CollisionPointRec(Vector2 point, Rectangle rec);
 	void DrawTextAndButton(const char* text, int fontSize, Rectangle button, bool shouldDrawTexture);
 }

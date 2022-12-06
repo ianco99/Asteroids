@@ -39,15 +39,9 @@ namespace kuznickiAsteroid
 		backgroundSprite = LoadTexture("resources/textures/back.png");
 		backgroundSong = LoadMusicStream("resources/audio/backgroundSong.ogg");
 
-		Button buttons[startMenuButtons];
 		InitButtons(buttons);
-
 		InitButtonCredits();
 		InitButtonRules();
-
-		Rectangle mouseCollisions[startMenuButtons];
-		InitMouseCollisions(buttons, mouseCollisions);
-
 
 		currentScreen = ProgramScreen::StartMenu;
 		ProgramScreen selectedScreen;
@@ -66,7 +60,18 @@ namespace kuznickiAsteroid
 					shouldQuit = true;
 				}
 
-				
+				for (int i = 0; i < startMenuButtons; i++)
+				{
+					if (CollisionPointRec(GetMousePosition(), mouseCollisions[i]))
+					{
+						selectedScreen = buttons[i].buttonScreen;
+
+						if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+						{
+							currentScreen = selectedScreen;
+						}
+					}
+				}
 
 				if (IsKeyPressed(KEY_SPACE))
 				{
@@ -138,22 +143,6 @@ namespace kuznickiAsteroid
 
 		CloseAudioDevice();
 		CloseWindow();
-	}
-
-	void StartButtons()
-	{
-		for (int i = 0; i < startMenuButtons; i++)
-		{
-			if (CollisionPointRec(GetMousePosition(), mouseCollisions[i]))
-			{
-				selectedScreen = buttons[i].buttonScreen;
-
-				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-				{
-					currentScreen = selectedScreen;
-				}
-			}
-		}
 	}
 
 	void InitWindowAndAudio()

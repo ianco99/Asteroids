@@ -101,13 +101,25 @@ namespace kuznickiAsteroid
 		Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
 		Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
 
-		player.velocity = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity);
+		//player.velocity.x = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity).x * GetFrameTime();
+		//player.velocity.y = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity).y * GetFrameTime();
 
-		//if (player.velocity.x > player.defaultPlayerValues.maxVelocityX)
-		//	player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+		//float absoluteX = player.velocity.x < 0 ? -player.velocity.x : player.velocity.x;
+		//float absoluteY = player.velocity.y < 0 ? -player.velocity.y : player.velocity.y;
 
-		//if (player.velocity.y > player.defaultPlayerValues.maxVelocityY)
-		//	player.velocity.y = player.defaultPlayerValues.maxVelocityY;
+		//if (absoluteX > player.defaultPlayerValues.maxVelocityX)
+		//{
+		//	if (player.velocity.x < 0)
+		//		player.velocity.x = -player.defaultPlayerValues.maxVelocityX;
+		//	else
+		//		player.velocity.x = player.defaultPlayerValues.maxVelocityX;
+		//}
+		//	
+		//if (absoluteY > player.defaultPlayerValues.maxVelocityY)
+		//	if (player.velocity.y < 0)
+		//		player.velocity.y = -player.defaultPlayerValues.maxVelocityY;
+		//	else
+		//		player.velocity.y = player.defaultPlayerValues.maxVelocityY;
 	}
 
 	void PointPlayer()
