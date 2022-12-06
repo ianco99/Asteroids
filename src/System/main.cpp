@@ -1,4 +1,4 @@
-#include "start_menu.h"
+#include "core_loop.h"
 
 int main()
 {

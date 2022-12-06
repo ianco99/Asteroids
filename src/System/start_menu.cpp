@@ -8,7 +8,6 @@ namespace kuznickiAsteroid
 {
 	static void InitMouseCollisions();
 
-	extern ProgramScreen selectedScreen;
 	extern ProgramScreen currentScreen;
 
 	const int startMenuButtons = 4;
@@ -18,6 +17,7 @@ namespace kuznickiAsteroid
 	static Rectangle mouseCollisions[startMenuButtons];
 
 	static Button buttons[startMenuButtons];
+	static ProgramScreen selectedScreen;
 
 
 	static const int textFontSize = 26;

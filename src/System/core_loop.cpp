@@ -16,7 +16,6 @@ namespace kuznickiAsteroid
 	Texture2D buttonSprite;
 
 	ProgramScreen currentScreen;
-	ProgramScreen selectedScreen;
 
 	Music backgroundSong;
 
