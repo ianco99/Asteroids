@@ -130,7 +130,7 @@ namespace kuznickiAsteroid
 
 				BeginDrawing();
 				DrawText(TextFormat("You lost! Your final score was %2i", player.score), static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), TextFormat("You lost! Your final score was %2i", player.score), static_cast<float>(textFontSize), 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4), textFontSize, RAYWHITE);
-				DrawText("Press space to go back to main menu", static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", 26, 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4.0f + 40.0f), textFontSize, WHITE);
+				DrawText("Press space to go back to main menu", static_cast<int>(GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", static_cast<float>(textFontSize), 2).x / 2.0f), static_cast<int>(GetScreenHeight() / 4.0f + 40.0f), textFontSize, WHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_SPACE))
@@ -139,8 +139,8 @@ namespace kuznickiAsteroid
 				}
 
 				break;
-
 			default:
+
 				break;
 			}
 		}
@@ -189,7 +189,7 @@ namespace kuznickiAsteroid
 		DrawBullets(player.bullets);
 		DrawAsteroid(asteroidSprite);
 		DrawUserInterface();
-		DrawTextAndButton(pauseButton.text, 26, pauseButton.body, true);
+		DrawTextAndButton(pauseButton.text, textFontSize, pauseButton.body, true);
 		EndDrawing();
 	}
 

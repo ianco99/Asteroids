@@ -54,7 +54,7 @@ namespace kuznickiAsteroid
 
 		bool shouldQuit = false;
 
-		while (!WindowShouldClose() && !shouldQuit)
+		while (!shouldQuit)
 		{
 			UpdateMusicStream(backgroundSong);
 
