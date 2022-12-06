@@ -1,14 +1,20 @@
-#include "game_loop.h"
+﻿#include "game_loop.h"
 #include "raylib.h"
 #include "raymath.h"
 #include "bullet.h"
 #include "asteroid.h"
+#include "System/start_menu.h"
 
 namespace kuznickiAsteroid
 {
 	int maxAsteroids = 60;
 	int screenOffset = 5;
 	int initialAsteroids = 5;
+
+	extern Music backgroundSong;
+
+	extern Texture2D backgroundSprite;
+	extern Texture2D buttonSprite;
 
 	Player player;
 
@@ -17,12 +23,11 @@ namespace kuznickiAsteroid
 	Texture2D asteroidSprite;
 	Texture2D bulletSprite;
 
+
 	Sound playerDeathSound;
 	Sound asteroidDeathSound;
 
-	extern Music backgroundSong;
-
-	extern Texture2D backgroundSprite;
+	Button pauseButton;
 
 	void InitSounds();
 	void InitGame();
@@ -54,6 +59,10 @@ namespace kuznickiAsteroid
 		}
 
 		asteroidSprite = LoadTexture("textures/asteroid.png");
+
+		pauseButton.body = { GetScreenWidth() / 2.0f, 30.0f, static_cast<float>(buttonSprite.width), static_cast<float>(buttonSprite.height) };
+		pauseButton.text = "| |";
+		pauseButton.buttonScreen = ProgramScreen::StartMenu;
 	}
 
 	void RunGame()
@@ -66,7 +75,7 @@ namespace kuznickiAsteroid
 		InitGame();
 
 		GameEndConditions condition = GameEndConditions::Game;
-		
+
 
 		while (playing)
 		{
@@ -128,6 +137,11 @@ namespace kuznickiAsteroid
 		{
 			return GameEndConditions::Pause;
 		}
+		else if (CollisionPointRec(GetMousePosition(), { pauseButton.body.x - pauseButton.body.width / 2, pauseButton.body.y - pauseButton.body.height / 2 , pauseButton.body.width, pauseButton.body.height }))
+		{
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				return GameEndConditions::Pause;
+		}
 		else
 		{
 			return GameEndConditions::Game;
@@ -143,6 +157,7 @@ namespace kuznickiAsteroid
 		DrawBullets(player.bullets);
 		DrawAsteroid(asteroidSprite);
 		DrawUserInterface();
+		DrawTextAndButton(pauseButton.text, 26, pauseButton.body, true, WHITE);
 		EndDrawing();
 	}
 

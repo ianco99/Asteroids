@@ -1,7 +1,10 @@
+#include "player.h"
+
 #include "raylib.h"
 #include "raymath.h"
-#include "Player.h"
-#include "Asteroid.h"
+
+#include "System/start_menu.h"
+#include "asteroid.h"
 
 namespace kuznickiAsteroid
 {
@@ -10,11 +13,14 @@ namespace kuznickiAsteroid
 
 	extern Sound playerDeathSound;
 
+	extern Texture2D buttonSprite;
+
+	extern Button pauseButton;
+
 	extern int screenOffset;
 	extern int maxAsteroids;
 
 	bool CheckCollisionPlayerAsteroid();
-
 	void KillPlayer();
 
 	Player GeneratePlayer()
@@ -231,12 +237,8 @@ namespace kuznickiAsteroid
 		Rectangle spriteSource = { 0,0, player.shipSprite.width, player.shipSprite.height };
 		Rectangle spriteDestination = { player.position.x, player.position.y, player.radius * 2, player.radius * 2 };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
-		//Rectangle spriteDestination = { player.position.x - player.radius, player.position.y - player.radius, player.radius*2, player.radius*2 };
-		//DrawTextureEx(player.shipSprite, { player.body.x+player.body.width/2 , player.body.y+player.body.height }, player.angle, 0.2f,RAYWHITE);
-		//DrawTextureRec(player.shipSprite, player.body, { player.body.x, player.body.y }, RAYWHITE);
-		//DrawRectanglePro(player.body, { player.body.width / 2	, player.body.height / 2 }, player.angle, RAYWHITE);
+
 		DrawCircleLines(player.position.x, player.position.y, player.radius, GREEN);
 		DrawTexturePro(player.shipSprite, spriteSource, spriteDestination, spriteOrigin, player.angle, WHITE);
-		//DrawTexturePro(player.shipSprite, { 0.0f,0.0f, static_cast<float>(player.shipSprite.width), static_cast<float>(player.shipSprite.height) }, { player.position.x, player.position.y , player.position.x + player.radius * 2, player.position.y + player.radius * 2 }, { player.position.x + player.radius, player.position.y + player.radius / 2 }, player.angle, RAYWHITE);
 	}
 }
