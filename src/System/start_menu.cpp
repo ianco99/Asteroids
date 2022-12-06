@@ -11,21 +11,25 @@ namespace kuznickiAsteroid
 	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[]);
 	void RunGame();
 
+	extern Sound bulletShootSound;
+	extern Sound playerDeathSound;
+	extern Sound asteroidDeathSound;
+
 	Texture2D backgroundSprite;
 	Texture2D buttonSprite;
 
 	ProgramScreen currentScreen;
 
 	Music backgroundSong;
-	extern Sound bulletShootSound;
-	extern Sound playerDeathSound;
-	extern Sound asteroidDeathSound;
+
+	const int startMenuButtons = 4;
 
 	int creditsFontSize = 26;
 	int offsetBtwnCredits = 40;
 
 	void RunProject()
 	{
+
 
 		backgroundSong.looping = true;
 
@@ -37,13 +41,13 @@ namespace kuznickiAsteroid
 		backgroundSprite = LoadTexture("resources/textures/back.png");
 		backgroundSong = LoadMusicStream("resources/audio/backgroundSong.ogg");
 
-		Button buttons[4];
+		Button buttons[startMenuButtons];
 		InitButtons(buttons);
 
 		InitButtonCredits();
 		InitButtonRules();
 
-		Rectangle mouseCollisions[4];
+		Rectangle mouseCollisions[startMenuButtons];
 		InitMouseCollisions(buttons, mouseCollisions);
 
 
@@ -64,7 +68,7 @@ namespace kuznickiAsteroid
 					shouldQuit = true;
 				}
 
-				for (int i = 0; i < 4; i++)
+				for (int i = 0; i < startMenuButtons; i++)
 				{
 					if (CollisionPointRec(GetMousePosition(), mouseCollisions[i]))
 					{
@@ -116,13 +120,10 @@ namespace kuznickiAsteroid
 
 				DrawText("ASTEROIDS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "ASTEROIDS", 60, 0).x / 2, GetScreenHeight() / 10, 60, RAYWHITE);
 
-				DrawTextAndButton(buttons[0].text, 26, buttons[0].body, true, WHITE);
-
-				DrawTextAndButton(buttons[1].text, 26, buttons[1].body, true, WHITE);
-
-				DrawTextAndButton(buttons[2].text, 26, buttons[2].body, true, WHITE);
-
-				DrawTextAndButton(buttons[3].text, 26, buttons[3].body, true, WHITE);
+				for (int i = 0; i < startMenuButtons; i++)
+				{
+					DrawTextAndButton(buttons[i].text, 26, buttons[i].body, true, WHITE);
+				}
 
 				break;
 
@@ -190,7 +191,7 @@ namespace kuznickiAsteroid
 
 	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[])
 	{
-		for (size_t i = 0; i < 4; i++)
+		for (size_t i = 0; i < startMenuButtons; i++)
 		{
 			mouseCollisions[i] = { buttons[i].body.x - buttons[i].body.width / 2, buttons[i].body.y - buttons[i].body.height / 2 ,buttons[i].body.width, buttons[i].body.height };
 		}

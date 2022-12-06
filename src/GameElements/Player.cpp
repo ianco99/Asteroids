@@ -238,7 +238,6 @@ namespace kuznickiAsteroid
 		Rectangle spriteDestination = { player.position.x, player.position.y, player.radius * 2, player.radius * 2 };
 		Vector2 spriteOrigin = { spriteDestination.width / 2.0f, spriteDestination.height / 2.0f };
 
-		DrawCircleLines(player.position.x, player.position.y, player.radius, GREEN);
 		DrawTexturePro(player.shipSprite, spriteSource, spriteDestination, spriteOrigin, player.angle, WHITE);
 	}
 }
