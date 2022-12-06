@@ -11,11 +11,6 @@
 
 namespace kuznickiAsteroid
 {
-	int maxAsteroids = 60;
-	int screenOffset = 5;
-	int initialAsteroids = 5;
-	const int maxBullets = 50;
-
 	extern Music backgroundSong;
 
 	extern Texture2D backgroundSprite;
@@ -34,6 +29,11 @@ namespace kuznickiAsteroid
 	Sound asteroidDeathSound;
 
 	Button pauseButton;
+
+	int maxAsteroids = 60;
+	int screenOffset = 5;
+	int initialAsteroids = 5;
+	const int maxBullets = 50;
 
 	void InitSounds();
 	void InitGame();
