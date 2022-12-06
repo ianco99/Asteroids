@@ -17,7 +17,7 @@ namespace kuznickiAsteroid
 	extern Texture2D buttonSprite;
 
 	extern Sound bulletShootSound;
-	
+
 	Player player;
 
 	Asteroid asteroids[60];
@@ -90,7 +90,7 @@ namespace kuznickiAsteroid
 
 			case GameEndConditions::Pause:
 				BeginDrawing();
-				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(),"You are in pause, press Y to quit to menu or N to resume playing.",26, 2).x / 2.0f, GetScreenHeight() / 4, 22, RAYWHITE);
+				DrawText("You are in pause, press Y to quit to menu or N to resume playing.", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "You are in pause, press Y to quit to menu or N to resume playing.", 26, 2).x / 2.0f, GetScreenHeight() / 4, 22, RAYWHITE);
 				EndDrawing();
 
 				if (IsKeyPressed(KEY_Y))
@@ -104,7 +104,17 @@ namespace kuznickiAsteroid
 				break;
 
 			case GameEndConditions::Lose:
-				playing = false;
+
+				BeginDrawing();
+				DrawText(TextFormat("You lost! Your final score was %2i", player.score), GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), TextFormat("You lost! Your final score was %2i", player.score), 26, 2).x / 2.0f, GetScreenHeight() / 4, 22, RAYWHITE);
+				DrawText("Press space to go back to main menu", GetScreenWidth() / 2.0f - MeasureTextEx(GetFontDefault(), "Press space to go back to main menu", 26, 2).x / 2.0f, GetScreenHeight() / 4 + 40, 22, WHITE);
+				EndDrawing();
+
+				if (IsKeyPressed(KEY_SPACE))
+				{
+					playing = false;
+				}
+
 				break;
 
 			default:
@@ -115,10 +125,6 @@ namespace kuznickiAsteroid
 		UnloadTexture(player.shipSprite);
 		UnloadTexture(player.bullets->sprite);
 		UnloadTexture(asteroidSprite);
-
-		UnloadSound(playerDeathSound);
-		UnloadSound(asteroidDeathSound);
-		UnloadSound(bulletShootSound);
 	}
 
 

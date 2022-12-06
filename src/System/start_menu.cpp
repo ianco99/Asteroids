@@ -17,6 +17,9 @@ namespace kuznickiAsteroid
 	ProgramScreen currentScreen;
 
 	Music backgroundSong;
+	extern Sound bulletShootSound;
+	extern Sound playerDeathSound;
+	extern Sound asteroidDeathSound;
 
 	int creditsFontSize = 26;
 	int offsetBtwnCredits = 40;
@@ -137,6 +140,9 @@ namespace kuznickiAsteroid
 			EndDrawing();
 		}
 
+		UnloadSound(playerDeathSound);
+		UnloadSound(asteroidDeathSound);
+		UnloadSound(bulletShootSound);
 		UnloadMusicStream(backgroundSong);
 
 		UnloadTexture(backgroundSprite);
