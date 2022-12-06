@@ -9,9 +9,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameElements\game_loop.cpp">
-      <Filter>GameElements</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameElements\bullet.cpp">
       <Filter>GameElements</Filter>
     </ClCompile>
@@ -34,11 +31,11 @@
     <ClCompile Include="src\System\core_loop.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameElements\game_loop.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameElements\game_loop.h">
-      <Filter>GameElements</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameElements\player.h">
       <Filter>GameElements</Filter>
     </ClInclude>
@@ -58,6 +55,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="src\System\core_loop.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameElements\game_loop.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>

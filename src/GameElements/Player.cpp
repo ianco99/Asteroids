@@ -16,8 +16,6 @@ namespace kuznickiAsteroid
 
 	extern Texture2D buttonSprite;
 
-	extern Button pauseButton;
-
 	extern bool isRespawning;
 	extern int screenOffset;
 	extern int maxAsteroids;
@@ -35,6 +33,8 @@ namespace kuznickiAsteroid
 	static void CheckOutOfScreen();
 	static void CheckBulletsOutOfScreen();
 
+	float velocityAdder = 2500;
+
 	Player GeneratePlayer()
 	{
 		Player createdPlayer;
@@ -44,7 +44,8 @@ namespace kuznickiAsteroid
 		createdPlayer.position = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
 		createdPlayer.radius = 20.0f;
 		createdPlayer.velocity = { 0,0 };
-		createdPlayer.acceleration = { 0.1f, 0.1f };
+		//createdPlayer.acceleration = { 0.6f, 0.6f };
+		createdPlayer.acceleration = { 600.0f, 600.0f};
 		createdPlayer.angle = 0;
 		createdPlayer.lives = 3;
 		createdPlayer.score = 0;
@@ -101,8 +102,23 @@ namespace kuznickiAsteroid
 		Vector2 pointDirection = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
 		Vector2 normalizedDir = { pointDirection.x / Vector2Length(pointDirection), pointDirection.y / Vector2Length(pointDirection) };
 
-		player.velocity.x = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity).x;
-		player.velocity.y = Vector2Add(Vector2Multiply(player.acceleration, normalizedDir), player.velocity).y;
+
+		//Direecion a la que tiene que dirigirse mi jugador
+		Vector2 deltaAcceleration = Vector2Multiply(player.acceleration, { GetFrameTime(), GetFrameTime() });
+
+		Vector2 vectorDirection = Vector2Multiply(deltaAcceleration, normalizedDir);
+
+		//Caso A: Superpongo una direccion por otra y mi jugador se dirige inmediatamente a una posicion dictada por mi vector normalizado multiplicado por mi aceleracion
+		//player.velocity = vectorDirection;
+
+		//Caso B: Añado una direccion nueva a la previamente existente, generando ese efecto de 'derrape' en la nave
+
+		player.velocity.x = Vector2Add(vectorDirection, player.velocity).x;
+		player.velocity.y = Vector2Add(vectorDirection, player.velocity).y;
+
+		//Observacion, cuando multiplico el vector por getframetime lo que estoy haciendo es haciendo al vector mucho más chico
+
+		//player.velocity = vectorDirection;
 
 		float absoluteX = player.velocity.x < 0 ? -player.velocity.x : player.velocity.x;
 		float absoluteY = player.velocity.y < 0 ? -player.velocity.y : player.velocity.y;
@@ -114,12 +130,13 @@ namespace kuznickiAsteroid
 			else
 				player.velocity.x = player.defaultPlayerValues.maxVelocityX;
 		}
-			
+
 		if (absoluteY > player.defaultPlayerValues.maxVelocityY)
 			if (player.velocity.y < 0)
 				player.velocity.y = -player.defaultPlayerValues.maxVelocityY;
 			else
 				player.velocity.y = player.defaultPlayerValues.maxVelocityY;
+
 	}
 
 	void PointPlayer()
@@ -193,7 +210,7 @@ namespace kuznickiAsteroid
 			{
 				double distX = static_cast<double>(player.position.x) - static_cast<double>(asteroids[i].position.x);
 				double distY = static_cast<double>(player.position.y) - static_cast<double>(asteroids[i].position.y);
-				double distance = sqrt((static_cast<double>(distX) * static_cast<double>(distX)) + (static_cast<double>(distY) * static_cast<double>(distY)));
+				double distance = sqrt((static_cast<double>(distX)* static_cast<double>(distX)) + (static_cast<double>(distY)* static_cast<double>(distY)));
 
 				//Collision circle-circle: http://www.jeffreythompson.org/collision-detection/circle-circle.php
 

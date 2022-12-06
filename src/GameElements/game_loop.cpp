@@ -7,7 +7,7 @@
 
 #include "Player.h"
 #include "Asteroid.h"
-#include "System/start_menu.h"
+#include "start_menu.h"
 
 namespace kuznickiAsteroid
 {
@@ -24,13 +24,13 @@ namespace kuznickiAsteroid
 
 	Asteroid asteroids[60];
 
-	Texture2D asteroidSprite;
+	static Texture2D asteroidSprite;
 	Texture2D bulletSprite;
 
 	Sound playerDeathSound;
 	Sound asteroidDeathSound;
 
-	Button pauseButton;
+	static Button pauseButton;
 
 	int maxAsteroids = 60;
 	int screenOffset = 5;

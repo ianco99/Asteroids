@@ -26,10 +26,6 @@ namespace kuznickiAsteroid
 
 	void UpdateAsteroids();
 
-	void AsteroidsOutOfScreen();
-
-	void MoveAsteroid(Asteroid& asteroid);
-
 	void DrawAsteroid(Texture2D asteroidSprite);
 
 	void DestroyAsteroid(Asteroid& asteroid);

@@ -21,8 +21,12 @@ namespace kuznickiAsteroid
 
 	static void GiveAsteroidInitPosition(Asteroid& asteroid);
 	static void GiveAsteroidInitDirection(Asteroid& asteroid);
+
+	static void MoveAsteroid(Asteroid& asteroid);
+
 	static bool ChangeAsteroidSize(Asteroid& asteroid);
 	static void TrySpawningAnotherAsteroid();
+	static void AsteroidsOutOfScreen();
 
 	Asteroid CreateAsteroid(int arrayPosition, AsteroidRadiusSize radiusSize)
 	{
@@ -43,7 +47,7 @@ namespace kuznickiAsteroid
 			createdAsteroid.speedMultiplier = { bigSpeed, bigSpeed };
 			break;
 		case AsteroidRadiusSize::Medium:
-			createdAsteroid.speedMultiplier = { mediumSpeed, mediumSpeed};
+			createdAsteroid.speedMultiplier = { mediumSpeed, mediumSpeed };
 			break;
 		case AsteroidRadiusSize::Small:
 			createdAsteroid.speedMultiplier = { smallSpeed, smallSpeed };

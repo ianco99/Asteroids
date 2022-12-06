@@ -13,12 +13,11 @@ namespace kuznickiAsteroid
 	extern Asteroid asteroids[];
 
 	extern int maxAsteroids;
+	extern const int maxBullets = 50;
 
 	extern Texture2D bulletSprite;
 
 	Sound bulletShootSound;
-
-	extern const int maxBullets = 50;
 
 	static const int bigAsteroidPoints = 500;
 	static const int mediumAsteroidPoints = 250;
