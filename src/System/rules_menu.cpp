@@ -8,83 +8,60 @@
 
 namespace kuznickiAsteroid
 {
+	extern Texture2D buttonSprite;
+	extern ProgramScreen currentScreen;
 
-	//Button creditButtons[maxCreditsButtons];
+	Button backButtonRules;
 
-	//Button backButton;
+	Rectangle backButtonRulessCollision;
 
-	//Rectangle backButtonCollision;
+	int offsetBtwnText = 60;
 
-	//void InitButtonCredits()
-	//{
-	//	/*backButton = { GetScreenWidth() / 2.0f, GetScreenHeight() - GetScreenHeight() / 8.0f, static_cast<float>(buttonSprite.width), static_cast<float>(buttonSprite.height) };
+	void InitButtonRules()
+	{
+		backButtonRules = { GetScreenWidth() / 2.0f, GetScreenHeight() - GetScreenHeight() / 8.0f, static_cast<float>(buttonSprite.width), static_cast<float>(buttonSprite.height) };
 
-	//	creditButtons[0].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 3, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", creditsFontSize, 2).y };
-	//	creditButtons[0].link = "https://www.kenney.nl/assets/ui-pack";
+		backButtonRulessCollision = { backButtonRules.body.x - backButtonRules.body.width / 2, backButtonRules.body.y - backButtonRules.body.height / 2 , backButtonRules.body.width, backButtonRules.body.height };
+	}
 
-	//	creditButtons[1].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-background-1", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 5, MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-background-1", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-background-1", creditsFontSize, 2).y };
-	//	creditButtons[1].link = "https://opengameart.org/content/space-background-1";
+	void ButtonRules()
+	{
 
-	//	creditButtons[2].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 7, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", creditsFontSize, 2).y };
-	//	creditButtons[2].link = "https://www.kenney.nl/assets/space-shooter-extension";
+		if (CollisionPointRec(GetMousePosition(), backButtonRulessCollision))
+		{
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			{
+				currentScreen = ProgramScreen::StartMenu;
+			}
+		}
+	}
 
-	//	creditButtons[3].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 9, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", creditsFontSize, 2).y };
-	//	creditButtons[3].link = "https://www.kenney.nl/assets/sci-fi-sounds";
+	void DrawRules()
+	{
 
-	//	creditButtons[4].body = { GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", creditsFontSize, 0).x / 2, GetScreenHeight() / 8.0f + offsetBtwnCredits * 11, MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", creditsFontSize, 2).x, MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", creditsFontSize, 2).y };
-	//	creditButtons[4].link = "https://opengameart.org/content/space-music-out-there";
+		DrawText("RULES", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "RULES", 26, 0).x / 2, GetScreenHeight() / 10, 26, RAYWHITE);
 
-	//	backButtonCollision = { backButton.body.x - backButton.body.width / 2, backButton.body.y - backButton.body.height / 2 , backButton.body.width, backButton.body.height };*/
-	//}
+		DrawText("Mouse right click to move spaceship", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Mouse right click to move spaceship", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnText * 2, 26, WHITE);
 
-	//void ButtonCredits()
-	//{
-	//	/*for (int i = 0; i < maxCreditsButtons; i++)
-	//	{
-	//		if (CollisionPointRec(GetMousePosition(), creditButtons[i].body))
-	//		{
-	//			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-	//			{
-	//				OpenURL(creditButtons[i].link);
-	//			}
-	//		}
-	//	}
+		DrawText("Mouse left click to shoot bullets", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Mouse left click to shoot bullets", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnText * 3, 26, WHITE);
 
-	//	if (CollisionPointRec(GetMousePosition(), backButtonCollision))
-	//	{
-	//		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-	//		{
-	//			currentScreen = ProgramScreen::StartMenu;
-	//		}
-	//	}*/
-	//}
+		DrawText("Esc in GAME to pause / Left click on PAUSE button to pause", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Esc in GAME to pause / Left click on PAUSE button to pause", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnText * 4, 26, WHITE);
 
-	//void DrawCredits()
-	//{
+		DrawText("Game is infinite, so play as much as you like/can!", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Game is infinite, so play as much as you like/can!", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnText * 5, 26, WHITE);
 
-	//	/*DrawText("CREDITS", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "CREDITS", 26, 0).x / 2, GetScreenHeight() / 10, 26, RAYWHITE);
+		DrawText("Player has 3 lives, when crashing into an asteroid they lose 1 life", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Player has 3 lives, when crashing into an asteroid they lose 1 life", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnText * 6, 26, WHITE);
 
-	//	DrawText("Button art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Button art by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 2, 26, RAYWHITE);
+		//DrawText("https://www.kenney.nl/assets/space-shooter-extension", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 7, 26, SKYBLUE);
 
-	//	DrawText("https://www.kenney.nl/assets/ui-pack", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/ui-pack", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 3, 26, SKYBLUE);
+		//DrawText("SFX by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "SFX by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 8, 26, RAYWHITE);
 
-	//	DrawText("Background art by Westbeam", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Background art by Westbeam", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 4, 26, RAYWHITE);
+		//DrawText("https://www.kenney.nl/assets/sci-fi-sounds", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 9, 26, SKYBLUE);
 
-	//	DrawText("https://opengameart.org/content/space-background-1", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-background-1", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 5, 26, SKYBLUE);
+		//DrawText("Music by yd", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Music by yd", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 10, 26, RAYWHITE);
 
-	//	DrawText("Ship, asteroids and bullets art by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Ship, asteroids and bullets art by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 6, 26, RAYWHITE);
+		//DrawText("https://opengameart.org/content/space-music-out-there", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 11, 26, SKYBLUE);
 
-	//	DrawText("https://www.kenney.nl/assets/space-shooter-extension", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/space-shooter-extension", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 7, 26, SKYBLUE);
+		DrawTextAndButton("BACK", 26, backButtonRules.body, true, WHITE);
 
-	//	DrawText("SFX by Kenney", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "SFX by Kenney", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 8, 26, RAYWHITE);
-
-	//	DrawText("https://www.kenney.nl/assets/sci-fi-sounds", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://www.kenney.nl/assets/sci-fi-sounds", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 9, 26, SKYBLUE);
-
-	//	DrawText("Music by yd", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "Music by yd", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 10, 26, RAYWHITE);
-
-	//	DrawText("https://opengameart.org/content/space-music-out-there", GetScreenWidth() / 2 - MeasureTextEx(GetFontDefault(), "https://opengameart.org/content/space-music-out-there", 26, 0).x / 2, GetScreenHeight() / 8 + offsetBtwnCredits * 11, 26, SKYBLUE);
-
-	//	DrawTextAndButton("BACK", 26, backButton.body, true, WHITE);*/
-
-	//}
+	}
 }

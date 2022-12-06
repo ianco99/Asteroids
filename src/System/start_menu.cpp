@@ -1,6 +1,7 @@
 #include "start_menu.h"
 
 #include "credits_menu.h"
+#include "rules_menu.h"
 
 
 namespace kuznickiAsteroid
@@ -37,6 +38,7 @@ namespace kuznickiAsteroid
 		InitButtons(buttons);
 
 		InitButtonCredits();
+		InitButtonRules();
 
 		Rectangle mouseCollisions[4];
 		InitMouseCollisions(buttons, mouseCollisions);
@@ -58,26 +60,20 @@ namespace kuznickiAsteroid
 					shouldQuit = true;
 				}
 
-				if (CollisionPointRec(GetMousePosition(), mouseCollisions[0]))
+				for (int i = 0; i < 3; i++)
 				{
-					selectedScreen = buttons[0].buttonScreen;
-
-					if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+					if (CollisionPointRec(GetMousePosition(), mouseCollisions[i]))
 					{
-						currentScreen = selectedScreen;
-					}
-				}
-				else if (CollisionPointRec(GetMousePosition(), mouseCollisions[1]))
-				{
-					selectedScreen = buttons[1].buttonScreen;
+						selectedScreen = buttons[i].buttonScreen;
 
-					if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-					{
-						currentScreen = selectedScreen;
+						if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+						{
+							currentScreen = selectedScreen;
+						}
 					}
 				}
 
-				else if (IsKeyPressed(KEY_SPACE))
+				if (IsKeyPressed(KEY_SPACE))
 				{
 					currentScreen = ProgramScreen::GameLoop;
 				}
@@ -92,6 +88,9 @@ namespace kuznickiAsteroid
 				break;
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
 				ButtonCredits();
+				break;
+			case kuznickiAsteroid::ProgramScreen::RulesScreen:
+				ButtonRules();
 				break;
 			case kuznickiAsteroid::ProgramScreen::Quit:
 				break;
@@ -116,17 +115,16 @@ namespace kuznickiAsteroid
 
 				DrawTextAndButton(buttons[1].text, 26, buttons[1].body, true, WHITE);
 
-
-				break;
-
-			case kuznickiAsteroid::ProgramScreen::GameLoop:
+				DrawTextAndButton(buttons[2].text, 26, buttons[2].body, true, WHITE);
 
 				break;
 
 			case kuznickiAsteroid::ProgramScreen::CreditsScreen:
 				DrawCredits();
 				break;
-
+			case kuznickiAsteroid::ProgramScreen::RulesScreen:
+				DrawRules();
+				break;
 			case kuznickiAsteroid::ProgramScreen::Quit:
 
 				break;
@@ -170,6 +168,12 @@ namespace kuznickiAsteroid
 		buttons[1].buttonScreen = ProgramScreen::CreditsScreen;
 		buttons[1].text = "CREDITS";
 		buttons[1].link = " ";
+
+		Rectangle rulesBtnBounds = { GetScreenWidth() / 2, GetScreenHeight() - GetScreenHeight() / 3, buttonSprite.width, buttonSprite.height };
+		buttons[2].body = rulesBtnBounds;
+		buttons[2].buttonScreen = ProgramScreen::RulesScreen;
+		buttons[2].text = "RULES";
+		buttons[2].link = " ";
 	}
 
 	void InitMouseCollisions(Button buttons[], Rectangle mouseCollisions[])

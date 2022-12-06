@@ -3,7 +3,7 @@
 
 namespace kuznickiAsteroid
 {
-	enum class ProgramScreen{StartMenu, GameLoop, CreditsScreen, Quit};
+	enum class ProgramScreen{StartMenu, GameLoop, CreditsScreen, RulesScreen,Quit};
 
 	struct Button
 	{
