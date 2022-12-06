@@ -20,6 +20,10 @@ namespace kuznickiAsteroid
 
 	extern const int maxBullets = 50;
 
+	const int bigAsteroidPoints = 500;
+	const int mediumAsteroidPoints = 250;
+	const int smallAsteroidPoints = 100;
+
 	bool CheckCollisionBulletAsteroid(Bullet& bullet);
 
 	void GenerateBullets(Bullet bullets[])
@@ -39,18 +43,12 @@ namespace kuznickiAsteroid
 	void GiveBulletOrientation(Bullet& bullet)
 	{
 		PlaySoundMulti(bulletShootSound);
-		//Give bullet player's angle
+
 		bullet.angle = player.angle;
 
-		//Give bullet player's position
 		bullet.position.x = player.position.x;
 		bullet.position.y = player.position.y;
 
-		//Give bullet a direction
-
-		//Vector2 normalizedDir = { GetMouseX() / Vector2Length(GetMousePosition()), GetMouseY() / Vector2Length(GetMousePosition()) };
-		//Vector2 normalizedDir = Vector2Normalize(player.acceleration);
-		//Vector2 normalizedDir = Vector2Subtract(GetMousePosition(), {player.body.x, player.body.y});
 		Vector2 direction = Vector2Subtract(GetMousePosition(), { player.position.x, player.position.y });
 
 		direction = Vector2Normalize(direction);
@@ -98,13 +96,13 @@ namespace kuznickiAsteroid
 					switch (asteroids[i].radiusSize)
 					{
 					case AsteroidRadiusSize::Big:
-						player.score += 500;
+						player.score += bigAsteroidPoints;
 						break;
 					case AsteroidRadiusSize::Medium:
-						player.score += 250;
+						player.score += mediumAsteroidPoints;
 						break;
 					case AsteroidRadiusSize::Small:
-						player.score += 100;
+						player.score += smallAsteroidPoints;
 						break;
 					default:
 						break;
