@@ -4,21 +4,22 @@
 
 #include "start_menu.h"
 
-float creditsFontSize = 26;
-int offsetBtwnCredits = 40;
-
-const int maxCreditsButtons = 5;
 
 namespace kuznickiAsteroid
 {
+	static const int maxCreditsButtons = 5;
+
 	extern ProgramScreen currentScreen;
 	extern Texture2D buttonSprite;
 
-	Button creditButtons[maxCreditsButtons];
+	static Button creditButtons[maxCreditsButtons];
 
-	Button backButton;
+	static Button backButton;
 
-	Rectangle backButtonCollision;
+	static Rectangle backButtonCollision;
+
+	static float creditsFontSize = 26;
+	static int offsetBtwnCredits = 40;
 
 	void InitButtonCredits()
 	{

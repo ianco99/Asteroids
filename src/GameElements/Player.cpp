@@ -23,17 +23,17 @@ namespace kuznickiAsteroid
 	extern int maxAsteroids;
 	extern const int maxBullets;
 
-	bool CheckCollisionPlayerAsteroid();
-	void DetectInput();
-	void ActionInput();
-	void OnMoveInput();
-	void PointPlayer();
-	void OnShootInput();
-	void MovePlayer();
-	void KillPlayer();
+	static bool CheckCollisionPlayerAsteroid();
+	static void DetectInput();
+	static void ActionInput();
+	static void OnMoveInput();
+	static void PointPlayer();
+	static void OnShootInput();
+	static void MovePlayer();
+	static void KillPlayer();
 
-	void CheckOutOfScreen();
-	void CheckBulletsOutOfScreen();
+	static void CheckOutOfScreen();
+	static void CheckBulletsOutOfScreen();
 
 	Player GeneratePlayer()
 	{

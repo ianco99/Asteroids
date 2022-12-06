@@ -34,17 +34,17 @@ namespace kuznickiAsteroid
 
 	int maxAsteroids = 60;
 	int screenOffset = 5;
-	int initialAsteroids = 5;
+	static int initialAsteroids = 5;
 	const int maxBullets = 50;
-	const float respawnTime = 5.0f;
-	float currentRespawnTime = 0.0f;
+	static const float respawnTime = 5.0f;
+	static float currentRespawnTime = 0.0f;
 
 	bool isRespawning = false;
 
 
-	void InitSounds();
-	void InitGame();
-	void DrawUserInterface();
+	static void InitSounds();
+	static void InitGame();
+	static void DrawUserInterface();
 
 	void InitSounds()
 	{
