@@ -22,7 +22,7 @@ namespace kuznickiAsteroid
 
 	void RunProject()
 	{
-		
+
 		backgroundSong.looping = true;
 
 		Color btnTint = WHITE;
@@ -49,7 +49,6 @@ namespace kuznickiAsteroid
 		while (!WindowShouldClose() && !shouldQuit)
 		{
 			UpdateMusicStream(backgroundSong);
-
 
 			switch (currentScreen)
 			{

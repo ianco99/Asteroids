@@ -16,13 +16,15 @@ namespace kuznickiAsteroid
 	extern Texture2D backgroundSprite;
 	extern Texture2D buttonSprite;
 
+	extern Sound bulletShootSound;
+	
+	
 	Player player;
 
 	Asteroid asteroids[60];
 
 	Texture2D asteroidSprite;
 	Texture2D bulletSprite;
-
 
 	Sound playerDeathSound;
 	Sound asteroidDeathSound;
@@ -111,8 +113,13 @@ namespace kuznickiAsteroid
 			}
 		}
 
-		//UnloadSound(playerDeathSound);
-		//UnloadSound(asteroidDeathSound);
+		UnloadTexture(player.shipSprite);
+		UnloadTexture(player.bullets->sprite);
+		UnloadTexture(asteroidSprite);
+
+		UnloadSound(playerDeathSound);
+		UnloadSound(asteroidDeathSound);
+		UnloadSound(bulletShootSound);
 	}
 
 
